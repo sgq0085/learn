@@ -1,0 +1,79 @@
+/***************************************
+   Default Styles
+***************************************/
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font: 80% Verdana, Helvetica, Arial, sans-serif;
+  color: #000;
+  background: #fff;
+}
+#container {
+  margin: 10px 2em;
+}
+
+h1 {
+  font-size: 2.5em;
+  margin-bottom: 0;
+}
+
+h2 {
+  font-size: 1.3em;
+  margin-bottom: .5em;
+}
+h3 {
+  font-size: 1.1em;
+  margin-bottom: 0;
+}
+
+code {
+  font-size: 1.2em;
+}
+
+a {
+  color: #06581f;
+}
+
+
+/***************************************
+   Chapter Styles
+***************************************/
+table {
+  margin: 1em 0;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 2px 8px;
+}
+thead th {
+  border-bottom: 1px solid #999;
+  text-align: left;
+}
+tfoot td {
+  border-top: 1px solid #999;
+  border-top: 1px solid #999;
+  text-align: left;
+}
+#sum td {
+  font-weight: bold;
+}
+#average td {
+  font-style: italic;
+}
+
+tr.one {
+  color: #fff;
+  background-color: #080;
+}
+tr.two {
+  background-color: #ffa;
+}
+
+.ljq-tooltip-text {
+  position: absolute;
+  padding: 5px;
+}

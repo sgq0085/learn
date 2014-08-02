@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Firebug</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="editplus" />
+</head>
+<body>
+<button type="button" id="btn1">执行循环1</button>
+<button type="button" id="btn2">执行循环2</button>
+<button type="button" id="btn3">执行循环3</button>
+<script type="text/javascript">
+	var f1=function() {
+		for (var i=0; i<1000; i++)for (var j=0; j<1000; j++);
+	}
+	function f2() {
+		for (var i=0; i<1000; i++)for (var j=0; j<1000; j++);
+	}
+	document.getElementById('btn1').onclick=f1;
+	document.getElementById('btn2').onclick=f2;
+	document.getElementById('btn3').onclick=function() {
+		for (var i=0; i<1000; i++)for (var j=0; j<1000; j++);
+	}
+</script>
+</body>
+</html>

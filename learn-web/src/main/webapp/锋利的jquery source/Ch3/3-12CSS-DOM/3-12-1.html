@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>3-12-1</title>
+<style type="text/css">
+.test{
+ font-weight:bold;
+ color : red;
+}
+.add{
+ font-style:italic;
+}
+</style>
+ <!--   引入jQuery -->
+ <script src="../../scripts/jquery.js" type="text/javascript"></script>
+ <script type="text/javascript">
+ //<![CDATA[
+  $(function(){
+      //获取<p>元素的color
+      $("input:eq(0)").click(function(){
+			alert(  $("p").css("color") );
+	  });
+      //设置<p>元素的color
+	  $("input:eq(1)").click(function(){
+			 $("p").css("color","red")
+	  });
+      //设置<p>元素的fontSize和backgroundColor
+	  $("input:eq(2)").click(function(){
+			 $("p").css({"fontSize":"30px" ,"backgroundColor":"#888888"})
+	  });    
+	  //获取<p>元素的高度
+	  $("input:eq(3)").click(function(){
+			  alert( $("p").height() );
+	  });  
+	  //获取<p>元素的宽度
+	  $("input:eq(4)").click(function(){
+			  alert( $("p").width() );
+	  });   
+
+	    //获取<p>元素的高度
+	  $("input:eq(5)").click(function(){
+			  $("p").height("100px");
+	  });  
+	  //获取<p>元素的宽度
+	  $("input:eq(6)").click(function(){
+			  $("p").width("400px");
+	  }); 
+	  //获取<p>元素的的左边距和上边距
+	  $("input:eq(7)").click(function(){
+			  var offset = $("p").offset();
+			  var left = offset.left;
+			  var top =  offset.top;
+		      alert("left:"+left+";top:"+top);
+	  });  
+  });
+  //]]>
+  </script>
+</head>
+<body>
+    <input type="button" value="获取p元素的color"/>
+	<input type="button" value="设置p元素的color"/>
+	<input type="button" value="设置p元素的fontSize和backgroundColor"/>
+	<input type="button" value="获取p元素的高度"/>
+	<input type="button" value="获取p元素的宽度"/>
+	<input type="button" value="设置p元素的高度"/>
+	<input type="button" value="设置p元素的宽度"/>
+	<input type="button" value="获取p元素的的左边距和上边距"/>
+
+
+	<p title="选择你最喜欢的水果."><strong>你最喜欢的水果是?</strong></p>
+	<ul>
+	  <li title='苹果'>苹果</li>
+	  <li title='橘子'>橘子</li>
+	  <li title='菠萝'>菠萝</li>
+	</ul>
+</body>
+</html>
+
+ 

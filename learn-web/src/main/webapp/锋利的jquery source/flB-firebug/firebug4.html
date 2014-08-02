@@ -1,0 +1,19 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Firebug</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="editplus" />
+</head>
+<body>
+<script type="text/javascript" src="../scripts/jquery.js"></script>
+<label for="passStr">传递参数：</label><br />
+<input type="text" id="passStr" value="Firebug=1.9.1&jQuery=1.7.1" size="35"/><br />
+<button type="button" id="btn1">进行Ajax传递</button>
+<script type="text/javascript">
+	$("#btn1").click(function(){
+		$.ajax({url:"firebug4.php",type:"get",data:$("#passStr").val()});
+	});
+</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>3-4-2</title>
+ <!--   引入jQuery -->
+ <script src="../../scripts/jquery.js" type="text/javascript"></script>
+ <script type="text/javascript">
+ //<![CDATA[
+  $(function(){
+	 var $li = $("ul li:eq(1)").remove(); // 获取第二个<li>元素节点后，将它从网页中删除。
+	 $li.appendTo("ul");						// 把刚才删除的又重新添加到<ul>元素里
+	 //所以，删除只是从网页中删除，在jQuery对象中，这个元素还是存在的，我们可以重新获取它
+  });
+  //]]>
+  </script>
+</head>
+<body>
+	<p title="选择你最喜欢的水果." >你最喜欢的水果是?</p>
+	<ul>
+	  <li title='苹果'>苹果</li>
+	  <li title='橘子'>橘子</li>
+	  <li title='菠萝'>菠萝</li>
+	</ul>
+</body>
+</html>
+
+ 

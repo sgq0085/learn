@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>3-10-2-2</title>
+ <!--   引入jQuery -->
+ <script src="../../scripts/jquery.js" type="text/javascript"></script>
+ <script type="text/javascript">
+ //<![CDATA[
+  $(function(){
+      $("#address").focus(function(){         // 地址框获得鼠标焦点
+			var txt_value =  $(this).val();   // 得到当前文本框的值
+			if(txt_value==this.defaultValue){  
+                $(this).val("");              // 如果符合条件，则清空文本框内容
+			} 
+	  });
+	  $("#address").blur(function(){		  // 地址框失去鼠标焦点
+	  	    var txt_value =  $(this).val();   // 得到当前文本框的值
+			if(txt_value==""){
+                $(this).val(this.defaultValue);// 如果符合条件，则设置内容
+			} 
+	  })
+
+	  $("#password").focus(function(){
+			var txt_value =  $(this).val();
+			if(txt_value==this.defaultValue){
+                $(this).val("");
+			} 
+	  });
+	  $("#password").blur(function(){
+	  	    var txt_value =  $(this).val();
+			if(txt_value==""){
+                $(this).val(this.defaultValue);
+			} 
+	  })
+  });
+  //]]>
+  </script>
+
+</head>
+<body>
+    <input type="text" id="address" value="请输入邮箱地址"/>   <br/><br/>
+	<input type="text" id="password" value="请输入邮箱密码"/>  <br/><br/>
+	<input type="button" value="登录"/>
+</body>
+</html>
+
+ 

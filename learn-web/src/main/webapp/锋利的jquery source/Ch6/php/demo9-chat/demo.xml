@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<response> 
+ <status>1</status> 
+ <time>1170323512</time> 
+ <message> 
+   <author>张三</author> 
+   <text>沙发!</text> 
+ </message> 
+ <message> 
+   <author>李四</author> 
+   <text>板凳!</text> 
+ </message> 
+</response>

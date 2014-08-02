@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!--   引入jQuery -->
+<script src="../../scripts/jquery.js" type="text/javascript"></script>
+<script language="javascript" >
+	$(function(){// dom元素加载完毕
+		$('#btn').click(function(){ //获取id为btn的元素,给它添加onclick事件
+		    var items =  $("input[name='check']:checked"); 
+			//获取name为check的一组元素,然后选取它们中选中(checked)的。
+		   	alert( "选中的个数为："+items.length  )
+		})
+	})
+</script>
+</head>
+<body>
+<input type="checkbox" value="1" name="check" checked/>
+<input type="checkbox" value="2" name="check" />
+<input type="checkbox" value="3" name="check" checked/>
+<input type="button" value="测试选中的个数" id="btn"/>
+</body>
+</html>

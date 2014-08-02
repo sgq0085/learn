@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>3-10-4</title>
+<style type="text/css">
+.test{
+ font-weight:bold;
+ color : red;
+}
+.add{
+ font-style:italic;
+}
+</style>
+ <!--   引入jQuery -->
+ <script src="../../scripts/jquery.js" type="text/javascript"></script>
+ <script type="text/javascript">
+ //<![CDATA[
+  $(function(){
+      //设置单选下拉框选中
+      $("input:eq(0)").click(function(){
+		    $("#single option").removeAttr("selected");  //移除属性selected
+			$("#single option:eq(1)").attr("selected",true); //设置属性selected
+	  });
+      //设置多选下拉框选中
+	  $("input:eq(1)").click(function(){
+		    $("#multiple option").removeAttr("selected");  //移除属性selected
+			$("#multiple option:eq(2)").attr("selected",true);//设置属性selected
+			$("#multiple option:eq(3)").attr("selected",true);//设置属性selected
+	  });
+      //设置单选框和多选框选中
+	  $("input:eq(2)").click(function(){
+			$(":checkbox").removeAttr("checked"); //移除属性checked
+			$(":radio").removeAttr("checked"); //移除属性checked
+			$("[value=check2]:checkbox").attr("checked",true);//设置属性checked
+			$("[value=check3]:checkbox").attr("checked",true);//设置属性checked
+			$("[value=radio2]:radio").attr("checked",true);//设置属性checked
+	  });   
+  });
+  //]]>
+  </script>
+</head>
+<body>
+    <input type="button" value="设置单选下拉框选中"/>
+	<input type="button" value="设置多选下拉框选中"/>
+	<input type="button" value="设置单选框和多选框选中"/>
+
+<br/><br/>
+
+<select id="single">
+  <option>选择1号</option>
+  <option>选择2号</option>
+  <option>选择3号</option>
+</select>
+
+<select id="multiple" multiple="multiple" style="height:120px;">
+  <option selected="selected">选择1号</option>
+  <option>选择2号</option>
+  <option>选择3号</option>
+  <option>选择4号</option>
+  <option selected="selected">选择5号</option>
+</select>
+
+<br/><br/>
+
+
+<input type="checkbox" value="check1"/> 多选1
+<input type="checkbox" value="check2"/> 多选2
+<input type="checkbox" value="check3"/> 多选3
+<input type="checkbox" value="check4"/> 多选4
+
+<br/>
+
+<input type="radio" value="radio1" name="a"/> 单选1
+<input type="radio" value="radio2" name="a"/> 单选2
+<input type="radio" value="radio3" name="a"/> 单选3
+</body>
+</html>
+
+ 

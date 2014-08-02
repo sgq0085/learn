@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>4-4-4</title>
+<style type="text/css">
+*{margin:0;padding:0;}	
+body { font-size: 13px; line-height: 130%; padding: 60px; }
+#content { width: 220px; border: 1px solid #0050D0;background: #96E555 }
+span { width: 200px; margin: 10px; background: #666666; cursor: pointer;color:white;display:block;}
+p {width:200px;background:#888;color:white;height:16px;}
+</style>
+<script src="../../scripts/jquery.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(function(){
+   	// 为span元素绑定click事件
+	$('span').bind("click",function(event){
+		var txt = $('#msg').html() + "<p>内层span元素被点击.<p/>";
+		$('#msg').html(txt);
+		return false;
+	});
+	// 为div元素绑定click事件
+	$('#content').bind("click",function(event){
+	    var txt = $('#msg').html() + "<p>外层div元素被点击.<p/>";
+		$('#msg').html(txt);
+		return false;
+	});
+	// 为body元素绑定click事件
+	$("body").bind("click",function(){
+		var txt = $('#msg').html() + "<p>body元素被点击.<p/>";
+		$('#msg').html(txt);
+	});
+})
+</script>
+</head>
+<body>
+<div id="content">
+	外层div元素
+	<span>内层span元素</span>
+	外层div元素
+</div>
+
+<div id="msg"></div>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<decorators defaultdir="/WEB-INF/layouts">
+    <!-- 不进行装饰的路径 -->
+    <excludes>
+        <pattern>/static/*</pattern>
+        <pattern>/api/*</pattern>
+    </excludes>
+
+    <!-- 默认装饰器 -->
+    <decorator name="default" page="decorator.jsp">
+        <pattern>/*</pattern>
+    </decorator>
+
+    <decorator name="anotherdecorator" page="decorator2.jsp">
+        <pattern>/site*</pattern>
+    </decorator>
+
+    <decorator name="htmldecorator" page="html.jsp">
+        <pattern>*.html</pattern>
+        <pattern>*.htm</pattern>
+    </decorator>
+
+    <decorator name="none">
+        <!-- These files will not get decorated. -->
+        <pattern>/none/*</pattern>
+    </decorator>
+
+</decorators>

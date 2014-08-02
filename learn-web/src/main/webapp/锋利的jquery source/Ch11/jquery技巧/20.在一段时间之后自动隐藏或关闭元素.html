@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<script src="../../scripts/jquery.js" type="text/javascript"></script>
+</head>
+<body>
+<p><button>Run</button></p>
+<div class="first">Test</div>
+
+<script type="text/javascript">
+$(document).ready(function(){  
+	$("button").click(function() {
+		$("div").slideUp(300).delay(3000).fadeIn(400);
+    });
+	/*
+	//这是1.3.2中我们使用setTimeout来实现的方式
+	setTimeout(function() {
+		$('div').fadeIn(400)
+	}, 3000);
+	*/
+	//而在1.4之后的版本可以使用delay()这一功能来实现的方式
+	//$("div").slideUp(300).delay(3000).fadeIn(400);
+});
+</script>
+</body>
+</html>

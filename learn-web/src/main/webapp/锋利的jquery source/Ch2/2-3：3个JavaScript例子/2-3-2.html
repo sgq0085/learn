@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <script type="text/javascript">
+        // <![CDATA[
+        window.onload = function () { //页面所有元素加载完毕
+            var item = document.getElementById("tb");			//获取id为tb的元素(table)
+            console.info("item", item);
+            var tbody = item.getElementsByTagName("tbody")[0];	//获取表格的第一个tbody元素
+            console.info("tbody", tbody);
+            var trs = tbody.getElementsByTagName("tr");	        //获取tbody元素下的所有tr元素
+            for (var i = 0; i < trs.length; i++) {//循环tr元素
+                if (i % 2 == 0) {        //取模. (取余数.比如 0%2=0 , 1%2=1 , 2%2=0 , 3%2=1)
+                    trs[i].style.backgroundColor = "#888"; // 改变 符合条件的tr元素 的背景色.
+                }
+            }
+        }
+        // ]]>
+    </script>
+</head>
+<body>
+<table id="tb">
+    <tbody>
+    <tr>
+        <td>第一行</td>
+        <td>第一行</td>
+    </tr>
+    <tr>
+        <td>第二行</td>
+        <td>第二行</td>
+    </tr>
+    <tr>
+        <td>第三行</td>
+        <td>第三行</td>
+    </tr>
+    <tr>
+        <td>第四行</td>
+        <td>第四行</td>
+    </tr>
+    <tr>
+        <td>第五行</td>
+        <td>第五行</td>
+    </tr>
+    <tr>
+        <td>第六行</td>
+        <td>第六行</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>3-2-2</title>
+ <!--   引入jQuery -->
+ <script src="../../scripts/jquery.js" type="text/javascript"></script>
+ <script type="text/javascript">
+ //<![CDATA[
+  $(function(){
+	var $li_1 = $("<li>香蕉</li>");	//  创建一个<li>元素，包括元素节点和文本节点
+														//“香蕉”就是创建的文本节点。
+	var $li_2 = $("<li>雪梨</li>");	//  创建一个<li>元素，包括元素节点和文本节点
+														//“雪梨”就是创建的文本节点。
+
+	var $parent = $("ul");		// 获取<ul>节点。<li>的父节点
+
+	$("ul").append($li_1);	    // 添加到<ul>节点中，使之能在网页中显示
+	$("ul").append($li_2);	    // 添加到<ul>节点中，使之能在网页中显示
+
+  });
+  //]]>
+  </script>
+</head>
+<body>
+
+	<p title="选择你最喜欢的水果." >你最喜欢的水果是?</p>
+	<ul>
+	  <li title='苹果'>苹果</li>
+	  <li title='橘子'>橘子</li>
+	  <li title='菠萝'>菠萝</li>
+	</ul>
+
+</body>
+</html>
+
+ 

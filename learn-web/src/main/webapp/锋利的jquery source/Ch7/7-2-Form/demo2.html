@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script src="../../scripts/jquery.js" type="text/javascript"></script>
+<script src="lib/jquery.form.js" type="text/javascript"></script>
+    <script type="text/javascript">          
+     $(document).ready(function() {  
+		$('#myForm').submit(function() { 
+               $(this).ajaxSubmit(function() {   
+			 		  $('#output1').html("提交成功！欢迎下次再来！").show();    
+		       }); 
+   			   return false; //阻止表单默认提交
+		});  
+      });   
+     </script> 
+   </head>
+  <body>
+    <h3> Demo 2 : form插件的使用---ajaxSubmit(). </h3>
+	<form id="myForm" action="demo.php" method="post"> 
+	    名称： <input type="text" name="name" /> <br/>
+		地址： <input type="text" name="address" /><br/> 
+	    自我介绍： <textarea name="comment"></textarea> <br/>
+	    <input type="submit" id="test" value="提交" /> <br/>
+	    <div id="output1" style="display:none;"></div>
+	</form>
+  </body>
+</html>

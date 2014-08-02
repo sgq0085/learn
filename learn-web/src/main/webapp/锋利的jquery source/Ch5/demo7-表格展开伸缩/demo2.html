@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title></title>
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<!--   引入jQuery -->
+<script src="../../scripts/jquery.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(function(){
+	$('tr.parent').click(function(){   // 获取所谓的父行
+			$(this)
+				.toggleClass("selected")   // 添加/删除高亮
+				.siblings('.child_'+this.id).toggle();  // 隐藏/显示所谓的子行
+	}).click();
+})
+</script>
+</head>
+<body>
+	<table>
+		<thead>
+			<tr><th>姓名</th><th>性别</th><th>暂住地</th></tr>
+		</thead>
+		<tbody>
+			<tr class="parent" id="row_01"><td colspan="3">前台设计组</td></tr>
+			<tr class="child_row_01"><td>张山</td><td>男</td><td>浙江宁波</td></tr>
+			<tr class="child_row_01"><td>李四</td><td>女</td><td>浙江杭州</td></tr>
+
+			<tr class="parent" id="row_02"><td colspan="3">前台开发组</td></tr>
+			<tr class="child_row_02"><td>王五</td><td>男</td><td>湖南长沙</td></tr>
+			<tr class="child_row_02"><td>找六</td><td>男</td><td>浙江温州</td></tr>
+
+			<tr class="parent" id="row_03"><td colspan="3">后台开发组</td></tr>
+			<tr class="child_row_03"><td>Rain</td><td>男</td><td>浙江杭州</td></tr>
+			<tr class="child_row_03"><td>MAXMAN</td><td>女</td><td>浙江杭州</td></tr>
+		</tbody>
+	</table>
+</body>
+</html>

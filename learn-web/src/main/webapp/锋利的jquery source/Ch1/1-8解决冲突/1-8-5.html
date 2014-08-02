@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>冲突解决5</title>
+<!-- 引入 jQuery  -->
+<script src="../../scripts/jquery.js" type="text/javascript"></script>
+<!-- 引入 prototype  -->
+<script src="lib/prototype.js" type="text/javascript"></script>
+</head>
+<body>
+<p id="pp">Test-prototype(将被隐藏)</p>
+<p >Test-jQuery(将被绑定单击事件)</p>
+
+<script type="text/javascript">
+jQuery(function(){   //直接使用 jQuery ,没有必要调用"jQuery.noConflict()"函数。
+	jQuery("p").click(function(){      
+		alert( jQuery(this).text() );
+	});
+});
+
+$("pp").style.display = 'none'; //使用prototype
+</script>
+</body>
+</html>

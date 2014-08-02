@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<style type="text/css">
+* { margin:0; padding:0;font:normal 12px/17px Arial; }
+.msg {width:300px; margin:100px; }
+.msg_caption { width:100%; overflow:hidden; margin-bottom:1px;}
+.msg_caption span { display:block; float:left; margin:0 2px; padding:4px 10px; background:#898989; cursor:pointer;color:white; }
+.msg textarea{ width:300px; height:80px;height:100px;border:1px solid #000;}
+</style>
+ <!--   引入jQuery -->
+<script src="../../scripts/jquery.js" type="text/javascript"></script>
+ <script type="text/javascript">
+	$(function(){
+	    var $comment = $('#comment');  //获取评论框
+	    $('.bigger').click(function(){ //放大按钮绑定单击事件
+		   if(!$comment.is(":animated")){ //判断是否处于动画
+			  if( $comment.height() < 500 ){ 
+				  	$comment.animate({ height : "+=50" },400); //重新设置高度，在原有的基础上加50
+			  }
+			}
+		})
+		$('.smaller').click(function(){//缩小按钮绑定单击事件
+		   if(!$comment.is(":animated")){//判断是否处于动画
+				if( $comment.height() > 50 ){
+					$comment.animate({ height : "-=50" },400); //重新设置高度，在原有的基础上减50
+				}
+			}
+		});
+	});
+  </script>
+</head>
+<body>
+<form action="" method="post">
+<div class="msg">
+	<div class="msg_caption">
+		<span class="bigger" >放大</span>
+		<span class="smaller" >缩小</span>
+	</div>
+	<div>
+		<textarea id="comment" rows="8" cols="20">多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.</textarea>
+	</div>
+</div>
+</form>
+</body>
+</html>

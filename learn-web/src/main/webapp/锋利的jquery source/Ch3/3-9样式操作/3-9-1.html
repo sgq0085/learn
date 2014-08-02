@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>3-9-1</title>
+<style type="text/css">
+.high{
+ font-weight:bold;   /* 粗体字 */
+ color : red;        /* 字体颜色设置红色*/
+}
+.another{
+ font-style:italic;
+ color:blue;
+}
+</style>
+ <!--   引入jQuery -->
+ <script src="../../scripts/jquery.js" type="text/javascript"></script>
+ <script type="text/javascript">
+ //<![CDATA[
+  $(function(){
+      //获取样式
+      $("input:eq(0)").click(function(){
+			alert( $("p").attr("class") );
+	  });
+      //设置样式
+	  $("input:eq(1)").click(function(){
+			$("p").attr("class","high");
+	  });
+      //追加样式
+	  $("input:eq(2)").click(function(){
+			$("p").addClass("another");
+	  });    
+	  //删除全部样式
+	  $("input:eq(3)").click(function(){
+			$("p").removeClass();
+	  });  
+	   //删除指定样式
+	  $("input:eq(4)").click(function(){
+			$("p").removeClass("high");
+	  });   
+	  //重复切换样式
+	  $("input:eq(5)").click(function(){
+			$("p").toggleClass("another");
+	  });  
+	  //判断元素是否含有某样式
+	  $("input:eq(6)").click(function(){
+			alert( $("p").hasClass("another") )
+			alert( $("p").is(".another") )
+	  });  
+  });
+  //]]>
+  </script>
+</head>
+<body>
+    <input type="button" value="输出class类"/>
+	<input type="button" value="设置class类"/>
+	<input type="button" value="追加class类"/>
+	<input type="button" value="删除全部class类"/>
+	<input type="button" value="删除指定class类"/>
+	<input type="button" value="重复切换class类"/>
+	<input type="button" value="判断元素是否含有某个class类"/>
+
+	<p class="myClass" title="选择你最喜欢的水果." >你最喜欢的水果是?</p>
+	<ul>
+	  <li title='苹果'>苹果</li>
+	  <li title='橘子'>橘子</li>
+	  <li title='菠萝'>菠萝</li>
+	</ul>
+</body>
+</html>
+
+ 

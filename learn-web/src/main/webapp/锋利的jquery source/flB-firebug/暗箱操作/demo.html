@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/ TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title></title>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+* { margin:0; padding:0;}
+body { font-size:12px;}
+</style>
+<link rel="stylesheet" href="css/scrollable.css" type="text/css"/>
+ <!--   引入jQuery -->
+<script src="../../scripts/jquery.js" type="text/javascript"></script>
+<script language="javascript" type="text/javascript">
+  $(function(){
+      var $content = $(".scrollable_demo");
+	  var i = 5;  //已知显示的<a>元素的个数
+	  var m = 5;  //用于计算的变量
+	  var count = $content.find("a").length;//总共的<a>元素的个数
+	  $(".next").click(function(){
+			if( !$content.is(":animated")){  //判断元素是否正处于动画，如果不处于动画状态，则追加动画。
+				if(m<count){  //判断 i 是否小于总的个数
+					m++;
+					$content.animate({left: "-=96px"}, 600);
+				}
+			}
+	  });
+	  $(".prev").click(function(){
+			if( !$content.is(":animated")){
+				if(m>i){ //判断 i 是否小于总的个数
+					m--;
+					$content.animate({left: "+=96px"}, 600);
+				}
+			}
+	  });
+  })
+</script>
+</head>
+<body>
+<div style="margin:0 auto;width:500px;">
+
+    <!-- 例子 -->
+    <div id="scrollable">
+        <a class="prev" href="#"></a>
+        <!--  外部div使用相对定位，里面的div使用绝对定位 -->
+        <div class="items" style="overflow: hidden; position: relative; visibility: visible; width: 478px;">
+            <div style="position: absolute; width: 200000em; left: 0px;" class="scrollable_demo">
+                <a>1</a>
+                <a>2</a>
+                <a>3</a>
+                <a>4</a>
+                <a>5</a>
+                <a>6</a>
+                <a>7</a>
+                <a>8</a>
+                <a>9</a>
+                <a>10</a>
+                <a>11</a>
+                <a>12</a>
+                <a>13</a>
+                <a>14</a>
+                <a>15</a>
+            </div>
+            <br clear="all"/>            
+        </div>
+        <!-- "prev page" link -->
+        <a  class="next" href="#"></a>
+	</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>表格</title>
+<!-- 引入 jQuery -->
+<script src="../scripts/jquery.js" type="text/javascript"></script>
+<script type="text/javascript">
+//等待dom元素加载完毕.
+$(document).ready(function(){
+	/*
+	添加注释：
+	在一个id为table的表格的tbody中，如果每行最后一列中的checkbox没有被禁用，
+	则把这行的背景设为红色
+	*/
+	$("#table>tbody>tr:has(td:has(:checkbox:enabled))").css("background","red");
+
+});
+</script>
+</head>
+<body>
+<table id="table">
+<tbody>
+<tr>
+	<td>第1行</td>
+	<td>第1行</td>
+	<td>第1行</td>
+	<td>第1行</td>
+	<td>第2行<input type="checkbox" disabled="disabled"/></td>
+</tr>
+<tr>
+	<td>第2行</td>
+	<td>第2行</td>
+	<td>第2行</td>
+	<td>第2行</td>
+	<td>第2行<input type="checkbox" /></td>
+</tr>
+<tr>
+	<td>第3行</td>
+	<td>第3行</td>
+	<td>第3行</td>
+	<td>第3行</td>
+	<td>第3行<input type="checkbox" disabled="disabled"/></td>
+</tr>
+<tr>
+	<td>第4行</td>
+	<td>第4行</td>
+	<td>第4行</td>
+	<td>第4行</td>
+	<td>第4行<input type="checkbox" /></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

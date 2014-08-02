@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gqshao.test.sys.rbac.dao.UserDao">
+    <resultMap id="BaseResultMap" type="com.gqshao.test.sys.rbac.domain.User">
+        <id column="ID" property="id" jdbcType="CHAR" />
+        <result column="LOGIN_NAME" property="loginName" jdbcType="VARCHAR" />
+        <result column="PASSWORD" property="password" jdbcType="VARCHAR" />
+        <result column="SALT" property="salt" jdbcType="VARCHAR" />
+        <result column="NAME" property="name" jdbcType="VARCHAR" />
+        <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+        <result column="IS_ADMIN" property="isAdmin" jdbcType="DECIMAL" />
+        <result column="STATUS" property="status" jdbcType="DECIMAL" />
+        <result column="CREATE_USER" property="createUser" jdbcType="VARCHAR" />
+        <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+        <result column="UPDATE_USER" property="updateUser" jdbcType="VARCHAR" />
+        <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+        <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+        <result column="IS_DELETE" property="isDelete" jdbcType="DECIMAL" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        ID, LOGIN_NAME, PASSWORD, NAME, SALT, EMAIL, IS_ADMIN, STATUS, CREATE_USER,
+        CREATE_DATETIME, UPDATE_USER, UPDATE_DATETIME, REMARK, IS_DELETE
+    </sql>
+
+    <select id="findUserById" resultMap="BaseResultMap" parameterType="string">
+        select
+        <include refid="Base_Column_List" />
+        from sys_user
+        where ID = #{id,jdbcType=CHAR}
+    </select>
+
+    <select id="findUserByLoginName" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from sys_user
+        where login_name = #{loginName}
+        and is_delete!=1
+    </select>
+
+    <select id="list" parameterType="userfilter" resultType="userdto">
+        select u2.id as id,u2.login_name as loginName,u2.name
+        ,u2.status,u2.email ,u2.is_admin as isAdmin,
+        role.role_name as
+        roleName
+        from sys_user u2,
+        (select u1.id,wm_concat(r1.name) as role_name
+        from sys_user
+        u1,sys_role r1 ,sys_user_role sur
+        where
+        u1.id=sur.user_id(+)
+        and sur.role_id=r1.id(+)
+        and u1.is_delete=0
+        and (r1.is_delete=0 or
+        r1.is_delete is null)
+        and (u1.is_admin = 0 or u1.is_admin is null)
+        <if test="loginName != null ">
+            and u1.login_name like '%'||#{loginName}||'%'
+        </if>
+        <if test="name != null ">
+            and u1.name like '%'||#{name}||'%'
+        </if>
+        group by u1.id) role
+        where u2.id=role.id
+        and (u2.is_admin = 0 or u2.is_admin is null)
+        <if test="sidx!=null and sord!=null"> order by ${sidx} ${sord} </if>
+        <if test="sidx==null or sord == null"> order by u.create_datetime desc</if>
+    </select>
+
+    <insert id="save" parameterType="user">
+        insert into sys_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                ID,
+            </if>
+            <if test="loginName != null">
+                login_name,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="salt != null">
+                salt,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="isAdmin != null">
+                IS_ADMIN,
+            </if>
+            <if test="status != null">
+                STATUS,
+            </if>
+            <if test="createUser != null">
+                CREATE_USER,
+            </if>
+            <if test="createDatetime != null">
+                CREATE_DATETIME,
+            </if>
+            <if test="updateUser != null">
+                UPDATE_USER,
+            </if>
+            <if test="updateDatetime != null">
+                UPDATE_DATETIME,
+            </if>
+            <if test="remark != null">
+                REMARK,
+            </if>
+            <if test="isDelete != null">
+                IS_DELETE,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=CHAR},
+            </if>
+            <if test="loginName != null">
+                #{loginName,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="salt != null">
+                #{salt,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="isAdmin != null">
+                #{isAdmin,jdbcType=CHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="createUser != null">
+                #{createUser,jdbcType=VARCHAR},
+            </if>
+            <if test="createDatetime != null">
+                #{createDatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUser != null">
+                #{updateUser,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDatetime != null">
+                #{updateDatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="isDelete != null">
+                #{isDelete,jdbcType=CHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="update" parameterType="user">
+        update SYS_USER
+        <set>
+            <if test="password != null">
+                PASSWORD = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                NAME = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="salt != null">
+                SALT = #{salt,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                EMAIL = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="isAdmin != null">
+                IS_ADMIN = #{isAdmin,jdbcType=DECIMAL},
+            </if>
+            <if test="status != null">
+                STATUS = #{status,jdbcType=DECIMAL},
+            </if>
+            <if test="updateUser != null">
+                UPDATE_USER = #{updateUser,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDatetime != null">
+                UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                REMARK = #{remark,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=CHAR} and is_delete!=1
+    </update>
+
+    <update id="delete">
+        update sys_user set is_delete = 1
+        where is_delete !=1 and id in
+        <foreach collection="array" item="id" index="i" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+
+    <insert id="saveUserRole" parameterType="java.util.List">
+        insert into sys_user_role
+        (user_id, role_id)
+        <foreach collection="list" item="ur" index="i" separator="union all">
+            select #{ur.userId,jdbcType=CHAR},#{ur.roleId,jdbcType=CHAR} from dual
+        </foreach>
+    </insert>
+
+    <delete id="deleteUserRole" parameterType="string">
+        delete sys_user_role where user_id = #{value,jdbcType=CHAR}
+    </delete>
+
+    <delete id="deleteUserRoles">
+        delete sys_user_role where user_id in
+        <foreach collection="array" item="id" index="i" open="(" separator="," close=")">
+            #{id,jdbcType=CHAR}
+        </foreach>
+    </delete>
+
+</mapper>

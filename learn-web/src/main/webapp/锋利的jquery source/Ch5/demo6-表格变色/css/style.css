@@ -1,0 +1,6 @@
+table		{ border:0;border-collapse:collapse;}
+td	{ font:normal 12px/17px Arial;padding:2px;width:100px;}
+th			{ font:bold 12px/17px Arial;text-align:left;padding:4px;border-bottom:1px solid #333;}
+.even		{ background:#FFF38F;}  /* 偶数行样式*/
+.odd		{ background:#FFFFEE;}  /* 奇数行样式*/
+.selected		{ background:#FF6500;color:#fff;}

@@ -1,0 +1,22 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script src="../../scripts/jquery.js" type="text/javascript"></script>
+</head>
+<body>
+<div style="width:200px;height:40px;background:#eee;cursor:pointer;">
+	<a href="http://www.cssrain.cn">home</a>
+</div>
+<script>
+$(document).ready(function() {	
+	$("div").click(function(){  
+		window.location=$(this).find("a").attr("href"); 
+		return false;  
+	}); 
+});
+
+</script>
+</body>
+</html>

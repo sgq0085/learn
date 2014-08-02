@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!--   引入jQuery -->
+<script src="../../scripts/jquery.js" type="text/javascript"></script>
+<script language="javascript" >
+	$(function(){// dom元素加载完毕
+	   $('#tb tbody tr:even').css("backgroundColor","#888");
+	   //获取id为tb的元素,然后寻找他下面的tbody标签，再寻找tbody下索引值是偶数的tr元素,
+	   //改变它的背景色.
+	})
+</script>
+</head>
+<body>
+<table id="tb">
+<tbody>
+<tr><td>第一行</td><td>第一行</td></tr>
+<tr><td>第二行</td><td>第二行</td></tr>
+<tr><td>第三行</td><td>第三行</td></tr>
+<tr><td>第四行</td><td>第四行</td></tr>
+<tr><td>第五行</td><td>第五行</td></tr>
+<tr><td>第六行</td><td>第六行</td></tr>
+</tbody>
+</table>
+</body>
+</html>

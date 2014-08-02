@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>插件3，ltrim,rtrim</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!--   引入jQuery -->
+<script src="../../scripts/jquery.js" type="text/javascript"></script>
+<script	type="text/javascript">
+//插件编写
+;(function($) {
+	$.extend({
+		ltrim :	function( text ) {
+			return (text ||	"").replace( /^\s+/g, "" )
+		},
+		rtrim :	function rtrim(	text ) {
+			return (text ||	"").replace( /\s+$/g, "" )
+		}
+	});
+})(jQuery);
+
+//插件应用
+$(function(){
+	$("#trimTest").val(
+		jQuery.trim("       test      ") + "\n" +
+		jQuery.ltrim("       test      ") + "\n" +
+		jQuery.rtrim("       test      ")
+	);
+})
+
+</script>
+</head>
+<body>
+<textarea id="trimTest" rows="5" cols="20"></textarea>
+
+</body>
+</html>

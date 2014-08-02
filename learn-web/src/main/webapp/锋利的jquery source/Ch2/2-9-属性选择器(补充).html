@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>2-9</title>
+<link rel="stylesheet" type="text/css" href="css/style.css" /> 
+<!--   引入jQuery --> 
+<script src="../scripts/jquery.js" type="text/javascript"></script>
+<script src="lib/assist.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  //选取 属性title值 以 en 开始 的div元素.
+  $('#btn1').click(function(){
+	$('div[title^="en"]').css("background","#bbffaa");
+  })
+  //选取 属性title值 含有 en  的div元素.
+  $('#btn2').click(function(){
+	$('div[title*="en"]').css("background","#bbffaa");
+  })
+  //选取 属性title等于en或以en为前缀（该字符串后跟一个连字符'-'）的元素
+  $('#btn3').click(function(){
+	$('div[title|="en"]').css("background","#bbffaa");
+  })
+  //选取 属性title用空格分隔的值中包含字符uk的元素.
+  $('#btn4').click(function(){
+	$('div[title~="uk"]').css("background","#bbffaa");
+  })
+});
+</script>
+</head>
+<body>
+
+<button id="reset">手动重置页面元素</button>
+<input type="checkbox" id="isreset" checked="checked"/><label for="isreset">点击下列按钮时先自动重置页面</label>
+
+<h3> 属性选择器.</h3>
+<input type="button" value="选取 属性title值 以 en 开始 的div元素" id="btn1"/>
+<input type="button" value="选取 属性title值 含有 en  的div元素" id="btn2"/>
+<input type="button" value="选取 属性title等于en或以en为前缀（该字符串后跟一个连字符'-'）的元素" id="btn3"/>
+<input type="button" value="选取 属性title用空格分隔的值中包含字符uk的元素." id="btn4"/>
+
+<br/><br/>
+
+<div title="en">title为en的div元素</div> 
+<div title="en-UK">title为en-UK的div元素</div>
+<div title="english">title为english的div元素</div> 
+<div title="en uk">title为en uk的div元素</div>  
+<div title="uken">title为uken的div元素</div>    
+
+</body>
+</html>

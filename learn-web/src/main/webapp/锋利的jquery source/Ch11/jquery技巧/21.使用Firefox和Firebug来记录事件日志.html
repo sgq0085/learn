@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<script src="../../scripts/jquery.js" type="text/javascript"></script>
+</head>
+<body>
+<p><button>Run</button></p>
+<div class="first">Test</div>
+
+<script type="text/javascript">
+// 在firebug上查看
+jQuery.log = jQuery.fn.log = function (msg) {
+      if (console){
+         console.log("%s: %o", msg, this);
+      }
+      return this;
+};
+$(document).ready(function(){  
+	$("button").click(function() {
+		$('#someDiv').hide().log('div被隐藏');
+    });
+});
+</script>
+</body>
+</html>

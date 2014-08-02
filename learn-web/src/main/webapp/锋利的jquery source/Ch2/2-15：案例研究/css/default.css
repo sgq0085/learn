@@ -1,0 +1,11 @@
+*{ margin:0; padding:0;}
+body {font-size:12px;text-align:center;}
+a { color:#04D; text-decoration:none;}
+a:hover { color:#F50; text-decoration:underline;}
+.SubCategoryBox {width:600px; margin:0 auto; text-align:center;margin-top:40px;}
+.SubCategoryBox ul { list-style:none;}
+.SubCategoryBox ul li { display:block; float:left; width:200px; line-height:20px;}
+.showmore { clear:both; text-align:center;padding-top:10px;}
+.showmore a { display:block; width:120px; margin:0 auto; line-height:24px; border:1px solid #AAA;}
+.showmore a span { padding-left:15px; background:url(../img/down.gif) no-repeat 0 0;}
+.promoted a { color:#F50;}

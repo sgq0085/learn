@@ -1,0 +1,114 @@
+/***************************************
+   Default Styles
+***************************************/
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font: 80% Verdana, Helvetica, Arial, sans-serif;
+  color: #000;
+  background: #fff;
+}
+#container {
+  margin: 10px 2em;
+}
+
+h1 {
+  font-size: 2.5em;
+/*  margin-bottom: 0;*/
+}
+
+h2 {
+  font-size: 1.3em;
+  margin-bottom: .5em;
+}
+h3 {
+  font-size: 1.1em;
+  margin-bottom: 0;
+}
+
+code {
+  font-size: 1.2em;
+}
+
+a {
+  color: #06581f;
+}
+
+
+/***************************************
+   Chapter Styles
+***************************************/
+
+#gallery {
+  width: 600px;
+}
+
+#more-photos {
+  clear: left;
+  display: block;
+  margin: 1em 0;
+}
+
+.photo {
+  float: left;
+  position: relative;
+  overflow: hidden;
+  width: 180px;
+  height: 140px;
+  margin: 10px;
+  -webkit-box-shadow: #777 2px 2px 8px;
+     -moz-box-shadow: #777 2px 2px 8px;
+       -o-box-shadow: #777 2px 2px 8px;
+          box-shadow: #777 2px 2px 8px;
+  -webkit-border-radius: 1em;
+     -moz-border-radius: 1em;
+       -o-border-radius: 1em;
+          border-radius: 1em;
+
+}
+.photo img {
+  display: block;
+  padding: 10px;
+
+}
+
+.photo .details {
+  display: none;
+  position: absolute;
+  overflow: hidden;
+  left: 10px;
+  top: 10px;
+  width: 160px;
+  height: 120px;
+  z-index: 1;
+  background-color: #333;
+  color: #fff;
+}
+.photo .details .description {
+  padding: 10px;
+  font-size: 10px;
+  font-weight: bold;
+}
+.photo .details .date {
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  font-size: 9px;
+}
+.photo .details .photographer {
+  position: absolute;
+  right: 5px;
+  bottom: 15px;
+  font-size: 9px;
+}
+
+.selected .details {
+  background-color: #060;
+}
+
+
+

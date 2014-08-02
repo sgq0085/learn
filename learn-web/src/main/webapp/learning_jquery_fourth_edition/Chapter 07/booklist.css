@@ -1,0 +1,27 @@
+.ui-content img {
+  display: block;
+  width: 300px;
+  height: 210px;
+}
+.ui-content .title {
+  padding: 10px;
+  margin: 0;
+  width: 280px;
+  font-weight: bold;
+/*  font-size: 18px;*/
+  background-color: #000;
+  color: #fff;
+  text-shadow: none;
+}
+.ui-content .author {
+  padding: 10px;
+  margin: 0;
+  width: 280px;
+  font-weight: bold;
+/*  font-size: 14px;*/
+  background-color: #F79321;
+  color: #fff;
+  text-shadow: none;
+}
+
+

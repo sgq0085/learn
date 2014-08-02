@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>3-10-1</title>
+<style type="text/css">
+.test{
+ font-weight:bold;
+ color : red;
+}
+.add{
+ font-style:italic;
+}
+</style>
+ <!--   引入jQuery -->
+ <script src="../../scripts/jquery.js" type="text/javascript"></script>
+ <script type="text/javascript">
+ //<![CDATA[
+  $(function(){
+      //获取<p>元素的HTML代码
+      $("input:eq(0)").click(function(){
+			alert(  $("p").html() );
+	  });
+      //获取<p>元素的文本
+	  $("input:eq(1)").click(function(){
+			alert(  $("p").text() );
+	  });
+      //设置<p>元素的HTML代码
+	  $("input:eq(2)").click(function(){
+			 $("p").html("<strong>你最喜欢的水果是?</strong>");
+	  });    
+	   //设置<p>元素的文本
+	  $("input:eq(3)").click(function(){
+			 $("p").text("你最喜欢的水果是?");
+	  });  
+	  //设置<p>元素的文本
+	  $("input:eq(4)").click(function(){
+			 $("p").text("<strong>你最喜欢的水果是?</strong>");
+	  });  
+	  //获取按钮的value值
+	  $("input:eq(5)").click(function(){
+			 alert( $(this).val() );
+	  });   
+	  //设置按钮的value值
+	  $("input:eq(6)").click(function(){
+		    $(this).val("我被点击了!");
+	  });  
+  });
+  //]]>
+  </script>
+</head>
+<body>
+    <input type="button" value="获取<p>元素的HTML代码"/>
+	<input type="button" value="获取<p>元素的文本"/>
+	<input type="button" value="设置<p>元素的HTML代码"/>
+	<input type="button" value="设置<p>元素的文本"/>
+	<input type="button" value="设置<p>元素的文本(带HTML)"/>
+	<input type="button" value="获取按钮的value值"/>
+	<input type="button" value="设置按钮的value值"/>
+
+	<p title="选择你最喜欢的水果." ><strong>你最喜欢的水果是?</strong></p>
+	<ul>
+	  <li title='苹果'>苹果</li>
+	  <li title='橘子'>橘子</li>
+	  <li title='菠萝'>菠萝</li>
+	</ul>
+</body>
+</html>
+
+ 

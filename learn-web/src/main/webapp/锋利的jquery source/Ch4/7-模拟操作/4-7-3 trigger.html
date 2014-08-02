@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<style type="text/css">
+*{margin:0;padding:0;}	
+body { font-size: 13px; line-height: 130%; padding: 60px; }
+p {width:200px;background:#888;color:white;height:16px;}
+</style>
+<script src="../../scripts/jquery.js" type="text/javascript"></script>
+<script type="text/javascript">
+	$(function(){
+	   $('#btn').bind("myClick", function(event, message1, message2){
+			$('#test').append( "<p>"+message1 + message2 +"</p>");
+		});
+	   $('#btn').click(function(){
+			$(this).trigger("myClick",["我的自定义","事件"]);
+	   }).trigger("myClick",["我的自定义","事件"]);
+	})
+</script>
+</head>
+<body>
+<button id="btn">点击我</button>
+<div id="test"></div>
+</body>
+</html>

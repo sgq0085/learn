@@ -1,0 +1,16 @@
+/*  Styles for ie8 and below */
+
+.photo {
+  width: 200px;
+  height: 160px;
+  margin: 0;
+  background: transparent url(frame.png) no-repeat scroll 0 0;
+}
+
+.photo img {
+  padding: 20px;
+}
+.photo .details {
+  left: 20px;
+  top: 20px;
+}

@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script src="../../scripts/jquery.js" type="text/javascript"></script>
+<style>
+#load{
+	display:none;
+}
+</style>
+</head>
+<body>
+<div id="load">加载中...</div>
+<input type="button" id="send1" value="ajax"/>
+<div id="resText1"></div>
+
+<script>
+$(document).ready(function() { 
+	$('#send1').click(function() {
+		$.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?tags=car&tagmode=any&format=json&jsoncallback=?",function(data){
+					  $("#resText1").empty();
+					  $.each(data.items, function( i,item ){
+							$("<img/> ").attr("src", item.media.m ).appendTo("#resText1");
+							if ( i == 3 ) { 
+								return false;
+							}
+					  });
+				 }
+		); 
+   });
+
+	$.ajaxPrefilter(function( options ) {
+		options.global = true;
+	});
+	$("#load").ajaxStart(function(){
+		showLoading(); //显示loading
+		disableButtons(); //禁用按钮
+	});
+	$("#load").ajaxComplete(function(){
+		hideLoading(); //隐藏loading
+		enableButtons(); //启用按钮
+	});
+
+});
+
+function showLoading(){
+	$("#load").show();
+}
+function hideLoading(){
+	$("#load").hide();
+}
+function disableButtons(){
+	$("#send1").attr("disabled","disabled");
+}
+function enableButtons(){
+	$("#send1").removeAttr("disabled");
+}
+
+
+</script>
+</body>
+</html>

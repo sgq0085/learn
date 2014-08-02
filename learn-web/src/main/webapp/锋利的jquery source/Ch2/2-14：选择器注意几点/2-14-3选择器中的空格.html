@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title> new document </title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<!--   引入jQuery -->
+	<script src="../../scripts/jquery.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		$(function(){
+		  //注意区分类似这样的选择器
+		  //虽然一个空格，却截然不同的效果.
+		   var $t_a = $('.test :hidden');
+		   var $t_b = $('.test:hidden');
+		   var len_a = $t_a.length;
+		   var len_b = $t_b.length;
+		   $("<p>$('.test :hidden')的长度为"+len_a+"</p>").appendTo("body");
+		   $("<p>$('.test:hidden')的长度为"+len_b+"</p>").appendTo("body");
+		})
+	</script>
+</head>
+<body>
+	<div class="test">
+	   <div style="display:none;">aa</div>
+	   <div style="display:none;">bb</div>
+	   <div style="display:none;">cc</div>
+	   <div class="test" style="display:none;">dd</div>
+	</div>
+	<div class="test" style="display:none;">ee</div>
+	<div class="test" style="display:none;">ff</div>
+</body>
+</html>

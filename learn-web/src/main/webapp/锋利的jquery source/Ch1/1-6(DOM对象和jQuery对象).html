@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>1-5</title>
+<!-- 引入 jQuery -->
+<script src="../scripts/jquery.js" type="text/javascript"></script>
+<script type="text/javascript">
+//等待dom元素加载完毕.
+$(document).ready(function(){
+	var domObj = document.getElementsByTagName("h3")[0]; // Dom对象
+	var $jQueryObj = $(domObj);  //jQuery对象
+	alert("DOM对象："+domObj.innerHTML);
+	alert("jQuery对象："+$jQueryObj.html());
+});
+</script>
+</head>
+<body>
+<h3>例子</h3>
+<p title="选择你最喜欢的水果." >你最喜欢的水果是?</p>
+<ul>
+<li>苹果</li>
+<li>橘子</li>
+<li>菠萝</li>
+</ul>
+</body>
+</html>

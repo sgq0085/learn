@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>插件4，between</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<!--   引入jQuery -->
+	<script src="../../scripts/jquery.js" type="text/javascript"></script>
+	<script	type="text/javascript">
+		//插件编写
+		;(function($) {
+			$.extend(jQuery.expr[":"], {
+				between :	function( a , i ,m ) {
+					var tmp=m[3].split(","); //将传递进来的m[3]以逗号为分隔符，切成一个数组
+					return tmp[0]-0<i&&i<tmp[1]-0;
+				}
+			});
+		})(jQuery);
+
+		//插件应用
+		$(function(){
+			alert("执行前");
+			$("div:between(2,5)").css("background","white");
+			alert("执行后");
+		})
+	</script>
+</head>
+<body>
+<div style="background:red">0</div>
+<div style="background:blue">1</div>
+<div style="background:green">2</div>
+<div style="background:yellow">3</div>
+<div style="background:gray">4</div>
+<div style="background:orange">5</div>
+
+</body>
+</html>

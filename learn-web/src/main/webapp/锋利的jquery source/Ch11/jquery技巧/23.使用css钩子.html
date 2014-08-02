@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style>
+.box{
+	width:200px;
+	height:200px;
+	margin:10px;
+	background:#333;
+}
+</style>
+<script src="../../scripts/jquery.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="rect" class="box"></div>
+
+<script>
+/*! Copyright (c) 2010 Burin Asavesna (http://helloburin.com)
+ * Licensed under the MIT License (LICENSE.txt).
+ */
+(function($) {
+    // borderRadius get hooks
+    var div = document.createElement('div'),
+        divStyle = div.style,
+        support = $.support,
+        dirs = "TopLeft TopRight BottomRight BottomLeft".split(" ");
+
+    // WebKit supports "borderRadius" as well as "WebKitBorderRadius", weird
+    support.borderRadius =
+        divStyle.MozBorderRadius     === ''? 'MozBorderRadius'    :
+        (divStyle.MsBorderRadius     === ''? 'MsBorderRadius'     :
+        (divStyle.WebkitBorderRadius === ''? 'WebkitBorderRadius' :
+        (divStyle.OBorderRadius      === ''? 'OBorderRadius'      :
+        (divStyle.borderRadius       === ''? 'BorderRadius'       :
+        false))));
+
+    div = null;
+
+    function borderCornerRadius(direction, prefix) {
+        prefix = prefix === undefined || prefix === '' ? 'border' : prefix + 'Border';
+        if ( support.borderRadius && support.borderRadius == "MozBorderRadius" ) {
+            // e.g. MozBorderRadiusTopleft
+            return prefix + "Radius" + direction.charAt(0).toUpperCase()+direction.substr(1).toLowerCase();
+        } else {
+            // e.g. WebKitBorderTopLeftRadius, borderTopLeftRadius, etc
+            return prefix + direction + "Radius";
+        }
+    }
+
+    if ( support.borderRadius && support.borderRadius !== "BorderRadius" ) {
+        var vendor_prefix = support.borderRadius.replace('BorderRadius','');
+        $.cssHooks.borderRadius = {
+            get: function( elem, computed, extra ) {
+                // return each of the directions, topleft, topright, bottomright, bottomleft
+                return $.map(dirs, function( dir ) {
+                    return $.css(elem, borderCornerRadius( dir, vendor_prefix ));
+                }).join(" ");
+            },
+            set: function( elem, value ) {
+                // takes in a single value or shorthand (just letting the browser handle this) 
+                // e.g. 5px to set all, or 5px 0 0 5px to set left corners
+                elem.style[ borderCornerRadius( '', vendor_prefix ) ] = value;
+            }
+        };
+
+        $.each(dirs, function( i, dir ) {
+            $.cssHooks[ "borderRadius" + dir ] = {
+                get: function( elem, computed, extra ) {
+                    return $.css(elem, borderCornerRadius( dir, vendor_prefix ));
+                },
+                set: function( elem, value ) {
+                    elem.style[ borderCornerRadius( dir, vendor_prefix ) ] = value;
+                }
+            };
+        });
+
+    }
+
+})(jQuery);
+
+//use
+$('#rect').css('borderRadius',10);
+
+</script>
+</body>
+</html>

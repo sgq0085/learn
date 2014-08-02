@@ -1,0 +1,130 @@
+/***************************************
+   Default Styles
+***************************************/
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font: 80% Verdana, Helvetica, Arial, sans-serif;
+  color: #000;
+  background: #fff;
+}
+#container {
+  margin: 10px 2em;
+}
+
+h1 {
+  font-size: 2.5em;
+  margin-bottom: 0;
+}
+
+h2 {
+  font-size: 1.3em;
+  margin-bottom: .5em;
+}
+h3 {
+  font-size: 1.1em;
+  margin-bottom: 0;
+}
+
+code {
+  font-size: 1.2em;
+}
+
+a {
+  color: #06581f;
+}
+
+
+/***************************************
+   Chapter Styles
+***************************************/
+#fx-toggle {
+  display: none;
+  margin: 1em 0;
+}
+.team {
+  width: 365px;
+  float: left;
+}
+
+
+.member {
+  position: relative;
+  overflow: hidden;
+  height: 85px;
+}
+.member img {
+  position: relative;
+  z-index: 10;
+  display: block;
+  width: 75px;
+  height: 75px;
+  padding: 5px 0 5px 5px;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.member div {
+  position: absolute;
+  left: -300px;
+  top: 0;
+  line-height: 25px;
+  margin-top: 5px;
+  padding: 0 10px 0 100px;
+  width: 250px;
+
+  color: #888;
+}
+.member .name {
+  z-index: 8;
+  color: #fff;
+  background-color: #888;
+  font-weight: bold;
+}
+.member .location {
+  z-index: 6;
+  font-size: 0.9em;
+}
+.member .position {
+  z-index: 4;
+  font-size: 0.9em;
+}
+
+.bio {
+  position: absolute;
+  left: -370px;
+  width: 350px;
+  margin: 0;
+  font-size: 0.9em;
+  color: #fff;
+}
+.bio a {
+  color: #fff;
+}
+#movable {
+  z-index: 0;
+  padding: 10px;
+  background-color: #888;
+  -moz-border-radius: 0 5px 5px 0;
+  -webkit-border-radius: 0 5px 5px 0;
+  border-radius: 0 5px 5px 0;
+  visibility: visible;
+  position: absolute;
+  overflow: hidden;
+  top: -1000em;
+  left: 0;
+  width: 75px;
+  height: 75px;
+}
+#movable .bio {
+  position: static;
+}
+
+.highlight {
+  font-weight: bold;
+  color: #090;
+}

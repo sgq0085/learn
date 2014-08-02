@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gqshao.test.sys.rbac.dao.PermissionDao">
+	<resultMap id="BaseResultMap" type="com.gqshao.test.sys.rbac.domain.Permission">
+		<id column="ID" property="id" jdbcType="CHAR" />
+	    <result column="NAME" property="name" jdbcType="VARCHAR" />
+	    <result column="CODE" property="code" jdbcType="VARCHAR" />
+	    <result column="PARENT_ID" property="parentId" jdbcType="VARCHAR" />
+	    <result column="GRADE" property="grade" jdbcType="DECIMAL" />
+	    <result column="INDEX_NO" property="indexNo" jdbcType="DECIMAL" />
+	    <result column="IS_LEAF" property="isLeaf" jdbcType="DECIMAL" />
+	    <result column="URL" property="url" jdbcType="VARCHAR" />
+	    <result column="CREATE_USER" property="createUser" jdbcType="VARCHAR" />
+	    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+	    <result column="UPDATE_USER" property="updateUser" jdbcType="VARCHAR" />
+	    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+	    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+	    <result column="IS_DELETE" property="isDelete" jdbcType="DECIMAL" />
+	    <result column="PERMISSION_TYPE" property ="permissionType" jdbcType="DECIMAL"/>
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		ID, NAME, CODE, PARENT_ID,PERMISSION_TYPE, GRADE, INDEX_NO, IS_LEAF, URL, CREATE_USER, 
+    CREATE_DATETIME, UPDATE_USER, UPDATE_DATETIME, REMARK, IS_DELETE
+	</sql>
+	<select id="queryById" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from sys_permission
+		where ID = #{id,jdbcType=CHAR}
+	</select>
+
+	<select id="queryByRoleId" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select 
+        p.ID, 
+        p.NAME, 
+        p.CODE, 
+        p.PARENT_ID, 
+        p.GRADE, 
+        p.INDEX_NO, 
+        p.IS_LEAF, 
+        p.URL, 
+        p.CREATE_USER, 
+        p.CREATE_DATETIME,
+        p.UPDATE_USER,
+        p.UPDATE_DATETIME, 
+        p.REMARK, 
+        p.IS_DELETE
+        from sys_role_permission rp,sys_permission p
+        where p.id = rp.permissions_id and rp.role_id=#{value,jdbcType=CHAR} and p.is_delete=0
+	</select>
+    
+    <select id="querByCodeAndUserId" resultType="permission">
+    	select id, name, code, parent_id parentId, grade, index_no indexNo, url
+		  from sys_permission p
+		 where p.is_delete != 1
+		   and p.permission_type = 0
+		   and p.id in (select rp.permissions_id
+		                  from sys_role_permission rp, sys_user_role ur
+		                 where rp.role_id = ur.role_id
+		                   and ur.user_id = #{userId}
+		                 group by rp.permissions_id)
+		   and p.code = #{code}
+    </select>
+    
+    <select id="queryByCode" resultType="permission">
+    	select id, name, code, parent_id parentId, grade, index_no indexNo, url
+		  from sys_permission p
+		 where p.is_delete != 1
+		   and p.code = #{code}
+    </select>
+    
+    <select id="querByParentIdAndUserId"  resultType="permission">
+          select id, name, code, parent_id parentId, grade, index_no indexNo, url
+		  from (select rownum, id, name, code, parent_id, grade, index_no, url
+		          from sys_permission p
+		         where p.parent_id = #{parentId}
+		           and p.permission_type = 0
+		           and p.is_delete!=1
+		           and p.id in
+		               (select rp.permissions_id
+		                  from sys_role_permission rp, sys_user_role ur
+		                 where rp.role_id = ur.role_id
+		                   and ur.user_id = #{userId}
+		                 group by rp.permissions_id)
+		         order by p.index_no asc)
+		 where rownum = 1
+    </select>
+    
+    <select id="querByParentId"  resultType="permission">
+    	select id, name, code, parent_id parentId, grade, index_no indexNo, url
+		  from (select rownum, id, name, code, parent_id, grade, index_no, url
+		          from sys_permission p
+		         where p.parent_id = #{parentId}
+		           <if test="null != permissionType and permissionType !=1">
+		           and permission_type = 0
+		           </if>
+		         order by p.index_no asc)
+		 where rownum = 1
+    </select>
+    
+    <select id="queryByUserId"  resultMap="BaseResultMap" parameterType="string">
+    	select p.ID,
+	       p.NAME,
+	       p.CODE,
+	       p.PARENT_ID,
+	       p.GRADE,
+	       p.INDEX_NO,
+	       p.IS_LEAF,
+	       p.URL,
+	       p.CREATE_USER,
+	       p.CREATE_DATETIME,
+	       p.UPDATE_USER,
+	       p.UPDATE_DATETIME,
+	       p.REMARK,
+	       p.IS_DELETE
+		  from sys_permission p
+		 where p.id in (select rp.permissions_id
+		                  from sys_role_permission rp, sys_user_role ur,
+		                 where rp.role_id = ur.role_id
+		                   and ur.user_id = #{value,jdbcType=CHAR}
+		                 group by rp.permissions_id) 
+		 	and p.is_delete != 1
+       		--and p.permission_type = 0
+		 order by p.index_no asc
+    </select>
+
+	<select id="queryAll" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from sys_permission
+		where is_delete != 1 order by index_no asc
+	</select>
+	
+	<select id="queryMaxIndexNoByParentId" resultType="long" parameterType="string">
+	select max(index_no)+1 from sys_permission where is_delete!=1 and parent_id = #{value}
+	</select>
+	
+	<update id="delete" parameterType="string">
+		update sys_permission 
+		<set>
+			IS_DELETE = 1,
+		</set>
+		where ID = #{id,jdbcType=CHAR}
+	</update>
+
+	<insert id="save" parameterType="permission">
+		insert into SYS_PERMISSION
+	    <trim prefix="(" suffix=")" suffixOverrides="," >
+	      <if test="id != null" >
+	        ID,
+	      </if>
+	      <if test="name != null" >
+	        NAME,
+	      </if>
+	      <if test="code != null" >
+	        CODE,
+	      </if>
+	      <if test="parentId != null" >
+	        PARENT_ID,
+	      </if>
+	      <if test="grade != null" >
+	        GRADE,
+	      </if>
+	      <if test="indexNo != null" >
+	        INDEX_NO,
+	      </if>
+	      <if test="isLeaf != null" >
+	        IS_LEAF,
+	      </if>
+	      <if test="url != null" >
+	        URL,
+	      </if>
+	      <if test="createUser != null" >
+	        CREATE_USER,
+	      </if>
+	      <if test="createDatetime != null" >
+	        CREATE_DATETIME,
+	      </if>
+	      <if test="updateUser != null" >
+	        UPDATE_USER,
+	      </if>
+	      <if test="updateDatetime != null" >
+	        UPDATE_DATETIME,
+	      </if>
+	      <if test="remark != null" >
+	        REMARK,
+	      </if>
+	      <if test="isDelete != null" >
+	        IS_DELETE,
+	      </if>
+	      <if test="permissionType != null">
+	      	PERMISSION_TYPE,
+	      </if>
+	    </trim>
+	    <trim prefix="values (" suffix=")" suffixOverrides="," >
+	      <if test="id != null" >
+	        #{id,jdbcType=CHAR},
+	      </if>
+	      <if test="name != null" >
+	        #{name,jdbcType=VARCHAR},
+	      </if>
+	      <if test="code != null" >
+	        #{code,jdbcType=VARCHAR},
+	      </if>
+	      <if test="parentId != null" >
+	        #{parentId,jdbcType=VARCHAR},
+	      </if>
+	      <if test="grade != null" >
+	        #{grade,jdbcType=DECIMAL},
+	      </if>
+	      <if test="indexNo != null" >
+	        #{indexNo,jdbcType=DECIMAL},
+	      </if>
+	      <if test="isLeaf != null" >
+	        #{isLeaf,jdbcType=DECIMAL},
+	      </if>
+	      <if test="url != null" >
+	        #{url,jdbcType=VARCHAR},
+	      </if>
+	      <if test="createUser != null" >
+	        #{createUser,jdbcType=VARCHAR},
+	      </if>
+	      <if test="createDatetime != null" >
+	        #{createDatetime,jdbcType=TIMESTAMP},
+	      </if>
+	      <if test="updateUser != null" >
+	        #{updateUser,jdbcType=VARCHAR},
+	      </if>
+	      <if test="updateDatetime != null" >
+	        #{updateDatetime,jdbcType=TIMESTAMP},
+	      </if>
+	      <if test="remark != null" >
+	        #{remark,jdbcType=VARCHAR},
+	      </if>
+	      <if test="isDelete != null" >
+	        #{isDelete,jdbcType=DECIMAL},
+	      </if>
+	      <if test="null != permissionType">
+	      	#{permissionType,jdbcType=DECIMAL}
+	      </if>
+	    </trim>
+	</insert>
+
+
+	<update id="update" parameterType="permission">
+		update SYS_PERMISSION
+	    <set >
+	      <if test="name != null" >
+	        NAME = #{name,jdbcType=VARCHAR},
+	      </if>
+	      <if test="code != null" >
+	        CODE = #{code,jdbcType=VARCHAR},
+	      </if>
+	      <if test="parentId != null" >
+	        PARENT_ID = #{parentId,jdbcType=VARCHAR},
+	      </if>
+	      <if test="grade != null" >
+	        GRADE = #{grade,jdbcType=DECIMAL},
+	      </if>
+	      <if test="indexNo != null" >
+	        INDEX_NO = #{indexNo,jdbcType=DECIMAL},
+	      </if>
+	      <if test="isLeaf != null" >
+	        IS_LEAF = #{isLeaf,jdbcType=DECIMAL},
+	      </if>
+	      <if test="url != null" >
+	        URL = #{url,jdbcType=VARCHAR},
+	      </if>
+	      <if test="createUser != null" >
+	        CREATE_USER = #{createUser,jdbcType=VARCHAR},
+	      </if>
+	      <if test="createDatetime != null" >
+	        CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+	      </if>
+	      <if test="updateUser != null" >
+	        UPDATE_USER = #{updateUser,jdbcType=VARCHAR},
+	      </if>
+	      <if test="updateDatetime != null" >
+	        UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP},
+	      </if>
+	      <if test="remark != null" >
+	        REMARK = #{remark,jdbcType=VARCHAR},
+	      </if>
+	      <if test="isDelete != null" >
+	        IS_DELETE = #{isDelete,jdbcType=DECIMAL},
+	      </if>
+	      <if test="null != permissionType">
+	      	PERMISSION_TYPE = #{permissionType,jdbcType=DECIMAL}
+	      </if>
+	    </set>
+		where ID = #{id,jdbcType=CHAR} and IS_DELETE != 1
+	</update>
+</mapper>

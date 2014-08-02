@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Chapter 13</title>
+
+    <link rel="stylesheet" href="13.css" type="text/css" />
+
+    <script src="jquery.js"></script>
+    <script src="13.js"></script>
+  </head>
+  <body>
+    <div id="container">
+      <h1>Chapter 13</h1>
+
+      <div id="sidebar">
+        <form id="ajax-form" action="http://api.jquery.com/" method="get">
+          <fieldset>
+            <div class="text">
+              <label for="title">Search</label>
+              <input type="text" id="title" name="s">
+            </div>
+
+            <div class="actions">
+              <button type="submit">Request</button>
+            </div>
+          </fieldset>
+        </form>
+
+        <div id="categories" class="hide">
+          <h3>Categories</h3>
+        </div>
+      </div>
+
+      <div id="response" class="response"></div>
+    </div>
+  </body>
+</html>

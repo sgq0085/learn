@@ -1,0 +1,151 @@
+一.事件
+1.加载DOM
+$(window).load(function(){}) 等价于 window.onload=function(){}
+多次使用
+$(document).ready(function(){}) 简写$(function(){}) 另简写 $().ready(function(){})
+
+2.事件绑定
+bind(type,[data],fn)
+三种使用方式
+(1)同时绑定一个/多个事件类型
+$('#foo').bind('mouseenter mouseleave', function() {
+  $(this).toggleClass('entered');
+});
+(2)同时绑定多个事件类型/处理程序
+$("button").bind({
+  click:function(){$("p").slideToggle();},
+  mouseover:function(){$("body").css("background-color","red");},
+  mouseout:function(){$("body").css("background-color","#FFFFFF");}
+});
+(3)在事件处理之前传递一些附加的数据
+function handler(event) {
+  alert(event.data.foo);
+}
+$("p").bind("click", {foo: "bar"}, handler)
+
+阻止默认行为和事件起泡
+通过返回false来取消默认的行为并阻止事件起泡。
+$("form").bind("submit", function() { return false; })
+通过使用 preventDefault() 方法只取消默认的行为
+$("form").bind("submit", function(event){ event.preventDefault(); });
+通过使用 stopPropagation() 方法只阻止一个事件起泡
+$("form").bind("submit", function(event){ event.stopPropagation(); });
+
+事件                          概述
+blur([[data],fn])             当元素失去焦点时触发 blur 事件
+focus([[data],fn])            当元素获得焦点时，触发 focus 事件
+focusin([data],fn)            当元素获得焦点时，触发 focusin 事件，focusin事件跟focus事件区别在于，他可以在父元素上检测子元素获取焦点的情况
+focusout([data],fn)           当元素失去焦点时触发 focusout 事件，focusout事件跟blur事件区别在于，他可以在父元素上检测子元素失去焦点的情况
+
+change([[data],fn])           当元素的值发生改变时，会发生 change 事件
+click([[data],fn])            触发每一个匹配元素的click事件
+dblclick([[data],fn])         当双击元素时，会发生 dblclick 事件
+error([[data],fn])            当元素遇到错误（没有正确载入）时，发生 error 事件
+
+keydown([[data],fn])          当键盘或按钮被按下时，发生 keydown 事件
+keypress([[data],fn])         当键盘或按钮被按下时，发生 keypress 事件，与 keydown 事件不同，每插入一个字符，就会发生 keypress 事件
+keyup([[data],fn])            当按钮被松开时，发生 keyup 事件。它发生在当前获得焦点的元素上
+
+mousedown([[data],fn])        当鼠标指针移动到元素上方，并按下鼠标按键时，会发生 mousedown 事件，与 click 事件不同，mousedown 事件仅需要按键被按下，而不需要松开即可发生
+mouseup([[data],fn])          当在元素上放松鼠标按钮时，会发生 mouseup 事件
+mouseenter([[data],fn])       当鼠标指针穿过元素时，会发生 mouseenter 事件。该事件大多数时候会与mouseleave 事件一起。使用与 mouseover 事件不同，只有在鼠标指针穿过被选元素时，才会触发 mouseenter 事件。
+mouseleave([[data],fn])       当鼠标指针离开元素时，会发生 mouseleave 事件。该事件大多数时候会与mouseenter 事件一起使用。只有在鼠标指针离开被选元素时，才会触发 mouseleave 事件
+mouseover([[data],fn])        当鼠标指针位于元素上方时，会发生 mouseover 事件。 该事件大多数时候会与 mouseout 事件一起使用，如果鼠标指针穿过任何子元素，同样会触发 mouseover 事件。
+mouseout([[data],fn])         当鼠标指针从元素上移开时，发生 mouseout 事件，不论鼠标指针离开被选元素还是任何子元素，都会触发 mouseout 事件
+mousemove([[data],fn])        当鼠标指针在指定的元素中移动时，就会发生 mousemove 事件。mousemove事件处理函数会被传递一个变量——事件对象，其.clientX 和 .clientY 属性代表鼠标的坐标。
+
+resize([[data],fn])           当调整浏览器窗口的大小时，发生 resize 事件
+scroll([[data],fn])           当用户滚动指定的元素时，会发生 scroll 事件
+select([[data],fn])           当 textarea 或文本类型的 input 元素中的文本被选择时，会发生 select 事件
+submit([[data],fn])           当提交表单时，会发生 submit 事件
+unload([[data],fn])           在当用户离开页面时，会发生 unload 事件
+
+
+3.合成事件
+hover([over,]out)
+用来替代bind("mouseenter mouseleave")，触发hover()
+
+
+4.事件冒泡
+多个元素从下至上，响应同一个事件
+(1)事件对象
+$("element").bind("submit", function(event){ // event:事件对象 });
+(2)通过使用 preventDefault() 方法只取消默认的行为
+$("element").bind("submit", function(event){ event.preventDefault(); });
+(3)通过使用 stopPropagation() 方法阻止事件起泡
+$("element").bind("submit", function(event){ event.stopPropagation(); });
+
+
+5.事件对象的属性和方法
+属性和方法                               概述
+event.target                             最初触发事件的DOM元素的jQuery对象
+event.currentTarget                      在事件冒泡阶段中的当前DOM元素的jQuery对象
+event.relatedTarget                      在事件中涉及的其它任何DOM元素的jQuery对象,mouseout 事件,指向被进入的元素；mousein 事件,指向被离开的元素
+event.delegateTarget                     当currently-called的jQuery事件处理程序附加元素,用于通过.delegate() 或.on()附加委派的事件
+event.type                               事件类型
+event.data                               当前执行的处理器被绑定的时候，包含可选的数据传递给jQuery.fn.bind
+event.pageX                              鼠标相对于文档的左边缘的位置
+event.pageY                              鼠标相对于文档的顶部边缘的位置
+event.which                              键盘和鼠标事件，确定按的是哪个键或按钮,1鼠标左键;2中键;3鼠标右键;按钮ASCII码，0=48,A=65,String.fromCharCode(e.which)
+event.namespace                          当事件被触发时此属性包含指定的命名空间
+event.result                             包含了当前事件事件最后触发的那个处理函数的返回值，除非值是 undefined
+event.timeStamp                          这个属性返回事件触发时距离1970年1月1日的毫秒数
+event.altKey 	                         返回当事件被触发时，"ALT" 是否被按下。
+event.ctrlKey 	                         返回当事件被触发时，"CTRL" 键是否被按下。
+event.shiftKey 	                         返回当事件被触发时，"SHIFT" 键是否被按下。
+event.preventDefault()                   阻止默认事件行为的触发
+event.isDefaultPrevented()               根据事件对象中是否调用过 event.preventDefault() 方法来返回一个布尔值
+event.stopPropagation()                  防止事件冒泡到DOM树上，也就是不触发的任何前辈元素上的事件处理函数
+event.isPropagationStopped()             根据事件对象中是否调用过 event.stopPropagation() 方法来返回一个布尔值
+event.stopImmediatePropagation()         阻止剩余的事件处理函数执行并且防止事件冒泡到DOM树上
+event.isImmediatePropagationStopped()    根据事件对象中是否调用过 event.stopPropagation() 方法来返回一个布尔值
+
+
+6.移除事件
+unbind(type,[data|fn]])  bind()的反向操作，从每一个匹配的元素中删除绑定的事件
+eg1:
+$("p").unbind( "click" ) 将段落的click事件取消绑定
+eg2
+var foo = function () {  // 处理某个事件的代码 };
+$("p").bind("click", foo); // ... 当点击段落的时候会触发 foo
+$("p").unbind("click", foo); // ... 再也不会被触发 foo
+
+
+7.模拟操作
+trigger(type,[data])  在每一个匹配的元素上触发某类事件
+(1)触发事件
+$("form:first").trigger("submit") 提交第一个表单，但不用submit()
+$('#btn').trigger("click") 触发元素btn的点击事件，也可以通过 $("btn").click() 来实现
+(2)触发自定义事件
+$('#btn').bind("myClick", function(event, message1, message2){
+    $('#test').append( "<p>"+message1 + message2 +"</p>");
+});
+$('#btn').click(function(){
+    $(this).trigger("myClick",["我的自定义","事件"]);
+}).trigger("myClick",["我的自定义","事件"]);
+(3)triggerHandler(type, [data])
+只想触发绑定的事件，而不想执行浏览器默认操作。$("input").triggerHandler("focus");只会触发事件，不会获得焦点。
+
+
+二.动画
+属性和方法                               概述
+基本
+show([speed,[easing],[fn]])                 显示隐藏的匹配元素
+hide([speed,[easing],[fn]])                 隐藏显示的元素
+滑动
+slideDown([speed],[easing],[fn])            通过高度变化（向下增大）来动态地显示所有匹配的元素，在显示完成后可选地触发一个回调函数
+slideUp([speed],[easing],[fn])              通过高度变化（向上减小）来动态地隐藏所有匹配的元素，在隐藏完成后可选地触发一个回调函数。
+slideToggle([speed],[easing],[fn])          通过高度变化来切换所有匹配元素的可见性，并在切换完成后可选地触发一个回调函数。
+淡入淡出
+fadeIn([speed],[easing],[fn])               通过不透明度(css opacity)的变化来实现所有匹配元素的淡入效果，并在动画完成后可选地触发一个回调函数。
+fadeOut([speed],[easing],[fn])              通过不透明度的变化来实现所有匹配元素的淡出效果，并在动画完成后可选地触发一个回调函数。
+fadeTo([[speed],opacity,[easing],[fn]])     调整到不透明度，并在动画完成后可选地触发一个回调函数。
+fadeToggle([speed,[easing],[fn]])           通过不透明度的变化来切换所有匹配元素的淡入和淡出效果，并在动画完成后可选地触发一个回调函数。
+自定义
+animate(p,[s],[e],[fn]) 1.8*                用于创建自定义动画的函数
+stop([c],[j]) 1.7*                          停止所有在指定元素上正在运行的动画
+delay(d,[q])                                设置一个延时来推迟执行队列中之后的项目
+finish([queue]) 1.9+                        停止当前正在运行的动画，删除所有排队的动画，并完成匹配元素所有的动画
+
+(1)最终隐藏效果与.css("display","none");相同
+(2)speed:三种预定速度之一的字符串("slow","normal", or "fast")或表示动画时长的毫秒数值(如：1000)

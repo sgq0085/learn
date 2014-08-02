@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>插件1，color</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style>
+	.a{
+	  color : red;
+	}
+	</style>
+	<script type="text/javascript" src="../../scripts/jquery.js"></script>
+	<script type="text/javascript">
+	//插件编写
+	;(function($) {
+		$.fn.extend({
+			"color":function(value){
+				if (value==undefined) {
+					return this.css("color");
+				} else {
+					return this.css("color",value);
+				}
+			}
+		});
+	})(jQuery);
+	
+	//插件应用
+	$(function(){
+		//查看第一个div的color样式值
+		alert($("div").color()+"\n返回字符串，证明此插件可用。");  
+		//把所有的div的字体颜色都设为红色
+		alert($("div").color("red")+"\n返回object证明得到的是jQuery对象。"); 
+	})
+	</script>
+</head>
+<body>
+
+<div class="a">red</div>
+<div style="color:blue">blue</div>
+<div style="color:green">green</div>
+<div style="color:yellow">yellow</div>
+
+
+</body>
+</html>

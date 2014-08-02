@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Chapter 12</title>
+
+    <link rel="stylesheet" href="12.css" type="text/css" />
+
+    <script src="jquery.js"></script>
+    <script src="12.js"></script>
+  </head>
+  <body>
+    <div id="container">
+      <h1>Chapter 12</h1>
+
+      <table id="t-1" class="sortable">
+        <thead>
+          <tr>
+            <th></th>
+            <th class="sort-alpha">Title</th>
+            <th class="sort-alpha">Author(s)</th>
+            <th class="sort-date">Publish Date</th>
+            <th class="sort-numeric">Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><img src="images/2862_OS.jpg" alt="Drupal 7"></td>
+            <td>Drupal 7</td>
+            <td>David <span class="sort-key">Mercer</span></td>
+            <td>September 2010</td>
+            <td>$44.99</td>
+          </tr>
+          <tr>
+            <td>
+              <img src="images/3685EN_Amazon%20SimpleDB_LITE_0.jpg" alt="Amazon SimpleDB: LITE">
+            </td>
+            <td>Amazon SimpleDB: LITE</td>
+            <td>Prabhakar <span class="sort-key">Chaganti</span>, Rich Helms</td>
+            <td>May 2011</td>
+            <td>$9.99
+            </td>
+          </tr>
+          <tr>
+            <td><img src="images/1847194141.jpg" alt="Object-Oriented JavaScript"></td>
+            <td>Object-Oriented JavaScript</td>
+            <td>Stoyan <span class="sort-key">Stefanov</span></td>
+            <td>July 2008</td>
+            <td>$39.99</td>
+          </tr>
+          <tr>
+            <td>
+              <img src="images/0042_MockupCover_0.jpg" alt="jQuery 1.4 Reference Guide">
+            </td>
+            <td>
+              jQuery 1.4 Reference Guide
+            </td>
+            <td>
+              Karl <span class="sort-key">Swedberg</span>, Jonathan Chaffer
+            </td>
+            <td>
+              January 2010
+
+            </td>
+            <td>
+              $39.99
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img src="images/0386OT_Cocoa%20and%20OBjective-C%20Cookbookcov.jpg" alt="Cocoa and Objective-C Cookbook">
+            </td>
+            <td>
+              Cocoa and Objective-C Cookbook
+            </td>
+            <td>
+              Jeff <span class="sort-key">Hawkins</span>
+            </td>
+
+            <td>
+              May 2011
+            </td>
+            <td>
+              $39.99
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img src="images/4668_Python%20Testing%20Cookbook.jpg" alt="Python Testing Cookbook">
+            </td>
+            <td>
+              Python Testing Cookbook
+            </td>
+            <td>
+              Greg L. <span class="sort-key">Turnquist</span>
+
+            </td>
+            <td>
+              May 2011
+            </td>
+            <td>
+              $44.99
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img src="images/3760OS_Linux%20Shell%20Scripting%20Cookbook.jpg" alt="Linux Shell Scripting Cookbook">
+            </td>
+            <td>
+              Linux Shell Scripting Cookbook
+            </td>
+            <td>
+              Sarath <span class="sort-key">Lakshman</span>
+
+            </td>
+            <td>
+              January 2011
+            </td>
+            <td>
+              $44.99
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img src="images/4965OS_Nginx%201%20Web%20Server%20Implementation%20Cookbook.jpg" alt="Nginx 1 Web Server Implementation Cookbook">
+            </td>
+            <td>
+              Nginx 1 Web Server Implementation Cookbook
+            </td>
+            <td>
+              Dipankar <span class="sort-key">Sarkar</span>
+
+            </td>
+            <td>
+              May 2011
+            </td>
+            <td>
+              $39.99
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img src="images/1048OT_HTML5%20Multimedia%20Development%20Cookbookcov.jpg" alt="HTML5 Multimedia Development Cookbookcov.jpg">
+            </td>
+            <td>
+              HTML5 Multimedia Development Cookbookcov.jpg
+            </td>
+            <td>
+              Dale <span class="sort-key">Cruse</span>, Lee Jordan
+
+            </td>
+            <td>
+              May 2011
+            </td>
+            <td>
+              $39.99
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img src="images/0942OT_Core%20Data%20Essentials_0.jpg" alt="Core Data Essentials.jpg">
+            </td>
+            <td>
+              Core Data Essentials.jpg
+            </td>
+            <td>
+              B.M. <span class="sort-key">Harwani</span>
+
+            </td>
+            <td>
+              April 2011
+            </td>
+            <td>
+              $44.99
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img src="images/3524OS_WordPress%203%20Plugin%20Development%20Essentials_0.jpg" alt="WordPress 3 Plugin Development Essentials">
+            </td>
+            <td>
+              WordPress 3 Plugin Development Essentials
+            </td>
+            <td>
+              Brian <span class="sort-key">Bondari</span>, Everett Griffiths
+
+            </td>
+            <td>
+              March 2011
+            </td>
+            <td>
+              $39.99
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img src="images/9867_Latex%20cov.jpg" alt="LaTeX Beginner's Guide">
+            </td>
+            <td>
+              LaTeX Beginner's Guide
+            </td>
+            <td>
+              Stefan <span class="sort-key">Kottwitz</span>
+
+            </td>
+            <td>
+              March 2011
+            </td>
+            <td>
+              $44.99
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img src="images/2923OS_Panda3D%20game%20developer%E2%80%99s%20cookbook.jpg" alt="Panda3D 1.7 Game Developer's Cookbook">
+            </td>
+            <td>
+              Panda3D 1.7 Game Developer's Cookbook
+            </td>
+            <td>
+              Christoph <span class="sort-key">Lang</span>
+
+            </td>
+            <td>
+              March 2011
+            </td>
+            <td>
+              $44.99
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img src="images/1926_Cake%20PHP%201.3cov.jpg" alt="CakePHP 1.3 Application Development Cookbook">
+            </td>
+            <td>
+              CakePHP 1.3 Application Development Cookbook
+            </td>
+            <td>
+              Mariano <span class="sort-key">Iglesias</span>
+
+            </td>
+            <td>
+              March 2011
+            </td>
+            <td>
+              $39.99
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img src="images/4804os_mockupcover_ex.jpg" alt="Magento 1.4 Themes Design">
+            </td>
+            <td>
+              Magento 1.4 Themes Design
+            </td>
+            <td>
+              Richard <span class="sort-key">Carter</span>
+
+            </td>
+            <td>
+              January 2011
+            </td>
+            <td>
+              $39.99
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img src="images/0349OS_MockupCover_0.jpg" alt="Django JavaScript Integration: AJAX and jQuery">
+            </td>
+            <td>
+              Django JavaScript Integration: AJAX and jQuery
+            </td>
+            <td>
+              Jonathan <span class="sort-key">Hayward</span>
+
+            </td>
+            <td>
+              January 2011
+            </td>
+            <td>
+              $44.99
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img src="images/1445OS_MockupCover_Magento_1.4_Development_Cookbook_cb.jpg" alt="Magento 1.4 Development Cookbook">
+            </td>
+            <td>
+              Magento 1.4 Development Cookbook
+            </td>
+            <td>
+              Nurul <span class="sort-key">Ferdous</span>
+
+            </td>
+            <td>
+              December 2010
+            </td>
+            <td>
+              $44.99
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table id="t-2" class="sortable">
+        <thead>
+          <tr>
+            <th></th>
+            <th data-sort='{"key":"title"}'>Title</th>
+            <th data-sort='{"key":"authors"}'>Author(s)</th>
+            <th data-sort='{"key":"publishedYM"}'>Publish Date</th>
+            <th data-sort='{"key":"price"}'>Price</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr data-book='{"img":"2862_OS.jpg","title":"DRUPAL 7","authors":"MERCER DAVID","published":"September 2010","price":44.99,"publishedYM":"2010-09"}'>
+            <td><img src="images/2862_OS.jpg" alt="Drupal 7">
+            </td>
+            <td>Drupal 7</td>
+            <td>David Mercer</td>
+            <td>September 2010</td>
+            <td>$44.99</td>
+          </tr>
+          <tr data-book='{"img":"3685EN_Amazon%20SimpleDB_LITE_0.jpg","title":"AMAZON SIMPLEDB: LITE","authors":"CHAGANTI PRABHAKAR HELMS RICH","published":"May 2011","price":9.99,"publishedYM":"2011-05"}'>
+            <td><img src="images/3685EN_Amazon%20SimpleDB_LITE_0.jpg" alt="Amazon SimpleDB: LITE">
+            </td>
+            <td>Amazon SimpleDB: LITE</td>
+            <td>Prabhakar Chaganti, Rich Helms</td>
+
+            <td>May 2011</td>
+            <td>$9.99</td>
+          </tr>
+          <tr data-book='{"img":"1847194141.jpg","title":"OBJECT-ORIENTED JAVASCRIPT","authors":"STEFANOV STOYAN","published":"July 2008","price":39.99,"publishedYM":"2008-07"}'>
+            <td><img src="images/1847194141.jpg" alt="Object-Oriented JavaScript">
+            </td>
+            <td>Object-Oriented JavaScript</td>
+            <td>Stoyan Stefanov</td>
+            <td>July 2008</td>
+            <td>$39.99</td>
+          </tr>
+
+          <tr data-book='{"img":"0042_MockupCover_0.jpg","title":"JQUERY 1.4 REFERENCE GUIDE","authors":"SWEDBERG KARL CHAFFER JONATHAN","published":"January 2010","price":39.99,"publishedYM":"2010-01"}'>
+            <td><img src="images/0042_MockupCover_0.jpg" alt="jQuery 1.4 Reference Guide">
+            </td>
+            <td>jQuery 1.4 Reference Guide</td>
+            <td>Karl Swedberg, Jonathan Chaffer</td>
+            <td>January 2010</td>
+            <td>$39.99</td>
+          </tr>
+          <tr data-book='{"img":"0386OT_Cocoa%20and%20OBjective-C%20Cookbookcov.jpg","title":"COCOA AND OBJECTIVE-C COOKBOOK","authors":"HAWKINS JEFF","published":"May 2011","price":39.99,"publishedYM":"2011-05"}'>
+            <td><img src="images/0386OT_Cocoa%20and%20OBjective-C%20Cookbookcov.jpg" alt="Cocoa and Objective-C Cookbook">
+            </td>
+            <td>Cocoa and Objective-C Cookbook</td>
+
+            <td>Jeff Hawkins</td>
+            <td>May 2011</td>
+            <td>$39.99</td>
+          </tr>
+          <tr data-book='{"img":"4668_Python%20Testing%20Cookbook.jpg","title":"PYTHON TESTING COOKBOOK","authors":"TURNQUIST GREG L.","published":"May 2011","price":44.99,"publishedYM":"2011-05"}'>
+            <td><img src="images/4668_Python%20Testing%20Cookbook.jpg" alt="Python Testing Cookbook">
+            </td>
+            <td>Python Testing Cookbook</td>
+            <td>Greg L. Turnquist</td>
+            <td>May 2011</td>
+            <td>$44.99</td>
+
+          </tr>
+          <tr data-book='{"img":"3760OS_Linux%20Shell%20Scripting%20Cookbook.jpg","title":"LINUX SHELL SCRIPTING COOKBOOK","authors":"LAKSHMAN SARATH","published":"January 2011","price":44.99,"publishedYM":"2011-01"}'>
+            <td><img src="images/3760OS_Linux%20Shell%20Scripting%20Cookbook.jpg" alt="Linux Shell Scripting Cookbook">
+            </td>
+            <td>Linux Shell Scripting Cookbook</td>
+            <td>Sarath Lakshman</td>
+            <td>January 2011</td>
+            <td>$44.99</td>
+          </tr>
+          <tr data-book='{"img":"4965OS_Nginx%201%20Web%20Server%20Implementation%20Cookbook.jpg","title":"NGINX 1 WEB SERVER IMPLEMENTATION COOKBOOK","authors":"SARKAR DIPANKAR","published":"May 2011","price":39.99,"publishedYM":"2011-05"}'>
+            <td><img src="images/4965OS_Nginx%201%20Web%20Server%20Implementation%20Cookbook.jpg" alt="Nginx 1 Web Server Implementation Cookbook">
+            </td>
+            <td>Nginx 1 Web Server Implementation Cookbook</td>
+
+            <td>Dipankar Sarkar</td>
+            <td>May 2011</td>
+            <td>$39.99</td>
+          </tr>
+          <tr data-book='{"img":"1048OT_HTML5%20Multimedia%20Development%20Cookbookcov.jpg","title":"HTML5 MULTIMEDIA DEVELOPMENT COOKBOOKCOV.JPG","authors":"CRUSE DALE JORDAN LEE","published":"May 2011","price":39.99,"publishedYM":"2011-05"}'>
+            <td><img src="images/1048OT_HTML5%20Multimedia%20Development%20Cookbookcov.jpg" alt="HTML5 Multimedia Development Cookbookcov.jpg">
+            </td>
+            <td>HTML5 Multimedia Development Cookbookcov.jpg</td>
+            <td>Dale Cruse, Lee Jordan</td>
+            <td>May 2011</td>
+            <td>$39.99</td>
+
+          </tr>
+          <tr data-book='{"img":"0942OT_Core%20Data%20Essentials_0.jpg","title":"CORE DATA ESSENTIALS.JPG","authors":"HARWANI B.M.","published":"April 2011","price":44.99,"publishedYM":"2011-04"}'>
+            <td><img src="images/0942OT_Core%20Data%20Essentials_0.jpg" alt="Core Data Essentials.jpg">
+            </td>
+            <td>Core Data Essentials.jpg</td>
+            <td>B.M. Harwani</td>
+            <td>April 2011</td>
+            <td>$44.99</td>
+          </tr>
+          <tr data-book='{"img":"3524OS_WordPress%203%20Plugin%20Development%20Essentials_0.jpg","title":"WORDPRESS 3 PLUGIN DEVELOPMENT ESSENTIALS","authors":"BONDARI BRIAN GRIFFITHS EVERETT","published":"March 2011","price":39.99,"publishedYM":"2011-03"}'>
+            <td><img src="images/3524OS_WordPress%203%20Plugin%20Development%20Essentials_0.jpg" alt="WordPress 3 Plugin Development Essentials">
+            </td>
+            <td>WordPress 3 Plugin Development Essentials</td>
+
+            <td>Brian Bondari, Everett Griffiths</td>
+            <td>March 2011</td>
+            <td>$39.99</td>
+          </tr>
+          <tr data-book='{"img":"9867_Latex%20cov.jpg","title":"LATEX BEGINNER&rsquo;S GUIDE","authors":"KOTTWITZ STEFAN","published":"March 2011","price":44.99,"publishedYM":"2011-03"}'>
+            <td><img src="images/9867_Latex%20cov.jpg" alt="LaTeX Beginner's Guide">
+            </td>
+            <td>LaTeX Beginner's Guide</td>
+            <td>Stefan Kottwitz</td>
+            <td>March 2011</td>
+            <td>$44.99</td>
+
+          </tr>
+          <tr data-book='{"img":"2923OS_Panda3D%20game%20developer%E2%80%99s%20cookbook.jpg","title":"PANDA3D 1.7 GAME DEVELOPER&rsquo;S COOKBOOK","authors":"LANG CHRISTOPH","published":"March 2011","price":44.99,"publishedYM":"2011-03"}'>
+            <td><img src="images/2923OS_Panda3D%20game%20developer%E2%80%99s%20cookbook.jpg" alt="Panda3D 1.7 Game Developer's Cookbook">
+            </td>
+            <td>Panda3D 1.7 Game Developer's Cookbook</td>
+            <td>Christoph Lang</td>
+            <td>March 2011</td>
+            <td>$44.99</td>
+          </tr>
+          <tr data-book='{"img":"1926_Cake%20PHP%201.3cov.jpg","title":"CAKEPHP 1.3 APPLICATION DEVELOPMENT COOKBOOK","authors":"IGLESIAS MARIANO","published":"March 2011","price":39.99,"publishedYM":"2011-03"}'>
+            <td><img src="images/1926_Cake%20PHP%201.3cov.jpg" alt="CakePHP 1.3 Application Development Cookbook">
+            </td>
+            <td>CakePHP 1.3 Application Development Cookbook</td>
+
+            <td>Mariano Iglesias</td>
+            <td>March 2011</td>
+            <td>$39.99</td>
+          </tr>
+          <tr data-book='{"img":"4804os_mockupcover_ex.jpg","title":"MAGENTO 1.4 THEMES DESIGN","authors":"CARTER RICHARD","published":"January 2011","price":39.99,"publishedYM":"2011-01"}'>
+            <td><img src="images/4804os_mockupcover_ex.jpg" alt="Magento 1.4 Themes Design">
+            </td>
+            <td>Magento 1.4 Themes Design</td>
+            <td>Richard Carter</td>
+            <td>January 2011</td>
+            <td>$39.99</td>
+
+          </tr>
+          <tr data-book='{"img":"0349OS_MockupCover_0.jpg","title":"DJANGO JAVASCRIPT INTEGRATION: AJAX AND JQUERY","authors":"HAYWARD JONATHAN","published":"January 2011","price":44.99,"publishedYM":"2011-01"}'>
+            <td><img src="images/0349OS_MockupCover_0.jpg" alt="Django JavaScript Integration: AJAX and jQuery">
+            </td>
+            <td>Django JavaScript Integration: AJAX and jQuery</td>
+            <td>Jonathan Hayward</td>
+            <td>January 2011</td>
+            <td>$44.99</td>
+          </tr>
+          <tr data-book='{"img":"1445OS_MockupCover_Magento_1.4_Development_Cookbook_cb.jpg","title":"MAGENTO 1.4 DEVELOPMENT COOKBOOK","authors":"FERDOUS NURUL","published":"December 2010","price":44.99,"publishedYM":"2010-12"}'>
+            <td><img src="images/1445OS_MockupCover_Magento_1.4_Development_Cookbook_cb.jpg" alt="Magento 1.4 Development Cookbook">
+            </td>
+            <td>Magento 1.4 Development Cookbook</td>
+
+            <td>Nurul Ferdous</td>
+            <td>December 2010</td>
+            <td>$44.99</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table id="t-3" class="sortable">
+        <thead>
+          <tr>
+            <th></th>
+            <th data-sort='{"key":"title"}'>Title</th>
+            <th data-sort='{"key":"authors"}'>Author(s)</th>
+            <th data-sort='{"key":"publishedYM"}'>Publish Date</th>
+            <th data-sort='{"key":"price"}'>Price</th>
+          </tr>
+        </thead>
+
+        <tbody>
+        </tbody>
+
+      </table>
+    </div>
+  </body>
+</html>

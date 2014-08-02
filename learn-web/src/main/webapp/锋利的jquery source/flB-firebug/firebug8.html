@@ -1,0 +1,21 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<title>Javascript Debugging with Firebug</title>
+<script type="text/javascript">
+    function doSomething(){
+        var lbl = document.getElementById('messageLabel');
+            arrs=[1,2,3,4,5,6,7,8,9];
+        for (var arr in arrs) {
+            lbl.innerHTML+=arr+"<br />"
+        }
+    }
+</script>
+</head>
+<body>
+    <div>
+        <div id="messageLabel"></div>
+        <input type="button" value="Click Me!" onclick="doSomething();" />
+    </div>
+</body>
+</html>

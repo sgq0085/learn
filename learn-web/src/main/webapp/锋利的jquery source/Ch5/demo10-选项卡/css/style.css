@@ -1,0 +1,9 @@
+ *{ margin:0; padding:0;}
+ body { font:12px/19px Arial, Helvetica, sans-serif; color:#666;}
+ .tab { width:240px;margin:50px;}
+ .tab_menu { clear:both;}
+ .tab_menu li { float:left; text-align:center; cursor:pointer; list-style:none; padding:1px 6px; margin-right:4px; background:#F1F1F1; border:1px solid #898989; border-bottom:none;}
+ .tab_menu li.hover { background:#DFDFDF;}
+ .tab_menu li.selected { color:#FFF; background:#6D84B4;}
+ .tab_box { clear:both; border:1px solid #898989; height:100px;}
+ .hide{display:none}

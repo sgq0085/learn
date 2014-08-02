@@ -1,0 +1,87 @@
+/***************************************
+   Default Styles
+***************************************/
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font: 80% Verdana, Helvetica, Arial, sans-serif;
+  color: #000;
+  background: #fff;
+}
+#container {
+  margin: 10px 2em;
+}
+
+h1 {
+  font-size: 2.5em;
+  margin-bottom: 0;
+}
+
+h2 {
+  font-size: 1.3em;
+  margin-bottom: .5em;
+}
+h3 {
+  font-size: 1.1em;
+  margin-bottom: 0;
+}
+
+code {
+  font-size: 1.2em;
+}
+
+a {
+  color: #06581f;
+}
+
+
+/***************************************
+   Chapter Styles
+***************************************/
+
+h3 {
+  margin: 1em 0;
+  font-size: 1.2em;
+  line-height: 1;
+  padding: .25em .5em;
+  color: #333;
+}
+table {
+  margin: 1em 0;
+}
+tbody td img {
+  width: 76px;
+  height: 93px;
+}
+th {
+  text-align: left;
+  white-space: nowrap;
+  background-color: #eee;
+}
+th.sort a {
+  text-decoration: none;
+  display: block;
+  background:  url(images/sort-icons.png) no-repeat 0 3px;
+  padding-left: 20px;
+}
+th.sorted-desc a {
+  background-position: 0 -47px;
+}
+th.sorted-asc a {
+  background-position: 0 -97px;
+}
+
+th.sort a:hover {
+  background-color: #ddd;
+}
+
+th.sort a:focus {
+  color: #222;
+}
+th, td {
+  padding: 3px 6px;
+}

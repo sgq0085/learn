@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script src="../../scripts/jquery.js" type="text/javascript"></script>
+<script src="lib/jquery.form.js" type="text/javascript"></script>
+   <script type="text/javascript">           
+			$(document).ready(function() { 
+			    $('#myForm').ajaxForm({ 
+					     target:        '#output1', // 用服务器返回的数据 更新 id为output1的内容.
+						 beforeSubmit:  validate    // 提交前，验证
+			    }); 
+			});
+			
+			function validate(formData, jqForm, options) { 
+				    // formdata是数组对象,每个对象拥有名称和值.
+				    // 数据如下面的格式：
+				    // [ 
+				    //     { name:  username , value: usernameValue }, 
+				    //     { name:  password , value: passwordValue } 
+				    // ] 
+				    for (var i=0; i < formData.length; i++) { 
+				        if (!formData[i].value) { 
+				            alert('用户名,地址和自我介绍都不能为空!'); 
+				            return false; 
+				        } 
+				    } 
+				  var queryString = $.param(formData); //组装数据
+                  //alert(queryString); //类似 ： name=1&add=2  
+                  return true; 
+			}
+
+   </script> 
+  </head>
+  
+  <body>
+    <h3> Demo 5 : form插件的使用--验证后提交（简单验证）. </h3>
+<form id="myForm" action="ajax2.php" method="post"> 
+    名称： <input type="text" name="name" id="name" /> <br/>
+	地址： <input type="text" name="address" id="address"/><br/> 
+    自我介绍： <textarea name="comment" id="comment" ></textarea> <br/>
+    <input type="submit" id="test" value="提交" /> <br/>
+    <div id="output1" ></div>
+</form>
+
+  </body>
+</html>

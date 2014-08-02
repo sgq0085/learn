@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script src="../../scripts/jquery.js" type="text/javascript"></script>
+
+</head>
+<body>
+<input type="button" id="send1" value="get" onclick="getObj()"/>
+<select id="someElement">
+	<option>一班</option>
+	<option>二班</option>
+	<option>三班</option>
+</select>
+
+<script>
+function getObj(){
+	var $obj = $('#someElement').find('option:selected');
+	alert( $obj.val() );
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gqshao.test.sys.rbac.dao.RoleDao" >
+  <resultMap id="BaseResultMap" type="com.gqshao.test.sys.rbac.domain.Role" >
+    <id column="ID" property="id" jdbcType="CHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="INDEX_NO" property="indexNo" jdbcType="DECIMAL" />
+    <result column="CREATE_USER" property="createUser" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_USER" property="updateUser" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="IS_DELETE" property="isDelete" jdbcType="DECIMAL" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    ID, NAME, INDEX_NO, CREATE_USER, CREATE_DATETIME, UPDATE_USER, UPDATE_DATETIME, 
+    REMARK, IS_DELETE
+  </sql>
+
+  <select id="queryById" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_role
+    where is_delete != 1 and ID = #{id,jdbcType=CHAR}
+  </select>
+  
+  <select id="queryByFilter" resultType="role" parameterType="role">
+    select 
+        r.ID id, 
+        r.NAME name, 
+        r.INDEX_NO indexNo, 
+        u.name createUser, 
+        r.CREATE_DATETIME createDatetime, 
+        u1.name updateUser, 
+        r.UPDATE_DATETIME updateDatetime, 
+        r.REMARK remark, 
+        r.IS_DELETE isDelete
+    from sys_role r left join sys_user u on r.CREATE_USER = u.id left join sys_user u1 on r.UPDATE_USER = u1.id
+    where
+    r.is_delete!= 1
+    
+    <if test="null != name and ''!=name">
+    and r.name like '%'||#{name}||'%'
+    </if>
+    <if test="null != sidx and ''!=sidx">
+	order by ${sidx}
+	   <if test="null != sord and ''!=sord">
+	   ${sord}
+	   </if>
+	</if>
+	<if test="null == sidx or null == sord">
+		order by r.create_datetime desc
+	</if>
+  </select>
+  
+  <select id="queryAll" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_role
+    where is_delete !=1 
+  </select>
+  
+  <select id="queryByUserId" resultMap="BaseResultMap">
+  	select r.ID, r.NAME, r.INDEX_NO, r.CREATE_USER, r.CREATE_DATETIME, r.UPDATE_USER, r.UPDATE_DATETIME, 
+    r.REMARK, r.IS_DELETE
+  	from sys_role r,sys_user_role ur
+  	where r.id= ur.role_id
+  	and r.is_delete != 1
+  	and ur.user_id = #{userId}
+  </select>
+  
+  <select id="queryMaxIndexNo" resultType="java.lang.Integer">
+    select max(index_no)+1 from sys_role
+  </select>
+  
+  <update id="delete" parameterType="java.lang.String">
+    update sys_role
+    <set>is_delete = 1</set>
+    where id = #{value}
+  </update>
+  
+  <update id="deleteByIds">
+    update sys_role set IS_DELETE=1 
+    where ID in 
+    <foreach collection="array" item="id" index="index" open="(" close=")" separator=",">
+    #{id}
+    </foreach>
+  </update>
+  
+  <select id="queryUserRoleCount" resultType="java.lang.Long">
+  	select count(1) from sys_user_role where role_id in
+  	<foreach collection="array" item="id" index="index" open="(" close=")" separator=",">
+    #{id}
+    </foreach>
+  	
+  </select>
+  
+  <select id="checkExists"  resultType="long">
+  	select count(1) from sys_role where is_delete !=1 and name=#{name}
+  	<if test="null != id and id != '' ">
+  		and id != #{id}
+  	</if>
+  </select>
+  
+  <insert id="save" parameterType="role" >
+    insert into SYS_ROLE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="indexNo != null" >
+        INDEX_NO,
+      </if>
+      <if test="createUser != null" >
+        CREATE_USER,
+      </if>
+      <if test="createDatetime != null" >
+        CREATE_DATETIME,
+      </if>
+      <if test="updateUser != null" >
+        UPDATE_USER,
+      </if>
+      <if test="updateDatetime != null" >
+        UPDATE_DATETIME,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="isDelete != null" >
+        IS_DELETE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="indexNo != null" >
+        #{indexNo,jdbcType=DECIMAL},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null" >
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDatetime != null" >
+        #{updateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null" >
+        #{isDelete,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="update" parameterType="role" >
+    update SYS_ROLE
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+
+      <if test="indexNo != null" >
+        INDEX_NO = #{indexNo,jdbcType=DECIMAL},
+      </if>
+      <if test="createUser != null" >
+        CREATE_USER = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null" >
+        CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        UPDATE_USER = #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDatetime != null" >
+        UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=CHAR} and IS_DELETE != 1
+  </update>
+  
+  <delete id="deleteRolePermission" parameterType="string">
+    delete sys_role_permission
+    where role_id = #{value,jdbcType=CHAR}
+  </delete>
+  
+  <delete id="deleteRolePermissions">
+    delete sys_role_permission
+    where role_id in 
+    <foreach collection="array" item="id" index="i" open="(" separator="," close=")">
+        #{id,jdbcType=CHAR}
+    </foreach>
+  </delete>
+  
+  <insert id="saveRolePermission" parameterType="java.util.List">
+    insert into sys_role_permission
+    (role_id, permissions_id)
+    <foreach collection="list" item='rp' index='i' separator="union all">
+    select #{rp.roleId,jdbcType=CHAR},#{rp.permissionId,jdbcType=CHAR} from dual
+    </foreach>
+  </insert>
+  
+  
+     <delete id="deleteByRoleId" parameterType="String">
+     delete from sys_role_aircrafttail where role_id = #{roleId}
+    </delete>
+    
+    <insert id="addRoleTail" parameterType="String">
+    insert into sys_role_aircrafttail (
+        role_id, aircraft_id 
+        )
+       ${value}
+    </insert>
+  
+</mapper>

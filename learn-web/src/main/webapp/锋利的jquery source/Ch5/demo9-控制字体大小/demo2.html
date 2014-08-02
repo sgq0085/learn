@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+ <!--   引入jQuery -->
+ <script src="../../scripts/jquery.js" type="text/javascript"></script>
+ <script type="text/javascript">
+	$(function(){
+		$("span").click(function(){
+			var thisEle = $("#para").css("font-size"); 
+			var textFontSize = parseInt(thisEle , 10);
+			var unit = thisEle.slice(-2); //获取单位
+			var cName = $(this).attr("class");
+			if(cName == "bigger"){
+				   if( textFontSize <= 22 ){
+						textFontSize += 2;
+					}
+			}else if(cName == "smaller"){
+				   if( textFontSize >= 12  ){
+						textFontSize -= 2;
+					}
+			}
+			$("#para").css("font-size",  textFontSize + unit);
+		});
+	});
+  </script>
+</head>
+<body>
+
+<div class="msg">
+	<div class="msg_caption">
+		<span class="bigger" >放大</span>
+		<span class="smaller" >缩小</span>
+	</div>
+	<div>
+		<p id="para">
+		This is some text. This is some text. This is some text. This is some text. This
+		is some text. This is some text. This is some text. This is some text. This is some
+		text. This is some text. This is some text. This is some text. This is some text.
+		This is some text. This is some text. This is some text. This is some text. This
+		is some text. This is some text.
+		</p>
+	</div>
+</div>
+
+</body>
+</html>

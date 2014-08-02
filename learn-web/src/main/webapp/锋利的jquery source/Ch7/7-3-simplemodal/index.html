@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>SimpleModal Basic Modal Dialog </title>
+<!-- Page styles -->
+<link type='text/css' href='css/demo.css' rel='stylesheet' />
+<!-- Contact Form CSS files -->
+<link type='text/css' href='css/basic.css' rel='stylesheet' />
+<link type='text/css' href='css/box.css' rel='stylesheet' />
+</head>
+<body>
+<div id='container'>
+
+	<div id='logo'>
+		<h1>Simple<span><a href="http://www.ericmmartin.com/projects/simplemodal-demos/">Modal</a></span></h1>
+		<span class='title'>一个简单的遮罩层，可以制作提示框，对话框，弹出层，弹出iframe等...</span>
+	</div>
+	<div id='content'>
+		<div id='basic-modal'>
+			<p>提示框-ok：<input type='button' name='basic' value='Demo' class='open-basic-dialog-ok'/> or <a href='#' class='open-basic-dialog-ok'>Demo</a></p>
+			<p>提示框-warn：<input type='button' name='basic' value='Demo' class='open-basic-dialog-warn'/> or <a href='#' class='open-basic-dialog-warn'>Demo</a></p>
+			<p>弹出iframe：<input type='button' name='basic' value='Demo' class='open-basic-ifr'/> or <a href='#' class='open-basic-ifr'>Demo</a></p>
+		</div>
+	</div>
+	
+	<!-- 弹出内容 -->
+
+	<div id="basic-dialog-ok">
+		<!-- 普通弹出层 [[ -->  
+		<div class="box-title show"><h2>提示</h2></div>  
+		<div class="box-main">
+			<div class="tips">      
+				<span class="tips-ico">
+					<span class="ico-ok"><!-- 图标class可以为： ico-ok , ico-error , ico-info , ico-question , ico-warn , ico-wait --></span>
+				</span>      
+				<div class="tips-content">        
+					<div class="tips-title">申请成功，我们将短信通知您！</div>        
+					<div class="tips-line"></div>     
+				</div>    
+			</div>
+			<div class="box-buttons"><button type="button" class="simplemodal-close">关 闭</button></div>
+		</div>  
+		<!-- 普通弹出层 ]] -->
+	</div>
+
+	<div id="basic-dialog-warn">
+		<!-- 普通弹出层 [[ -->  
+		<div class="box-title show"><h2>提示</h2></div>  
+		<div class="box-main">
+			<div class="tips">      
+				<span class="tips-ico">
+					<span class="ico-warn"><!-- 图标 --></span>
+				</span>      
+				<div class="tips-content">        
+					<div class="tips-title">系统繁忙，请稍候重试</div>        
+					<div class="tips-line"></div>     
+				</div>    
+			</div>
+			<div class="box-buttons"><button type="button" class="simplemodal-close">关 闭</button></div>
+		</div>  
+		<!-- 普通弹出层 ]] -->
+	</div>
+
+	<div id="ifr-dialog" >
+		<!-- iframe弹出层 [[ -->  
+		<iframe frameborder="0" scrolling="no" id="ifr-dialog-container" src="javascript:;" class="box-iframe"></iframe>
+		<!-- iframe弹出层 ]] -->
+	</div>
+
+</div>
+<!-- Load jQuery, SimpleModal and Basic JS files -->
+<script type="text/javascript" src="../../scripts/jquery.js" ></script>
+<script type='text/javascript' src='js/jquery.simplemodal.js'></script>
+<script  >
+jQuery(function ($) {
+	/* 提示框 */
+	$('.open-basic-dialog-ok').click(function (e) {
+		$('#basic-dialog-ok').modal();
+		return false;
+	});
+	$('.open-basic-dialog-warn').click(function (e) {
+		$('#basic-dialog-warn').modal();
+		return false;
+	});
+
+	$('.open-basic-ifr').click(function (e) {
+		showIframe("http://www.baidu.com","ifr-dialog-content");
+		return false;
+	});
+
+});
+
+/* eg:showIframe */
+function showIframe(src , id ){
+	$("#ifr-dialog-container").attr("src",src);
+	$('#ifr-dialog').modal({opacity:30,"overlayClose":true,"containerId":id });
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>jQuery UI Sortable</title>
+	<style type="text/css">
+		#myList{
+			width: 80px;
+			background: #EEE;
+			padding: 5px;
+			list-style: none;
+		}
+		#myList a{
+			text-decoration: none;
+			color: #0077B0;
+		}
+		#myList a:hover{
+			text-decoration: underline;
+		}
+		#myList .qlink{
+			font-size: 12px;
+			color: #666;
+			margin-left: 10px;
+		}
+	</style>
+</head>
+<body>
+<ul id="myList">
+	<li><a href="#">心情</a></li>
+	<li>
+		<a href="#">相册</a>
+		<a href="#" class="qlink">上传</a>
+	</li>
+	<li>
+		<a href="#">日志</a>
+		<a href="#" class="qlink">发表</a>
+	</li>
+	<li><a href="#">投票</a></li>
+	<li><a href="#">分享</a></li>
+	<li><a href="#">群组</a></li>
+</ul>
+<script type="text/javascript" src="../../scripts/jquery.js"></script>
+<script type="text/javascript" src="js/jquery.ui.core.js"></script>
+<script type="text/javascript" src="js/jquery.ui.widget.js"></script>
+<script type="text/javascript" src="js/jquery.ui.mouse.js"></script>
+<script type="text/javascript" src="js/jquery.ui.sortable.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#myList").sortable({delay:1}); //修复潜在链接点击问题
+});
+</script>
+</body>
+</html>

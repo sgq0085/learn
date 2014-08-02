@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<stulist>
+        <student  email="1@1.com">  
+                <name>zhangsan</name>
+                <id>1</id>
+        </student>
+        <student  email="2@2.com">
+               <name>lisi</name>
+                <id>2</id>
+        </student>
+</stulist>

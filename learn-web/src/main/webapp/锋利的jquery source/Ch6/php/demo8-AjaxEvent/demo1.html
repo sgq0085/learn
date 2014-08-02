@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title></title>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+* { margin:0; padding:0;}
+body { font-size:12px;}
+#loading{
+    width:80px;
+	height: 20px;
+	background:#bbb;
+	color:#000;
+	display:none;
+}
+img{border:0;height:100px;width:100px;}
+.comment { margin-top:10px; padding:10px; border:1px solid #ccc;background:#DDD;}
+.comment h6 { font-weight:700; font-size:14px;}
+.para { margin-top:5px; text-indent:2em;background:#DDD;}
+</style>
+ <!--   引入jQuery -->
+<script src="../scripts/jquery.js" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+   $(function(){
+    //demo1:
+        $('#send1').click(function() {
+            $.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?tags=car&tagmode=any&format=json&jsoncallback=?",
+					  function(data){
+					      $("#resText1").empty();
+						  $.each(data.items, function( i,item ){
+								$("<img/> ").attr("src", item.media.m ).appendTo("#resText1");
+								if ( i == 3 ) { 
+									return false;
+								}
+					      });
+		             }
+		    ); 
+       });
+
+   //demo2:
+	   $("#send2").click(function(){
+			$.get("get1.php", { 
+						username :  $("#username").val() , 
+						content :  $("#content").val()  
+					}, function (data, textStatus){
+                        $("#resText2").html(data); // 把返回的数据添加到页面上
+					}
+			);
+	   })
+
+		$.ajaxPrefilter(function( options ) {
+			options.global = true;
+		});
+		//共用这2个全局的ajax事件
+	   $("#loading").ajaxStart(function(){
+	      $(this).show();
+	   });
+	   $("#loading").ajaxStop(function(){
+	      $(this).hide();
+	   });
+
+
+   })
+//]]>
+</script>
+</head>
+<body>
+<br/>
+<div id="loading">加载中...</div>
+
+<br/>
+Demo1:
+<br/>
+<input type="button" id="send1" value="加载"/>
+<div id="resText1" ></div>
+
+
+<br/>
+Demo2:
+<br/>
+<form id="form1" action="#">
+<p>评论:</p>
+ <p>姓名: <input type="text" name="username" id="username" /></p>
+ <p>内容: <textarea name="content" id="content"  rows="2" cols="20"></textarea></p>
+ <p><input type="button" id="send2" value="提交"/></p>
+</form>
+<div  class='comment'>已有评论：</div>
+<div id="resText2" >
+</div>
+
+
+</body>
+</html>

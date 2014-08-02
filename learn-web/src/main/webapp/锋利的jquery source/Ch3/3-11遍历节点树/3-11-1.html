@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>3-11-1</title>
+ <!--   引入jQuery -->
+ <script src="../../scripts/jquery.js" type="text/javascript"></script>
+ <script type="text/javascript">
+ //<![CDATA[
+  $(function(){
+     var $body = $("body").children();
+	 var $p = $("p").children();
+	 var $ul = $("ul").children();
+	 alert( $body.length );  // <body>元素下有2个子元素
+	 alert( $p.length );     // <p>元素下有0个子元素
+	 alert( $ul.length );    // <p>元素下有3个子元素
+	 for(var i=0;i< $ul.length;i++){
+         alert( $ul[i].innerHTML );
+	 }
+  }); 
+  //]]>
+  </script>
+</head>
+<body>
+	<p title="选择你最喜欢的水果." >你最喜欢的水果是?</p>
+	<ul>
+	  <li title='苹果'>苹果</li>
+	  <li title='橘子'>橘子</li>
+	  <li title='菠萝'>菠萝</li>
+	</ul>
+</body>
+</html>
+
+ 

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Appendix B Tests</title>
+  <link rel="stylesheet" href="test/qunit.css" media="screen">
+
+  <script src="jquery.js"></script>
+  <script src="test/qunit.js"></script>
+  <script src="B.js"></script>
+  <script src="test/test.js"></script>
+</head>
+<body>
+  <div id="qunit"></div>
+  <div id="qunit-fixture">
+
+    <ul id="selected-plays" class="clear-after">
+      <li>Comedies
+        <ul>
+          <li><a href="/asyoulikeit/">As You Like It</a></li>
+          <li>All's Well That Ends Well</li>
+          <li>A Midsummer Night's Dream</li>
+          <li>Twelfth Night</li>
+        </ul>
+      </li>
+      <li>Tragedies
+        <ul>
+          <li><a href="hamlet.pdf">Hamlet</a></li>
+          <li>Macbeth</li>
+          <li>Romeo and Juliet</li>
+        </ul>
+      </li>
+      <li>Histories
+        <ul>
+          <li>Henry IV (<a href="mailto:henryiv@king.co.uk">email</a>)
+            <ul>
+              <li>Part I</li>
+              <li>Part II</li>
+            </ul>
+          </li>
+          <li><a href="http://www.shakespeare.co.uk/henryv.htm">Henry V</a></li>
+          <li>Richard II</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h2>Shakespeare's Plays</h2>
+    <table>
+      <tr>
+        <td>As You Like It</td>
+        <td>Comedy</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>All's Well that Ends Well</td>
+        <td>Comedy</td>
+        <td>1601</td>
+      </tr>
+      <tr>
+        <td>Hamlet</td>
+        <td>Tragedy</td>
+        <td>1604</td>
+      </tr>
+      <tr>
+        <td>Macbeth</td>
+        <td>Tragedy</td>
+        <td>1606</td>
+      </tr>
+      <tr>
+        <td>Romeo and Juliet</td>
+        <td>Tragedy</td>
+        <td>1595</td>
+      </tr>
+      <tr>
+        <td>Henry IV, Part I</td>
+        <td>History</td>
+        <td>1596</td>
+      </tr>
+      <tr>
+        <td>Henry V</td>
+        <td>History</td>
+        <td>1599</td>
+      </tr>
+    </table>
+    <h2>Shakespeare's Sonnets</h2>
+    <table>
+      <tr>
+        <td>The Fair Youth</td>
+        <td>1–126</td>
+      </tr>
+      <tr>
+        <td>The Dark Lady</td>
+        <td>127–152</td>
+      </tr>
+      <tr>
+        <td>The Rival Poet</td>
+        <td>78–86</td>
+      </tr>
+    </table>
+
+    <div id="switcher" class="switcher">
+      <h3>Style Switcher</h3>
+      <button id="switcher-default">
+        Default
+      </button>
+      <button id="switcher-narrow">
+        Narrow Column
+      </button>
+      <button id="switcher-large">
+        Large Print
+      </button>
+    </div>
+
+  </div>
+</body>
+</html>

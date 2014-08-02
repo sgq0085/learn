@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script src="../../scripts/jquery.js" type="text/javascript"></script>
+<script src="lib/jquery.form.js" type="text/javascript"></script>
+   <script type="text/javascript">           
+			 // json
+					$(document).ready(function() { 
+					    $('#myForm').ajaxForm({ 
+					        // 声明 服务器返回数据的类型.
+					        dataType:  'json', 
+					        success:   processJson 
+					    }); 
+					});
+					
+					function processJson(data) { 
+						    // 'data'是一个json对象，从服务器返回的.
+						    $('#jsonOut').html(data.name +  "   "+data.address + "  "+data.comment); 
+					}
+			
+			// xml 
+				$(document).ready(function() { 
+				    $('#xmlForm').ajaxForm({ 
+				        // 声明 服务器返回数据的类型.
+				        dataType:  'xml', 
+				        success:   processXml 
+				    }); 
+				});	
+				
+				function processXml(responseXML) { 
+				    // 'responseXML' 是一个XML的文档 ，从服务器返回的.
+				    var name = $('name', responseXML).text(); 
+				    var address = $('address', responseXML).text(); 
+				    var comment = $('comment', responseXML).text(); 
+				    $('#xmlOut').html(name +  "   "+address + "  "+comment); 
+				}
+			
+			// html 
+				$(document).ready(function() { 
+				    $('#htmlForm').ajaxForm({ 
+				        // 用服务器返回的数据 更新 id为 htmlcssrain 的内容.
+				        target: '#htmlOut', 
+				        success: function() { 
+				            $('#htmlOut').fadeIn('slow'); 
+				        } 
+				    }); 
+				});
+	
+	
+   </script> 
+  </head>
+  
+  <body>
+    <h3> Demo 8 : form插件的使用--dataType的其他方式. </h3>
+<!-- demo1 json-->
+<h4>json方式返回</h4>
+<form id="myForm" action="json.php" method="post"> 
+    名称： <input type="text" name="name" id="name" /> <br/>
+	地址： <input type="text" name="address" id="address"/><br/> 
+    自我介绍： <textarea name="comment" id="comment" ></textarea> <br/>
+    <input type="submit" id="test" value="json方式返回" /> <br/>
+    <div id="jsonOut" ></div>
+</form>
+ 
+<!-- demo2 xml-->
+<h4>xml方式返回</h4>
+<form id="xmlForm" action="xml.php" method="post"> 
+    名称： <input type="text" name="xmlname" id="xmlname" /> <br/>
+	地址： <input type="text" name="xmladdress" id="xmladdress"/><br/> 
+    自我介绍： <textarea name="xmlcomment" id="xmlcomment" ></textarea> <br/>
+    <input type="submit" id="xmltest" value="xml方式返回" /> <br/>
+    <div id="xmlOut" ></div>
+</form>
+
+<!-- demo3 html-->
+<h4>html方式返回</h4>
+<form id="htmlForm" action="html.php" method="post"> 
+    名称： <input type="text" name="htmlname" id="htmlname" /> <br/>
+	地址： <input type="text" name="htmladdress" id="htmladdress"/><br/> 
+    自我介绍： <textarea name="htmlcomment" id="htmlcomment" ></textarea> <br/>
+    <input type="submit" id="htmltest" value="html方式返回" /> <br/>
+    <div id="htmlOut" ></div>
+</form>
+  </body>
+</html>

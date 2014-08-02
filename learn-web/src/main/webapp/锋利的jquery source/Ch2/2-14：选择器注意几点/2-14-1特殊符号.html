@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title> new document </title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<!--   引入jQuery -->
+	<script src="../../scripts/jquery.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		$(function(){
+			var $id_a  = $('#id.a');//jQuery对象
+			var $id_b  = $('#id#b');//jQuery对象
+			var $id_c =  $('#id[1]'); 	//jQuery对象
+
+			var $id_right_a  = $('#id\\.a');//jQuery对象,对特殊字符,我们转义一下
+			var $id_right_b  = $('#id\\#b');//jQuery对象,对特殊字符,我们转义一下
+			var $id_right_c  = $('#id\\[1\\]'); 			//对特殊字符，我们转义一下
+
+			$("<div>结果输出：<br/>值1:"+$id_a.html()+"<br/>值2:"+$id_b.html()+"<br/>值3:"+$id_c.html()+"<br/>值4:"+$id_right_a.html()+"<br/>值5:"+$id_right_b.html()+"<br/>值6:"+$id_right_c.html()+"<br/></div>").appendTo("body");
+		})
+	</script>
+</head>
+<body>
+	<div id="id.a">aa</div>
+	<div id="id#b">bb</div>
+	<div id="id[1]">cc</div>
+</body>
+</html>

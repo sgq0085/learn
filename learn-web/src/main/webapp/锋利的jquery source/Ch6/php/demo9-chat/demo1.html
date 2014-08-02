@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title></title>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+		body{
+		   margin:0;
+		   padding:0;
+		   font-size:12px;
+		}
+		#messagewindow {
+			height: 250px;
+			border: 1px solid;
+			padding: 5px;
+			overflow: auto;
+		}
+		#wrapper {
+			margin: auto;
+			width: 438px;
+		}
+	</style>
+	 <!--   引入jQuery -->
+	 <script src="../scripts/jquery.js" type="text/javascript"></script>
+	<script type="text/javascript">
+	//<![CDATA[
+		$(function(){
+		    //定义时间戳
+			timestamp = 0;
+			//调用更新信息函数
+			updateMsg();
+			//表单提交
+			$("#chatform").submit(function(){
+				$.post("backend.php",{
+							message: $("#msg").val(),
+							name: $("#author").val(),
+							action: "postmsg",
+							time: timestamp
+						}, function(xml) {
+					//清空信息文本框内容
+					$("#msg").val("");
+					//调用解析xml的函数
+					addMessages(xml);
+				});
+				return false; //阻止表单提交
+			});
+		});
+        //更新信息函数，每隔一定时间去服务端读取数据
+		function updateMsg(){
+			$.post("backend.php",{ time: timestamp }, function(xml) {
+				//移除掉 等待提示
+				$("#loading").remove();
+				//调用解析xml的函数
+				addMessages(xml);
+			});
+			 //每隔4秒，读取一次.
+			setTimeout('updateMsg()', 4000);
+		}
+        //解析xml文档函数，把数据显示到页面上
+		function addMessages(xml) {
+		    //如果状态为2，则终止
+			if($("status",xml).text() == "2") return;
+			//更新时间戳
+			timestamp = $("time",xml).text();
+			//$.each循环数据
+			$("message",xml).each(function() {
+			    var author = $("author",this).text(); //发布者
+				var content = $("text",this).text();  //内容
+				var htmlcode = "<strong>"+author+"</strong>: "+content+"<br />";
+				$("#messagewindow").prepend( htmlcode ); //添加到文档中
+			});
+		}
+	//]]>
+	</script>
+	
+</head>
+<body>
+
+	<div id="wrapper">
+		<p id="messagewindow"><span id="loading">加载中...</span></p>
+		<form id="chatform" action="#">
+			姓名： <input type="text" id="author" size="50"/><br />
+			内容： <input type="text" id="msg"  size="50"/>   <br /> 
+			<input type="submit" value="发送" /><br />
+		</form>
+	</div>
+
+</body>
+</html>

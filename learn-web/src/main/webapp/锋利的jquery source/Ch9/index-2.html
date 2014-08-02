@@ -1,0 +1,65 @@
+<!DOCTYPE html> 
+<html> 
+	<head> 
+	<title>My Page</title> 
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<link rel="stylesheet" href="css/jquery.mobile-1.0.1.min.css" />
+	<link rel="stylesheet" href="Elastislide/css/elastislide.css" />
+</head> 
+<body> 
+<div data-role="page">
+	<div data-role="header">
+		<h1>Jane Shopping</h1>
+		<a href="#about" data-icon="gear" class="ui-btn-right">关于</a>
+		<div data-role="navbar" data-iconpos="top">
+			<ul>
+				<li><a href="#" data-icon="home" class="ui-btn-active">首页</a></li>
+				<li><a href="category.html" data-icon="grid">分类</a></li>
+				<li><a href="#" data-icon="star">联系我们</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div data-role="content">	
+		<input type="search" placeholder="请输入商品名称"/>
+		<ul data-role="listview" data-inset="true" data-theme="e">
+			<li><a href="#">Acura</a></li>
+			<li><a href="#">Audi</a></li>
+			<li><a href="#">BMW</a></li>
+			<li><a href="#">Cadillac</a></li>
+			<li><a href="#">Ferrari</a></li>
+		</ul>
+	</div>
+	<div data-role="footer">
+		<h4>Footer content</h4>
+	</div>
+
+</div>
+
+
+<!-- about -->	
+<div id="about" data-role="page">
+    <div data-role="header" data-backbtn="true">
+        <a href="#" data-rel="back" data-icon="arrow-l">返回</a>
+        <h1>关于Jane Shopping</h1>
+    </div>
+    <div data-role="content">
+        <div data-role="collapsible" data-collapsed="false">
+            <p>Jane Shopping网站的用途是向少男少女们提供时尚服装，首饰和玩具等。既然面向的客户群是年轻的一代，那么网站应该给人一种很时尚的感觉。因此，需要给网站增加一些与众不同的交互功能来吸引客户.</p>
+        </div>
+    </div>
+</div> 
+<!-- about/ -->	
+
+
+<script src="js/jquery.js"></script>
+<script src="Elastislide/js/jquery.elastislide.js"></script>
+<script src="js/jquery.mobile-1.0.1.min.js"></script>
+<script>
+$(document).ready(function() {
+	$('#carousel').carousel({endless: true});
+});
+</script>
+</body>
+</html>

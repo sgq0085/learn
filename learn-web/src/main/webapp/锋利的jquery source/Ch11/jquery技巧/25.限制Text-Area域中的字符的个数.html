@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script src="../../scripts/jquery.js" type="text/javascript"></script>
+</head>
+<body>
+<textarea id="mytextarea"></textarea>
+
+<script>
+jQuery.fn.maxLength = function(max){
+	this.each(function(){
+		var type = this.tagName.toLowerCase();
+		var inputType = this.type? this.type.toLowerCase() : null;
+		if(type == "input" && inputType == "text" || inputType == "password"){
+			//应用标准的maxLength
+			this.maxLength = max;
+		}else if(type == "textarea"){
+			this.onkeypress = function(e){
+				var ob = e || event;
+				var keyCode = ob.keyCode;
+				var hasSelection = document.selection? document.selection.createRange().text.length > 0 : this.selectionStart != this.selectionEnd;
+				return !(this.value.length >= max && (keyCode > 50 || keyCode == 32 || keyCode == 0 || keyCode == 13) && !ob.ctrlKey && !ob.altKey && !hasSelection);
+			};
+			this.onkeyup = function(){
+				if(this.value.length > max){
+					this.value = this.value.substring(0,max);
+				}
+			};
+		}
+	});
+};
+//use
+$('#mytextarea').maxLength(10);
+</script>
+</body>
+</html>

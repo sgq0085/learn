@@ -1,0 +1,149 @@
+JQuery对象转换成DOM对象 $(this).get(0)与$(this)[0]等价
+var $variable = JQuery对象;
+方法一：
+var variable = $variable[0];
+方法二：
+var variable = $variable.get(0);
+
+DOM对象转换成JQuery对象 用 $() 把DOM对象包装起来
+var cr = document.getElementById("cr");
+var $cr = $(cr);
+
+
+1.基本选择器(4个)
+选择器                  描述                      返回        示例
+#ID                     根据给定ID匹配一个元素    单个元素    $("#test") 选取ID为test的一个元素
+.class                  根据给定类名匹配元素      集合元素    $(".test") 选取所有class为test的元素
+element                 根据给定元素名匹配元素    集合元素    $("p") 选取所有<p>元素
+*                       匹配所有元素              集合元素    $("*") 选取所有元素
+"selector1,selector2"   将各个选择器结果合并返回  集合元素    $("div,span,p.myClass")选取所有<div>元素，<span>和class为myClass的<p>标签
+
+
+
+2.层次选择器(4个)
+选择器                      描述                                             返回        示例
+$("ancestor descendat")     选取ancestor元素里，所有descendat(后代)元素      集合元素    $('body div') 选择body内的所有div元素.
+$("parent > child")         选取parent元素下的child（子）元素                集合元素    $('body > div') 选择body内元素名是div的子元素
+$("prev + next")            选取prev元素之后的第一个next元素                 集合元素    $('.one + div') 选择所有class为one 的下一个div同辈元素
+$("prev ~ siblings")        选择prev元素之后的所有siblings元素               集合元素    $('#two ~ div') 选择id为two的元素后面的所有div兄弟元素
+
+注意:
+$("prev + next")可以使用next()方法来代替, $(".one + div") 等价于 $(".one").next("div")
+$("prev ~ siblings") 可以使用next()方法来代替，$("#two ~ div") 等价于 $("#two").nextAll("div")
+$("prev ~ siblings") 不等价于 $("perv").siblings("siblings")  siblings()选取同辈所有元素，而不单单只是后面
+
+
+3.过滤选择器
+(1)基本过滤选择器(11个)
+选择器             描述                                         返回        示例
+:first             选取第1个元素                                单个元素    $('div:first') 选取所有div元素中第一个
+:last              选取最后1个元素                              单个元素    $('div:last') 选择最后一个div元素.
+:not(selector)     去除所有与给定选择器匹配的元素               集合元素    $('div:not(.one)') 选择class不为one的 所有div元素
+:even              匹配所有索引值为偶数的元素，从0开始计数      集合元素    $('div:even') 选择索引值为偶数的div元素，即索引值0、2、4...
+:odd               匹配所有索引值为奇数的元素，从0开始计数      集合元素    $('div:odd') 选择索引值为奇数的div元素，即索引值1、3、5...
+:eq(index)         匹配一个给定索引值的元素，从0开始计数        单个元素    $('div:eq(3)') 选择索引等于3的元素
+:gt(index)         匹配所有大于给定索引值的元素，从0开始计数    集合元素    $('div:gt(3)') 选择索引大于3的元素，不包括3
+:lt(index)         匹配所有小于给定索引值的元素，从0开始计数    集合元素    $('div:lt(3)') 选择索引小于3的元素，不包括3
+:header            匹配如 h1, h2, h3之类的标题元素              集合元素    $(':header') 选择所有的标题元素.比如h1, h2, h3等等
+:animated          匹配所有正在执行动画效果的元素               集合元素    $(':animated') 选择当前正在执行动画的所有元素.
+:focus             匹配当前获取焦点的元素                       集合元素    $('body :focus') 选择当前获取焦点的所有元素.
+1.9+
+:lang              选择指定语言的所有元素                       集合元素    $("div:lang(en)")将匹配<div lang="en"> and <div lang="en-us">
+:root              选择该文档的根元素                           单个元素    $(":root") 在HTML中，文档的根元素永远是<html>元素
+:target            选择由文档URI的格式化识别码表示的目标元素    集合元素    $( "p:target" )，给定的URI http://example.com/#foo，，将选择<p id="foo">元素
+
+注意:
+:focus 建议前面用标记名称或其他选择,而不必搜索整个DOM树
+
+
+(2)内容过滤选择器(4个)
+选择器             描述                                         返回        示例
+:contains(text)    匹配包含给定文本的元素                       集合元素    $('div:contains(di)') 选取含有文本"di"的div元素
+:empty             匹配所有不包含子元素或者文本的空元素         集合元素    $('div:empty') 选取不包含子元素(或者文本元素)的div空元素
+:has(selector)     匹配含有选择器所匹配的元素的元素             集合元素    $("div:has('.mini')") 选取含有class为mini元素的div元素
+:parent            匹配含有子元素或者文本的元素                 集合元素    $('div:parent') 选取含有子元素(或者文本元素)的div元素
+
+
+(3)可见性过滤选择器(2个)
+选择器             描述                                         返回        示例
+:hidden            匹配所有不可见元素，或者type为hidden的元素   集合元素    $('body :hidden') 选取body后代元素中不可见元素
+:visible           匹配所有的可见元素                           集合元素    $('div:visible') 选取所有可见的div元素
+
+注意:
+:hidden 包含display为"none"的元素，或type="hidden"的form元素，但不包括visibility:hidden(只是隐藏但是仍然占据着物理空间)。
+visibility:hidden用filter方法实现选择
+$('div').filter(function(){
+   return ($(this).css('visibility') == 'hidden' || $(this).css('display') == 'none');
+});
+
+
+(4)属性过滤选择器(9个)
+选择器                          描述                                                   返回        示例
+[attribute]                     匹配拥有此属性的元素                                   集合元素    $('div[title]') 选取含有属性title 的div元素
+[attribute=value]               匹配给定的属性是某个特定值的元素                       集合元素    $('div[title=test]') 选取属性title值等于test的div元素
+[attribute!=value]              匹配所有不含有指定的属性，或者属性不等于特定值的元素   集合元素    $('div[title!=test]') 选取属性title值不等于test的div元素
+[attribute^=value]              匹配给定的属性是以某些值开始的元素                     集合元素    $('div[title^=te]') 选取属性title值以te开始的div元素
+[attribute$=value]              匹配给定的属性是以某些值结尾的元素                     集合元素    $("div[title$=est]") 选取属性title值以est结束的div元素.
+[attribute*=value]              匹配给定的属性是以包含某些值的元素                     集合元素    $("div[title*=es]") 选取属性title值含有es的div元素.
+[attribute|=value]              匹配给定的属性等于某个值，或为前缀(值后面有跟-)        集合元素    $('div[title|="en"]') 选取属性title等于en或以en为前缀（该字符串后跟一个连字符'-'）的元素
+[attribute~=value]              匹配给定的属性用空格分隔的值中包含某值                 集合元素    $('div[title~="uk"]') 选取属性title用空格分隔的值中包含字符uk的元素
+[attrSel1][attrSel2][attrSelN]  复合属性选择器，需要同时满足多个条件时使用             集合元素    $("div[id][title*=es]") 组合属性选择器,首先选取有属性id的div元素，在结果中选取属性title值含有es的元素
+
+
+(5)子元素过滤选择器(10个)
+选择器                                 描述                                                   返回        示例
+:nth-child(index/even/odd/equation)    匹配其父元素下的第N个子或奇偶元素(从1开始计数)         集合元素    $('div.one :nth-child(2)') 选取每个父元素下的第2个子元素，eq(index)返回单个元素
+:first-child                           匹配第一个子元素                                       集合元素    $('div.one :first-child') 选取每个父元素下的第一个子元素 :first只返回单个元素
+:last-child                            匹配最后一个子元素                                     集合元素    $('div.one :last-child') 选取每个父元素下的最后一个子元素 :last只返回单个元素
+:only-child                            如果某个元素是父元素中唯一的子元素，那将会被匹配       集合元素    $('div.one :only-child') 如果某个元素是父元素中唯一的子元素，那将会被匹配
+1.9+
+:first-of-type                         选择所有相同的元素名称的第一个兄弟元素                 集合元素    $('div.one :only-child') 选取每个父元素下的每种类型子元素的第一个，比如第一个div和第一个span都会被选
+:last-of-type                          选择的所有元素之间具有相同元素名称的最后一个兄弟元素   集合元素    $('div.one :last-of-type') 选取每个class为one的div父元素下的每种类型子元素中的最后一个
+:nth-last-child()                      选择所有他们父元素的第n个子元素(从1开始计数)           集合元素    $("div.one :nth-last-child(2)")  选取每个父元素下的倒数第2个子元素
+:nth-of-type()                         选择所有相同的元素名称的第N个兄弟元素 (从1开始计数)    集合元素    $("div.one :nth-of-type(2)") 选取每个父元素下的每种类型子元素的第2个子元素
+:nth-last-of-type()                    选择所有相同的元素名称倒数第N个兄弟元素 (从1开始计数)  集合元素    $("div.one :nth-last-of-type(1)") 选取每个父元素下的每种类型子元素的倒数第1个子元素
+:only-of-type                          选择相同的元素是父元素中唯一该类型的子元素             集合元素    $("div.one :only-of-type") 选取每个class为one的div父元素下，相同子元素类型唯一出现的，所有子元素
+
+注意:
+子元素过滤选择器匹配都是相对于该元素本身的父元素来匹配的，与基本过滤选择器是按照之前选择出来的元素集合进行匹配不同
+:nth-child()选择器是常见的子元素过滤选择器，详细功能如下：
+(1):nth-child(even) 选取每个父元素下的索引值是偶数的元素，因为:nth-child是从1开始计数，而偶数是从0开始计数，所以第一个对象不会被匹配上
+(2):nth-child(odd) 选取每个父元素下的索引值是奇数的元素，因为:nth-child是从1开始计数，所以第一个元素就会被匹配上
+(3):nth-child(2) 选取每个父元素下的索引值是2的元素
+(4):nth-child(3n) 选取每个父元素下的索引值是3的倍数的元素(n从1开始计数)
+(5):nth-child(3n+1) 选取每个父元素下的索引值是3n+1的元素(n从1开始计数)
+
+
+
+3.表单选择器
+
+选择器          描述                                                   返回        示例
+:input          匹配所有 input, textarea, select 和 button 元素        集合元素    $("#form1 :input") id为form1的表单所有input元素
+:text           匹配所有的单行文本框                                   集合元素    $("#form1 :text") id为form1的表单所有type="text"的input元素
+:password       匹配所有密码框                                         集合元素    $("#form1 :password") id为form1的表单所有type="password"的input元素
+:radio          匹配所有单选按钮                                       集合元素    $("#form1 :radio") id为form1的表单所有所有type="radio"的input元素
+:checkbox       匹配所有复选框                                         集合元素    $("#form1 :checkbox") id为form1的表单所有type="checkbox"的input元素
+:submit         匹配所有提交按钮                                       集合元素    $("#form1 :submit") type="submit"的input元素和button元素，IE8以上和其他浏览器的button元素默认type="submit"
+:image          匹配所有图像域                                         集合元素    $("#form1 :image") id为form1的表单所有type="image"的input元素
+:reset          匹配所有重置按钮                                       集合元素    $("#form1 :reset") id为form1的表单所有type="reset"的input元素
+:button         匹配所有按钮                                           集合元素    $("#form1 :input") id为form1的表单所有type="button"的input元素和button元素
+:file           匹配所有文件域                                         集合元素    $("#form1 :file") id为form1的表单所有type="file"的input元素
+:hidden         匹配所有不可见元素，或者type为hidden的元素             集合元素    $("#form1 :hidden") id为form1的表单中所有不可见元素（如br），或者type为hidden的元素
+
+
+(1) 最好不要把<button>标签当成<form>中的input元素,如果要用，一定要设置type属性
+(2) :hidden 查询元素包含display为"none"的元素，或type="hidden"的form元素，但不包括visibility:hidden的元素
+
+
+选择器          描述                                                                    返回        示例
+:enabled        匹配所有可用元素                                                        集合元素    $("input:enabled") 查找所有可用的input元素
+:disabled       匹配所有不可用元素                                                      集合元素    $("#form1 input:disabled") 匹配对表单内不可用input
+:checked        匹配所有选中的被选中元素(复选框、单选框等，不包括select中的option)      集合元素    $("input:checked") 查找所有选中的单选框和复选框元素
+:selected       匹配所有选中的option元素                                                集合元素    $("select option:selected") 查找所有选中的选项option元素
+
+
+4.注意事项
+(1)使用转义符 \\ 转义 . # ( ]
+(2)属性选择器中没有@符号
+(3)选择器中要注意空格的使用，防止错误使用后代选择器
+

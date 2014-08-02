@@ -1,0 +1,5 @@
+* { margin:0; padding:0; }
+.msg {width:300px; margin:100px; }
+.msg_caption { width:100%; overflow:hidden; margin-bottom:1px;}
+.msg_caption span { display:block; float:left; margin:0 2px; padding:4px 10px; background:#898989; cursor:pointer;font-size:12px;color:white; }
+.msg textarea{ width:300px; height:80px;height:100px;border:1px solid #000;}

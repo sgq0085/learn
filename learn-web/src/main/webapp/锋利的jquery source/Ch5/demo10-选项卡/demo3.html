@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title></title>
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<!--   引入jQuery -->
+ <script src="../../scripts/jquery.js" type="text/javascript"></script>
+<script type="text/javascript" >
+//<![CDATA[
+	$(function(){
+	    var $div_li =$("div.tab_menu ul li");
+	    $div_li.click(function(){
+			$(this).addClass("selected")            //当前<li>元素高亮
+				   .siblings().removeClass("selected");  //去掉其它同辈<li>元素的高亮
+            var index =  $div_li.index(this);  // 获取当前点击的<li>元素 在 全部li元素中的索引。
+			$("div.tab_box > div")   	//选取子节点。不选取子节点的话，会引起错误。如果里面还有div 
+					.eq(index).show()   //显示 <li>元素对应的<div>元素
+					.siblings().hide(); //隐藏其它几个同辈的<div>元素
+		}).hover(function(){
+			$(this).addClass("hover");
+		},function(){
+			$(this).removeClass("hover");
+		})
+	})
+//]]>
+</script>
+</head>
+<body>
+
+<div class="tab">
+	<div class="tab_menu">
+		<ul>
+			<li class="selected">时事</li>
+			<li>体育</li>
+			<li>娱乐</li>
+		</ul>
+	</div>
+	<div class="tab_box"> 
+		 <div>时事</div>
+		 <div class="hide">体育</div>
+		 <div class="hide">娱乐</div>
+	</div>
+</div>
+
+</body>
+</html>

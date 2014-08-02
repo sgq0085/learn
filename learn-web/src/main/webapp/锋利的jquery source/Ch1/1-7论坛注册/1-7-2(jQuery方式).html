@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>1-6-1</title>
+<!-- 引入 jQuery -->
+<script src="../../scripts/jquery.js" type="text/javascript"></script>
+<script type="text/javascript">
+//等待dom元素加载完毕.
+$(document).ready(function(){
+	var $cr = $("#cr");  //jQuery对象
+	$cr.click(function(){
+		if($cr.is(":checked")){ //jQuery方式判断
+			alert("感谢你的支持!你可以继续操作！");
+		}
+	})
+});
+</script>
+</head>
+<body>
+<input type="checkbox" id="cr"/><label for="cr">我已经阅读了上面制度.</label>
+</body>
+</html>

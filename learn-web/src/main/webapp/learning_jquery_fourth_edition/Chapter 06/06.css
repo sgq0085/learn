@@ -1,0 +1,130 @@
+/***************************************
+   Default Styles
+***************************************/
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font: 62.5% Verdana, Helvetica, Arial, sans-serif;
+  color: #000;
+  background: #fff;
+}
+#container {
+  font-size: 1.2em;
+  margin: 10px 2em;
+}
+
+h1 {
+  font-size: 2.5em;
+  margin-bottom: 0;
+}
+
+h2 {
+  font-size: 1.3em;
+  margin-bottom: .5em;
+}
+h3 {
+  font-size: 1.1em;
+  margin-bottom: 0;
+}
+
+code {
+  font-size: 1.2em;
+}
+
+a {
+  color: #06581f;
+}
+
+
+/***************************************
+   Chapter Styles
+***************************************/
+
+#header {
+  margin-bottom: 1em;
+  padding-bottom: 1em;
+  border-bottom: 1px solid #eee;
+}
+
+
+.letters {
+  float: left;
+  width: 15%;
+  padding-right: 5%;
+}
+
+.letter {
+  margin: 10px;
+}
+.letter h3 {
+  font-weight: bold;
+}
+
+.letter ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 1em;
+}
+
+.letter input {
+  width: 100%;
+  margin-bottom: 1em;
+}
+
+
+#dictionary {
+  float: left;
+  width: 78%;
+}
+
+.entry {
+  padding: 1em 0em;
+  border-bottom: 1px solid #eee;
+}
+.entry .term {
+  display: inline;
+  font-weight: bold;
+}
+.entry .part {
+  padding: 0 1em;
+  display: inline;
+  font-style: italic;
+}
+.entry .definition {
+  padding: .5em;
+}
+.entry .definition .quote {
+  margin: .5em 2em;
+  padding: 0 1em;
+  color: #333;
+  border-left: 2px #eee solid;
+}
+.entry .definition .quote .quote-author {
+  font-weight: bold;
+  margin-left: 20em;
+}
+
+#loading {
+  display: none;
+  position: fixed;
+  left: 50%;
+  top: 40%;
+  width: 90px;
+  padding: 20px;
+  margin-left: -66px;
+  border: 1px #000 solid;
+  background-color: #eee;
+}
+* html #loading {
+  position: absolute;
+}
+
+.highlighted {
+  background-color: #dfd;
+  font-style: italic;
+}
+

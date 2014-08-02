@@ -1,0 +1,107 @@
+/***************************************
+   Default Styles
+***************************************/
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font: 80% Verdana, Helvetica, Arial, sans-serif;
+  color: #000;
+  background: #fff;
+}
+#container {
+  margin: 10px 2em;
+}
+
+h1 {
+  font-size: 2.5em;
+  margin-bottom: 0;
+}
+
+h2 {
+  font-size: 1.3em;
+  margin-bottom: .5em;
+}
+h3 {
+  font-size: 1.1em;
+  margin-bottom: 0;
+}
+
+code {
+  font-size: 1.2em;
+}
+
+a {
+  color: #06581f;
+}
+
+
+/***************************************
+   Chapter Styles
+***************************************/
+
+#topics {
+  font-size: 0.9em;
+  margin: 6px 0;
+}
+#topics a {
+  text-decoration: none;
+  color: #000;
+  padding: 0 6px;
+}
+#topics a.selected {
+  background-color: #6f93ce;
+  color: #fff;
+}
+#topics a:hover {
+  background-color: #6f93ce;
+  color: #fff;
+}
+
+#news {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#news th,
+#news td {
+  padding: 3px 6px;
+  vertical-align: top;
+}
+
+#news td:first-child {
+  width: 48px;
+}
+#news th {
+  text-align: left;
+  color: #fff;
+}
+#news thead th {
+  background-color: #15b;
+}
+#news tbody th {
+  background-color: #6f93ce;
+}
+#news .alt td {
+  background-color: #ccc;
+}
+#news .alt-2 td {
+  background-color: #ddd;
+}
+#news td.selected {
+  background-color: #eee;
+}
+
+.highlight {
+  font-weight: bold;
+  font-style: italic;
+  color: #080;
+}
+
+#news td.active {
+  background-color: #dfd;
+}
+

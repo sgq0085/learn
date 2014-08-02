@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script src="../../scripts/jquery.js" type="text/javascript"></script>
+<script src="lib/jquery.form.js" type="text/javascript"></script>
+   <script type="text/javascript">          
+   $(document).ready(function() {  
+		 $('#test').click(function(){
+              var queryString = $('#myForm').formSerialize();
+              alert(queryString);
+              // 组装的数据可以用于 $.get, $.post, $.ajax ...
+              $.post('demo.php', queryString ,function(data){
+                  $('#output1').html("提交成功！欢迎下次再来！").show();      
+              }); 
+              return false;
+         })
+         
+         //demo2
+         $('#test2').click(function(){
+              var queryString = $('#myForm2 *').fieldValue(); 
+              alert(queryString);
+              return false;
+         })
+         
+         //重置表单
+         $('#test3').click(function(){
+             $('#myForm').resetForm();
+             $('#myForm2').resetForm();
+         })
+          //清除表单
+         $('#test4').click(function(){
+             $('#myForm').clearForm();
+             $('#myForm2').clearForm();
+         })
+   });   
+   </script> 
+  </head>
+  
+  <body>
+    <h3> Demo 3 : form插件的使用--formSerialize()组装表单数据,用于jQuery中的.ajax(). </h3>
+<!-- demo1 -->
+<form id="myForm" action="demo.php" method="post"> 
+    名称： <input type="text" name="name" /> <br/>
+	地址： <input type="text" name="address" /><br/> 
+    自我介绍： <textarea name="comment"></textarea> <br/>
+    <input type="submit" id="test" value="提交" /> <br/>
+    <div id="output1" style="display:none;"></div>
+</form>
+
+<br/><br/><br/>
+
+<!-- demo2 -->
+<form id="myForm2" action="demo.php" method="post"> 
+    名称： <input type="text" name="name2" class="special"/> <br/>
+	地址： <input type="text" name="address2" /><br/> 
+    自我介绍： <textarea name="comment2" class="special"></textarea> <br/>
+    单选：男<input type="radio" name="a" value="男" checked/> 
+       女<input type="radio" name="a" value="女"/><br/>
+    <input type="submit" id="test2" value="提交" /> <br/>
+</form>
+
+<br/><br/><br/>
+<input type="button" id="test3" value="重置所有表单" /> <br/>
+<input type="button" id="test4" value="清除所有表单" /> （提示：发现单选框以前选中的，也被清除了，跟重置有点区别！）<br/>
+
+
+  </body>
+</html>

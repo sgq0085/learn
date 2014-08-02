@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Developing Plugins</title>
+
+    <link rel="stylesheet" href="08.css" type="text/css" />
+    <link rel="stylesheet" href="ui-themes/smoothness/jquery-ui-1.10.0.custom.css" type="text/css" />
+
+    <script src="jquery.js"></script>
+    <script src="jquery-ui-1.10.0.custom.min.js"></script>
+    <script src="08.js"></script>
+  </head>
+  <body>
+    <div id="container">
+      <h1>Inventory</h1>
+      <table id="inventory">
+        <thead>
+          <tr class="one">
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr class="two" id="sum">
+            <td>Total</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr id="average">
+            <td>Average</td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tfoot>
+        <tbody>
+          <tr>
+            <td><a href="spam.html" data-tooltip-text="Nutritious and delicious!">Spam</a></td>
+            <td>4</td>
+            <td>2.50</td>
+          </tr>
+          <tr>
+            <td><a href="egg.html" data-tooltip-text="Farm fresh or scrambled!">Egg</a></td>
+            <td>12</td>
+            <td>4.32</td>
+          </tr>
+          <tr>
+            <td><a href="gourmet-spam.html" data-tooltip-text="Chef Hermann's recipe.">Gourmet Spam</a></td>
+            <td>14</td>
+            <td>7.89</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

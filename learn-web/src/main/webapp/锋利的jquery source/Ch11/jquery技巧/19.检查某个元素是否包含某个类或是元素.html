@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<style type="text/css">
+body {
+	margin: 10px auto;
+	width: 570px;
+	font: 75%/120% Arial, Helvetica, sans-serif;
+	color: #999999;
+}
+a {
+	color:#333399;
+}
+a:hover {
+	text-decoration: none;
+}
+a.pdf {
+	background: url(img/file-red.gif) no-repeat;
+	padding-left: 16px;
+}
+a.zip {
+	background: url(img/file-orange.gif) no-repeat;
+	padding-left: 16px;
+}
+a.psd {
+	background: url(img/file-blue.gif) no-repeat;
+	padding-left: 16px;
+}
+</style>
+<script src="../../scripts/jquery.js" type="text/javascript"></script>
+</head>
+<body>
+<p><a href="http://www.webdesignerwall.com/file/wdw-logo.pdf">PDF file</a> (wdw-logo.pdf)</p>
+<p><a href="http://www.webdesignerwall.com/file/wdw-logo.psd">PSD file</a> (wdw-logo.psd)</p>
+<p><a href="http://www.webdesignerwall.com/file/wdw-logo.zip">Zip file</a> (wdw-logo.zip)</p>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$("a[href$='pdf']").addClass("pdf");
+	$("a[href$='zip']").addClass("zip");
+	$("a[href$='psd']").addClass("psd");
+});
+</script>
+</body>
+</html>

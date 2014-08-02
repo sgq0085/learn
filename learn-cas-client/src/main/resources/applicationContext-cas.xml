@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:sec="http://www.springframework.org/schema/security"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+       http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+    <!-- 读取配置文件 -->
+    <context:property-placeholder location="classpath*:cas.properties" ignore-unresolvable="true" />
+
+    <bean name="singleSignOutFilter" class="org.jasig.cas.client.session.SingleSignOutFilter" />
+
+
+    <bean name="authenticationFilter" class="org.jasig.cas.client.authentication.AuthenticationFilter" p:renew="false"
+        p:gateway="false" p:casServerLoginUrl="${cas.server.login.url}" p:serverName="${server.name}" />
+
+    <bean name="ticketValidationFilter" class="org.jasig.cas.client.validation.Cas20ProxyReceivingTicketValidationFilter"
+        p:redirectAfterValidation="true" p:serverName="${server.name}">
+        <property name="ticketValidator">
+            <bean class="org.jasig.cas.client.validation.Cas20ServiceTicketValidator">
+                <constructor-arg index="0" value="${cas.server.url}" />
+            </bean>
+        </property>
+    </bean>
+
+    <bean name="httpServletRequestWrapperFilter" class="org.jasig.cas.client.util.HttpServletRequestWrapperFilter" />
+
+    <bean name="assertionThreadLocalFilter" class="org.jasig.cas.client.util.AssertionThreadLocalFilter" />
+
+</beans>

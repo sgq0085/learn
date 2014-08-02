@@ -1,0 +1,32 @@
+* { margin:0; padding:0; word-break:break-all; }
+body { background:#FFF; color:#333; font:12px/1.5em Helvetica, Arial, sans-serif; }
+h1, h2, h3, h4, h5, h6 { font-size:1em; }
+a { color:#2B93D2; text-decoration:none; }
+a:hover { color:#E31E1C; text-decoration:underline; }
+ul, li { list-style:none; }
+fieldset, img { border:none; }
+
+/* v_show style */
+.v_show { width:595px; margin:20px 0 1px 60px; }
+.v_caption { height:35px; overflow:hidden; background:url(img/btn_cartoon.gif) no-repeat 0 0; }
+.v_caption h2 { float:left; width:84px; height:35px; overflow:hidden; background:url(img/btn_cartoon.gif) no-repeat; text-indent:-9999px; }
+.v_caption .cartoon { background-position: 0 -100px; }
+.v_caption .variety { background-position:-100px -100px; }
+.highlight_tip { display:inline; float:left; margin:14px 0 0 10px; }
+.highlight_tip span { display:inline; float:left; width:7px; height:7px; overflow:hidden; margin:0 2px; background:url(img/btn_cartoon.gif) no-repeat 0 -320px; text-indent:-9999px; }
+.highlight_tip .current { background-position:0 -220px; }
+.change_btn { float:left; margin:7px 0 0 10px; }
+.change_btn span { display:block; float:left; width:30px; height:23px; overflow:hidden; background:url(img/btn_cartoon.gif) no-repeat; text-indent:-9999px; cursor:pointer; }
+.change_btn .prev { background-position:0 -400px;  }
+.change_btn .next { width:31px; background-position:-30px -400px; }
+.v_caption em { display:inline; float:right; margin:10px 12px 0 0; font-family:simsun; }
+.v_content { position:relative; width:592px; height:160px; overflow:hidden; border-right:1px solid #E7E7E7; border-bottom:1px solid #E7E7E7; border-left:1px solid #E7E7E7; }
+.v_content_list { position:absolute; width:2500px;top:0px; left:0px; }
+.v_content ul {float:left;}
+.v_content ul li { display:inline; float:left; margin:10px 2px 0; padding:8px; background:url(img/v_bg.gif) no-repeat; }
+.v_content ul li a { display:block; width:128px; height:80px; overflow:hidden; }
+.v_content ul li img {  width:128px; height:96px; }
+.v_content ul li h4 { width:128px; height:18px; overflow:hidden; margin-top:12px; font-weight:normal; }
+.v_content ul li h4 a { display:inline !important; height:auto !important; }
+.v_content ul li span { color:#666; }
+.v_content ul li em { color:#888; font-family:Verdana; font-size:0.9em; }

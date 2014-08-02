@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Panel</title>
+<style type="text/css">
+*{margin:0;padding:0;}	
+body { font-size: 13px; line-height: 130%; padding: 60px }
+#panel { width: 60px; border: 1px solid #0050D0 ;height:22px;overflow:hidden;}
+.head { padding: 5px; background: #96E555; cursor: pointer;width: 300px;}
+.content { padding: 10px; text-indent: 2em; border-top: 1px solid #0050D0;display:block; width:280px;}
+</style>
+<script src="../../../scripts/jquery.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(function(){
+	 $("#panel").hover(function() {
+				$(this).stop()
+					.animate({height : "150" } , 200 )
+					.animate({width : "300" } , 300 )
+	},function() {
+				$(this).stop()
+					.animate({height : "22" } , 200 )
+					.animate({width : "60" } , 300 )
+	});
+});
+</script>
+</head>
+<body>
+<div id="panel">
+	<h5 class="head">什么是jQuery?</h5>
+	<div class="content">
+		jQuery是继Prototype之后又一个优秀的JavaScript库，它是一个由 John Resig 创建于2006年1月的开源项目。jQuery凭借简洁的语法和跨平台的兼容性，极大地简化了JavaScript开发人员遍历HTML文档、操作DOM、处理事件、执行动画和开发Ajax。它独特而又优雅的代码风格改变了JavaScript程序员的设计思路和编写程序的方式。
+	</div>
+</div>
+</body>
+</html>

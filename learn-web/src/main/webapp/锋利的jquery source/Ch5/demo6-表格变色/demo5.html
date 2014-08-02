@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title></title>
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<!--   引入jQuery -->
+<script src="../../scripts/jquery.js" type="text/javascript"></script>
+<script type="text/javascript">
+	$(function(){
+		$("tbody>tr:odd").addClass("odd"); //先排除第一行,然后给奇数行添加样式
+		$("tbody>tr:even").addClass("even"); //先排除第一行,然后给偶数行添加样式
+		$('tbody>tr').click(function() {
+			if ($(this).hasClass('selected')) {
+				$(this)
+					.removeClass('selected')
+					.find(':checkbox').attr('checked',false);
+			}else{
+				$(this)
+					.addClass('selected')
+					.find(':checkbox').attr('checked',true);
+			}
+		});
+		// 如果复选框默认情况下是选择的，则高色.
+		// $('table :checkbox:checked').parent().parent().addClass('selected');
+		//简化:
+		$('table :checkbox:checked').parents("tr").addClass('selected');
+		//$('tbody>tr:has(:checked)').addClass('selected');
+  })
+</script>
+</head>
+<body>
+	<table>
+		<thead>
+			<tr><th> </th><th>姓名</th><th>性别</th><th>暂住地</th></tr>
+		</thead>
+		<tbody>
+			<tr><td><input type="checkbox" name="choice" value=""/></td>
+				<td>张山</td><td>男</td><td>浙江宁波</td></tr>
+			<tr><td><input type="checkbox" name="choice" value="" /></td>
+				<td>李四</td><td>女</td><td>浙江杭州</td></tr>
+			<tr><td><input type="checkbox" name="choice" value="" checked='checked' /></td>
+				<td>王五</td><td>男</td><td>湖南长沙</td></tr>
+			<tr><td><input type="checkbox" name="choice" value="" /></td>
+				<td>找六</td><td>男</td><td>浙江温州</td></tr>
+			<tr><td><input type="checkbox" name="choice" value="" /></td>
+				<td>Rain</td><td>男</td><td>浙江杭州</td></tr>
+			<tr><td><input type="checkbox" name="choice" value="" /></td>
+				<td>MAXMAN</td><td>女</td><td>浙江杭州</td></tr>
+		</tbody>
+	</table>
+</body>
+</html>

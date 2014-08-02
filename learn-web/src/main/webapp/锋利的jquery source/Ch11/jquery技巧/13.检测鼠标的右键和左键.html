@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script src="../../scripts/jquery.js" type="text/javascript"></script>
+<style>
+#XY{
+	width:40px;
+	height:100px;
+	background:#aaa;
+}
+</style>
+</head>
+<body>
+
+<div id="XY" class="box"></div>
+
+<script>
+$(document).ready(function() {  
+    $("#XY").mousedown(function(e){
+		alert(e.which)  // 1 = 鼠标左键 ; 2 = 鼠标中键; 3 = 鼠标右键
+	})
+});
+
+</script>
+</body>
+</html>

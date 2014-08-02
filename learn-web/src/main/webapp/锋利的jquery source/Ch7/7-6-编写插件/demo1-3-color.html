@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>color</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style>
+	.a{
+	  color : red;
+	}
+	</style>
+	<script type="text/javascript" src="../../scripts/jquery.js"></script>
+	<script type="text/javascript">
+	//插件编写
+	;(function($) {
+		jQuery.fn.extend({
+			"color":function(value){
+				return this.css("color",value);
+			}
+		});
+	})(jQuery);
+
+	//插件应用
+	$(function(){
+	   $("div").click(function(){
+			var color = $(this).text();
+			$("div").color( color ); //设置所有的div的字体颜色
+	   })
+	})
+	</script>
+
+</head>
+<body>
+<div class="a">red</div>
+<div style="color:blue">blue</div>
+<div style="color:green">green</div>
+<div style="color:yellow">yellow</div>
+
+</body>
+</html> 

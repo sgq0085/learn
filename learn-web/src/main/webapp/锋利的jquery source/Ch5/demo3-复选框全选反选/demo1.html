@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+ <!--   引入jQuery -->
+<script src="../../scripts/jquery.js" type="text/javascript"></script>
+ <script type="text/javascript">
+  $(function(){
+     //全选
+     $("#CheckedAll").click(function(){
+	     $('[name=items]:checkbox').attr('checked', true);
+	 });
+	 //全不选
+     $("#CheckedNo").click(function(){
+	    $('[type=checkbox]:checkbox').attr('checked', false);
+	 });
+	 //反选
+     $("#CheckedRev").click(function(){
+		  $('[name=items]:checkbox').each(function(){
+			//此处用JQ写法颇显啰嗦。体现不出JQ飘逸的感觉。
+			//$(this).attr("checked", !$(this).attr("checked"));
+			//$(this).prop("checked", !$(this).prop("checked"));
+			
+			//直接使用JS原生代码，简单实用
+			this.checked=!this.checked;
+		  });
+	 });
+	 //输出值
+	$("#send").click(function(){
+		var str="你选中的是：\r\n";
+		$('[name=items]:checkbox:checked').each(function(){
+			str+=$(this).val()+"\r\n";
+		})
+		alert(str);
+	});
+  })
+
+  </script>
+</head>
+<body>
+<form method="post" action="">
+   你爱好的运动是？
+   <br/>
+    <input type="checkbox" name="items" value="足球"/>足球
+	<input type="checkbox" name="items" value="篮球"/>篮球
+	<input type="checkbox" name="items" value="羽毛球"/>羽毛球
+	<input type="checkbox" name="items" value="乒乓球"/>乒乓球
+   <br/>
+    <input type="button" id="CheckedAll" value="全　选"/>
+    <input type="button" id="CheckedNo" value="全不选"/>
+    <input type="button" id="CheckedRev" value="反　选"/> 
+
+	<input type="button" id="send" value="提　交"/> 
+</form>
+</body>
+</html>
