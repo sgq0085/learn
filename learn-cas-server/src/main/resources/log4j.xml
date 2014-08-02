@@ -33,7 +33,7 @@
     </appender>
 
     <appender name="cas" class="org.apache.log4j.RollingFileAppender">
-        <param name="File" value="../logs/cas-server/cas.log" />
+        <param name="File" value="../logs/cas-server/cas.log"  />
         <param name="MaxFileSize" value="512KB" />
         <param name="MaxBackupIndex" value="3" />
         <layout class="org.apache.log4j.PatternLayout">
@@ -56,7 +56,7 @@
 
     <!-- This file appender is used to output aggregated performance statistics -->
     <appender name="fileAppender" class="org.apache.log4j.FileAppender">
-        <param name="File" value="../logs/cas-server/perfStats.log"/>
+        <param name="File" value="../logs/cas-server/perfStats.log" />
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="%m%n"/>
         </layout>
