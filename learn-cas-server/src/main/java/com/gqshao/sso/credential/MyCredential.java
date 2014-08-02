@@ -2,84 +2,56 @@ package com.gqshao.sso.credential;
 
 import org.jasig.cas.authentication.Credential;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 public class MyCredential implements Credential, Serializable {
 
-    /**
-     * Unique ID for serialization.
-     */
     private static final long serialVersionUID = -700605081472810939L;
 
-    /**
-     * Password suffix appended to username in string representation.
-     */
-    private static final String PASSWORD_SUFFIX = "+password";
-
-    /**
-     * The username.
-     */
-    @NotNull
-    @Size(min = 1, message = "required.username")
     private String username;
 
-    /**
-     * The password.
-     */
-    @NotNull
-    @Size(min = 1, message = "required.password")
     private String password;
 
-    /**
-     * Default constructor.
-     */
+    private String custom;
+
     public MyCredential() {
     }
 
-    /**
-     * Creates a new instance with the given username and password.
-     *
-     * @param userName Non-null user name.
-     * @param password Non-null password.
-     */
     public MyCredential(final String userName, final String password) {
         this.username = userName;
         this.password = password;
     }
 
-    /**
-     * @return Returns the password.
-     */
-    public final String getPassword() {
-        return this.password;
+    public MyCredential(String username, String password, String custom) {
+        this.username = username;
+        this.password = password;
+        this.custom = custom;
     }
 
-    /**
-     * @param password The password to set.
-     */
-    public final void setPassword(final String password) {
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
         this.password = password;
     }
 
-    /**
-     * @return Returns the userName.
-     */
-    public final String getUsername() {
-        return this.username;
+    public String getCustom() {
+        return custom;
     }
 
-    /**
-     * @param userName The userName to set.
-     */
-    public final void setUsername(final String userName) {
-        this.username = userName;
+    public void setCustom(String custom) {
+        this.custom = custom;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String getId() {
         return this.username;
@@ -87,7 +59,7 @@ public class MyCredential implements Credential, Serializable {
 
     @Override
     public String toString() {
-        return this.username + PASSWORD_SUFFIX;
+        return this.username + this.password;
     }
 
     @Override

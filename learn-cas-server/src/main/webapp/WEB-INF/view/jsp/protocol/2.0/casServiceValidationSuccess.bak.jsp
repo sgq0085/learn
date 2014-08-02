@@ -18,21 +18,12 @@
     under the License.
 
 --%>
-<%@ page session="false" contentType="application/xml; charset=UTF-8"  pageEncoding="UTF-8"%>
+<%@ page session="false" contentType="application/xml; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <cas:serviceResponse xmlns:cas='http://www.yale.edu/tp/cas'>
 	<cas:authenticationSuccess>
 		<cas:user>${fn:escapeXml(assertion.primaryAuthentication.principal.id)}</cas:user>
-        <!-- 解析返回的参数 Custom By SGQ -->
-        <c:if test="${fn:length(assertion.chainedAuthentications[fn:length(assertion.chainedAuthentications)-1].principal.attributes) > 0}">
-            <cas:attributes>
-                <c:forEach var="attr" items="${assertion.chainedAuthentications[fn:length(assertion.chainedAuthentications)-1].principal.attributes}">
-                    <cas:${fn:escapeXml(attr.key)}>${fn:escapeXml(attr.value)}</cas:${fn:escapeXml(attr.key)}>
-                </c:forEach>
-            </cas:attributes>
-        </c:if>
-        <!-- Custom By SGQ-->
         <c:if test="${not empty pgtIou}">
         		<cas:proxyGrantingTicket>${pgtIou}</cas:proxyGrantingTicket>
         </c:if>
