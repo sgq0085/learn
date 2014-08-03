@@ -11,7 +11,6 @@
     <name>learn :: production :: msm</name>
 
     <properties>
-        <!-- msm dependency start-->
         <memcached-session-manager.version>1.8.2</memcached-session-manager.version>
         <spymemcached.version>2.11.4</spymemcached.version>
         <kryo-serializers.version>0.11</kryo-serializers.version>
@@ -19,10 +18,6 @@
         <minlog.version>1.2</minlog.version>
         <reflectasm.version>1.01</reflectasm.version>
         <asm.version>3.2</asm.version>
-        <!-- msm dependency end -->
-        <jetty.version>7.6.15.v20140411</jetty.version>
-        <jdk.version>1.6</jdk.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencies>

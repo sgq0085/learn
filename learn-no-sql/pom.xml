@@ -10,14 +10,6 @@
     <packaging>war</packaging>
     <name>learn :: production :: no-sql</name>
 
-    <properties>
-        <jedis.version>2.5.1</jedis.version>
-        <spymemcached.version>2.11.4</spymemcached.version>
-        <jetty.version>7.6.14.v20131031</jetty.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <jdk.version>1.6</jdk.version>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>redis.clients</groupId>

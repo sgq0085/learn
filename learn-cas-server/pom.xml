@@ -13,7 +13,7 @@
 
     <properties>
         <cas-server.version>4.0.0</cas-server.version>
-        <spring.version>3.2.6.RELEASE</spring.version>
+        <spring.version>4.0.6.RELEASE</spring.version>
         <aspectj.version>1.7.2</aspectj.version>
         <javax.validation.version>1.0.0.GA</javax.validation.version>
         <slf4j.version>1.7.5</slf4j.version>

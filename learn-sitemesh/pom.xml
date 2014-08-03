@@ -11,14 +11,7 @@
     <name>learn :: production :: sitemesh</name>
 
     <properties>
-        <sitemesh.version>2.4.2</sitemesh.version>
         <!--<sitemesh.version>2.5-atlassian-9</sitemesh.version>-->
-        <commons-lang3.version>3.2.1</commons-lang3.version>
-        <jetty.version>7.6.14.v20131031</jetty.version>
-
-        <!-- Plugin的属性定义 -->
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <jdk.version>1.6</jdk.version>
     </properties>
 
     <!--<repositories>
