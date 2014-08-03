@@ -2,18 +2,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <artifactId>learn</artifactId>
-        <groupId>com.gqshao</groupId>
-        <version>1.0-SNAPSHOT</version>
-    </parent>
+    <groupId>com.gqshao</groupId>
     <artifactId>learn-cas-server</artifactId>
+    <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>learn :: cas :: server</name>
 
     <properties>
         <cas-server.version>4.0.0</cas-server.version>
-        <spring.version>4.0.6.RELEASE</spring.version>
+        <spring.version>3.2.6.RELEASE</spring.version>
         <aspectj.version>1.7.2</aspectj.version>
         <javax.validation.version>1.0.0.GA</javax.validation.version>
         <slf4j.version>1.7.5</slf4j.version>
