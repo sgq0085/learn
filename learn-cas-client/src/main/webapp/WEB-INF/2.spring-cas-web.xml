@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          version="2.5">
 
-<display-name>Archetype Created Web Application</display-name>
+    <display-name>Archetype Created Web Application</display-name>
 
     <context-param>
         <param-name>contextConfigLocation</param-name>
@@ -76,6 +76,7 @@
     </filter-mapping>
 
     <!-- CAS -->
+    <!-- SingleSignOutFilter可以影响字符编码 必须放在 CharacterEncodingFilter 后面-->
     <filter>
         <filter-name>CAS Single Sign Out Filter</filter-name>
         <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
@@ -86,19 +87,6 @@
     </filter>
     <filter-mapping>
         <filter-name>CAS Single Sign Out Filter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-
-    <filter>
-        <filter-name>CAS Validation Filter</filter-name>
-        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-        <init-param>
-            <param-name>targetBeanName</param-name>
-            <param-value>ticketValidationFilter</param-value>
-        </init-param>
-    </filter>
-    <filter-mapping>
-        <filter-name>CAS Validation Filter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
@@ -115,6 +103,19 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
+    <filter>
+        <filter-name>CAS Validation Filter</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+        <init-param>
+            <param-name>targetBeanName</param-name>
+            <param-value>ticketValidationFilter</param-value>
+        </init-param>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>CAS Validation Filter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
     <filter>
         <filter-name>CAS HttpServletRequest Wrapper Filter</filter-name>
         <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
