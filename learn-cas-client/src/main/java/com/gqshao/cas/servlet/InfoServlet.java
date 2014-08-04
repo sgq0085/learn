@@ -12,6 +12,9 @@ import javax.servlet.http.HttpSession;
 import org.jasig.cas.client.authentication.AttributePrincipal;
 import org.jasig.cas.client.util.AssertionHolder;
 
+/**
+ * 注意：通过shiro-cas整合后AssertionHolder不可用
+ */
 public class InfoServlet extends HttpServlet {
     private static final long serialVersionUID = -8390353826537804945L;
 

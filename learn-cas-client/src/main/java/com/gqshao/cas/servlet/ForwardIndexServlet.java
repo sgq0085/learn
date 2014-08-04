@@ -7,6 +7,9 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServlet;
 import java.io.IOException;
 
+/**
+ * Tomcat web.xml中welcome-file不能指向WEB-INF下的JSP，只能通过Servlet映射过去
+ */
 public class ForwardIndexServlet extends HttpServlet {
 
     @Override
