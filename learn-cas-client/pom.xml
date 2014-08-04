@@ -134,13 +134,11 @@
             <artifactId>shiro-ehcache</artifactId>
             <version>${shiro.version}</version>
         </dependency>
-        <!--
         <dependency>
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-cas</artifactId>
             <version>${shiro.version}</version>
         </dependency>
-        -->
         <!-- commons-lang begin -->
         <dependency>
             <groupId>org.apache.commons</groupId>

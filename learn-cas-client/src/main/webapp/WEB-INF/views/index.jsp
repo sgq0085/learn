@@ -19,7 +19,11 @@
 <body>
 Hi，下面是你的登录信息：
 <%
-    AttributePrincipal principal = (AttributePrincipal) AssertionHolder.getAssertion().getPrincipal();
+    AttributePrincipal principal = null;
+    if (AssertionHolder.getAssertion() != null) {
+        principal = (AttributePrincipal) AssertionHolder.getAssertion().getPrincipal();
+    }
+
     if (principal != null) {
         Map<String, Object> attributes = principal.getAttributes();
 
