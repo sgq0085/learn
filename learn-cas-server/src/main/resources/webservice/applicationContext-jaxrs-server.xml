@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+       xsi:schemaLocation="http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd"
+       default-lazy-init="true">
+
+    <description>Apache CXF的Restful Web Service配置</description>
+
+    <!-- jax-rs endpoint定义  -->
+    <jaxrs:server id="serviceContainer" address="/jaxrs">
+        <jaxrs:serviceBeans>
+            <ref bean="accountService"/>
+        </jaxrs:serviceBeans>
+        <jaxrs:providers>
+            <bean class="com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider"/>
+            <bean class="com.gqshao.account.filter.AuthorizationFilter"/>
+        </jaxrs:providers>
+    </jaxrs:server>
+
+    <!-- WebService的实现Bean定义 -->
+    <bean id="accountService" class="com.gqshao.account.jaxrs.AccountService"/>
+</beans>

@@ -17,6 +17,11 @@
         <junit.version>4.11</junit.version>
         <mockito.version>1.9.5</mockito.version>
 
+        <guava.version>17.0</guava.version>
+        <commons-lang3.version>3.3.2</commons-lang3.version>
+        <cxf.version>3.0.1</cxf.version>
+        <com.fasterxml.jackson.jaxrs.version>2.4.1</com.fasterxml.jackson.jaxrs.version>
+
         <jetty.version>7.6.15.v20140411</jetty.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jdk.version>1.6</jdk.version>
@@ -152,9 +157,26 @@
 
         <!-- add dependencies -->
         <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>17.0</version>
+            <version>${guava.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-jaxrs</artifactId>
+            <version>${cxf.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.jaxrs</groupId>
+            <artifactId>jackson-jaxrs-json-provider</artifactId>
+            <version>${com.fasterxml.jackson.jaxrs.version}</version>
         </dependency>
 
     </dependencies>
