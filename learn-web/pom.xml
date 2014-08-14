@@ -107,10 +107,9 @@
 
         <!-- sitemesh -->
         <dependency>
-            <groupId>opensymphony</groupId>
+            <groupId>org.sitemesh</groupId>
             <artifactId>sitemesh</artifactId>
             <version>${sitemesh.version}</version>
-            <scope>runtime</scope>
         </dependency>
 
         <!-- SECURITY begin -->

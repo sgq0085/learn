@@ -21,7 +21,7 @@ learn-sitemesh
 -----------------------------------
 SiteMesh配置实例<br />
 [SiteMesh2简单研究笔记](http://sgq0085.iteye.com/blog/2072882)<br />
-
+[SiteMesh3简单研究笔记](http://sgq0085.iteye.com/blog/2103870)<br />
 
 learn-web
 -----------------------------------

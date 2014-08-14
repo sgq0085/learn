@@ -1,0 +1,22 @@
+<sitemesh>
+    <!--默认情况下，sitemesh 只对 HTTP 响应头中 Content-Type 为 text/html 的类型进行拦截和装饰，可以添加更多的 mime 类型-->
+    <mime-type>text/html</mime-type>
+    <mime-type>application/xhtml+xml</mime-type>
+
+    <!-- 不被sitemesh装饰的路径 -->
+    <mapping path="/static/*" exclue="true"/>
+    <mapping path="/api/*" exclue="true"/>
+
+    <!-- 全局默认装饰器 -->
+    <mapping path="/*" decorator="/WEB-INF/decorator/decorator.jsp"/>
+
+    <!-- 同时使用多个装饰器 -->
+    <mapping path="/site*">
+        <decorator>/WEB-INF/decorator/decorator.jsp</decorator>
+        <decorator>/WEB-INF/decorator/decorator2.jsp</decorator>
+    </mapping>
+
+    <!-- 多个地址使用同一个装饰器 -->
+    <mapping path="*.htm" decorator="/WEB-INF/decorator/html.jsp"/>
+    <mapping path="*.html" decorator="/WEB-INF/decorator/html.jsp"/>
+</sitemesh>

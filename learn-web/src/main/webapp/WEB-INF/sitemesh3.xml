@@ -1,0 +1,8 @@
+<sitemesh>
+    <!-- 不被sitemesh装饰的路径 -->
+    <mapping path="/static/*" exclue="true"/>
+    <mapping path="/api/*" exclue="true"/>
+
+    <!-- 全局默认装饰器 -->
+    <mapping path="/*" decorator="/WEB-INF/views/layouts/decorator.jsp"/>
+</sitemesh>

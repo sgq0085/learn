@@ -32,16 +32,25 @@
         <url-pattern>/asite.html</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>site-htm</servlet-name>
+        <servlet-class>com.gqshao.servlet.Site1Servlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>site-htm</servlet-name>
+        <url-pattern>/asite.htm</url-pattern>
+    </servlet-mapping>
 
-    <filter>
-        <filter-name>sitemesh</filter-name>
-        <filter-class>com.opensymphony.sitemesh.webapp.SiteMeshFilter</filter-class>
-    </filter>
 
-    <filter-mapping>
-        <filter-name>sitemesh</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
+<filter>
+    <filter-name>sitemesh</filter-name>
+    <!--<filter-class>com.opensymphony.sitemesh.webapp.SiteMeshFilter</filter-class>-->
+    <filter-class>org.sitemesh.config.ConfigurableSiteMeshFilter</filter-class>
+</filter>
+<filter-mapping>
+    <filter-name>sitemesh</filter-name>
+    <url-pattern>/*</url-pattern>
+</filter-mapping>
 
     <welcome-file-list>
         <welcome-file>/index.jsp</welcome-file>

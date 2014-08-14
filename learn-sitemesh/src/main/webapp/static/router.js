@@ -5,7 +5,8 @@ function router(page, param, isBlank) {
     frag.appendChild(form);
 
     form.method = 'post';
-    form.action = url;
+    var action = url.split("/")[1];
+    form.action = "/" + action + "/";
     if (isBlank) {
         form.target = '_blank';
     }
