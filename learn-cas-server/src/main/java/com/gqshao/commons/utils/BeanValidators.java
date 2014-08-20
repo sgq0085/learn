@@ -1,8 +1,3 @@
-/**
- * Copyright (c) 2005-2012 springside.org.cn
- * 
- * Licensed under the Apache License, Version 2.0 (the "License");
- */
 package com.gqshao.commons.utils;
 
 import java.util.List;
@@ -25,7 +20,6 @@ import com.google.common.collect.Maps;
  * 2. List<String>, String内容为propertyPath + separator + message
  * 3. Map<propertyPath, message>
  * 
- * 详情见wiki: https://github.com/springside/springside4/wiki/HibernateValidator
  */
 public class BeanValidators {
 

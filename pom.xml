@@ -30,7 +30,7 @@
         <commons-codec.version>1.9</commons-codec.version>
         <dozer.version>5.5.1</dozer.version>
         <joda-time.version>2.3</joda-time.version>
-        <jackson.version>2.4.0</jackson.version>
+        <jackson.version>2.4.2</jackson.version>
         <cxf.version>2.7.11</cxf.version>
         <activiti.version>5.14</activiti.version>
         <flyway.version>2.3.1</flyway.version>

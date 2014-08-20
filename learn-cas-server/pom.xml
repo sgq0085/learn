@@ -20,7 +20,8 @@
         <guava.version>17.0</guava.version>
         <commons-lang3.version>3.3.2</commons-lang3.version>
         <cxf.version>3.0.1</cxf.version>
-        <com.fasterxml.jackson.jaxrs.version>2.4.1</com.fasterxml.jackson.jaxrs.version>
+        <com.fasterxml.jackson.jaxrs.version>2.4.2</com.fasterxml.jackson.jaxrs.version>
+        <jackson.version>2.4.2</jackson.version>
 
         <jetty.version>7.6.15.v20140411</jetty.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -173,12 +174,19 @@
             <artifactId>cxf-rt-frontend-jaxrs</artifactId>
             <version>${cxf.version}</version>
         </dependency>
+
         <dependency>
             <groupId>com.fasterxml.jackson.jaxrs</groupId>
             <artifactId>jackson-jaxrs-json-provider</artifactId>
             <version>${com.fasterxml.jackson.jaxrs.version}</version>
         </dependency>
 
+        <!-- JSON -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
