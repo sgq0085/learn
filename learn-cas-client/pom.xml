@@ -12,7 +12,7 @@
     <name>learn :: cas :: client</name>
 
     <properties>
-        <cas-client.version>3.2.1</cas-client.version>
+        <cas-client.version>3.3.3</cas-client.version>
     </properties>
 
     <dependencies>

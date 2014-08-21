@@ -45,15 +45,6 @@
         <url-pattern>/info</url-pattern>
     </servlet-mapping>
 
-    <!--<servlet>
-        <servlet-name>cas oss logout</servlet-name>
-        <servlet-class>com.gqshao.cas.servlet.LogoutServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>cas oss logout</servlet-name>
-        <url-pattern>/logout</url-pattern>
-    </servlet-mapping>-->
-
     <!-- Filter 定义 -->
     <!-- Character Encoding filter -->
     <filter>

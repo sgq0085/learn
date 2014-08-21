@@ -1,6 +1,4 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" %>
-<%@page import="org.jasig.cas.client.validation.Assertion" %>
-<%@page import="org.jasig.cas.client.util.AbstractCasFilter" %>
 <%@page import="org.jasig.cas.client.authentication.AttributePrincipal" %>
 <%@page import="org.jasig.cas.client.util.AssertionHolder" %>
 <%

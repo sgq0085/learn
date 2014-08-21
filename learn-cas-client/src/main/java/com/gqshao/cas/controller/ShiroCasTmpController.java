@@ -35,6 +35,9 @@ public class ShiroCasTmpController {
         List<Object> listPrincipals = principalCollection.asList();
         String name = listPrincipals.get(0).toString();
         Map<String, String> attributes = (Map<String, String>) listPrincipals.get(1);
+        for (String key : attributes.keySet()) {
+            System.out.println(key + " : " + attributes.get(key));
+        }
         return "shiroInfo";
     }
 
