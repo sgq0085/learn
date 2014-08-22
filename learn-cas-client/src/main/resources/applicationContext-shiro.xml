@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:sec="http://www.springframework.org/schema/security"
+       xmlns:util="http://www.springframework.org/schema/util" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+       http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <!-- 读取配置文件 -->
+    <context:property-placeholder location="classpath*:cas.properties" ignore-unresolvable="true"/>
+
+    <bean name="singleSignOutFilter" class="org.jasig.cas.client.session.SingleSignOutFilter"/>
+
+    <bean name="assertionThreadLocalFilter" class="org.jasig.cas.client.util.AssertionThreadLocalFilter"/>
+
+    <bean id="casFilter" class="org.apache.shiro.cas.CasFilter">
+        <!-- cas-failure 通过SpringMVC 跳转JSP -->
+        <property name="failureUrl" value="cas-failure"/>
+    </bean>
+
+    <!-- Shiro's main business-tier object for web-enabled applications -->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="shiroCasRealm"/>
+        <property name="subjectFactory" ref="casSubjectFactory"/>
+    </bean>
+
+    <!-- 項目自定义的Realm -->
+    <bean id="shiroCasRealm" class="com.gqshao.cas.realm.MyCasRealm">
+        <!--<property name="casServerUrlPrefix" value="${shiro.cas.server.url.prefix}"/>
+        <property name="casService" value="${shiro.cas.service}"/>-->
+        <property name="casServerUrlPrefix" value="${server.url}"/>
+        <property name="casService" value="${client.url}${client.login}"/>
+    </bean>
+
+    <bean id="casSubjectFactory" class="org.apache.shiro.cas.CasSubjectFactory"/>
+
+    <!-- Shiro Filter -->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager"/>
+        <!-- 用于调用Controller -->
+        <property name="loginUrl"
+                  value="${cas.server.url}/login?service=${client.url}${client.login}"/>
+        <property name="successUrl" value="/"/>
+        <!-- 自己实现的formAuthcFilter，加入key type -->
+        <property name="filters">
+            <util:map>
+                <entry key="cas" value-ref="casFilter"/>
+            </util:map>
+        </property>
+        <property name="filterChainDefinitions">
+            <value>
+                ${client.login} = cas
+                /logout = logout
+                /static/** = anon
+                /cas-failure = anon
+                /** = user
+            </value>
+        </property>
+    </bean>
+
+    <!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+
+    <!-- AOP式方法级权限检查 -->
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+          depends-on="lifecycleBeanPostProcessor">
+        <property name="proxyTargetClass" value="true"/>
+    </bean>
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
+</beans>
