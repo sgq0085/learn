@@ -4,6 +4,14 @@
          version="2.5">
     <display-name>Archetype Created Web Application</display-name>
 
+    <servlet>
+        <servlet-name>jsonp</servlet-name>
+        <servlet-class>com.gqshao.servlet.JsonpServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>jsonp</servlet-name>
+        <url-pattern>/jsonp</url-pattern>
+    </servlet-mapping>
 
     <filter>
         <filter-name>sitemesh</filter-name>
