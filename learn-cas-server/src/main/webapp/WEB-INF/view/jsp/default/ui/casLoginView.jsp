@@ -1,6 +1,7 @@
 <%@ page pageEncoding="UTF-8" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="ctx" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,7 +16,7 @@
         <p>您正在通过非安全连接访问单点登录系统。单点登录将无法正常工作。为了单点登录正常工作，你必须通过HTTPS登录。</p>
     </div>
 </c:if>
-<form id="fm1" action="/cas-server/login" method="post">
+<form id="fm1" action="${ctx}/login" method="post">
     <h2>请输入您的用户名和密码.</h2>
 
     <div>
