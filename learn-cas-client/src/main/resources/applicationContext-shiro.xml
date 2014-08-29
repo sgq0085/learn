@@ -30,8 +30,6 @@
 
     <!-- 項目自定义的Realm -->
     <bean id="shiroCasRealm" class="com.gqshao.cas.realm.MyCasRealm">
-        <!--<property name="casServerUrlPrefix" value="${shiro.cas.server.url.prefix}"/>
-        <property name="casService" value="${shiro.cas.service}"/>-->
         <property name="casServerUrlPrefix" value="${server.url}"/>
         <property name="casService" value="${client.url}${client.login}"/>
     </bean>
@@ -40,27 +38,27 @@
 
     <!-- Shiro Filter -->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
-        <property name="securityManager" ref="securityManager"/>
-        <!-- 用于调用Controller -->
-        <property name="loginUrl"
-                  value="${cas.server.url}/login?service=${client.url}${client.login}"/>
-        <property name="successUrl" value="/"/>
-        <!-- 自己实现的formAuthcFilter，加入key type -->
-        <property name="filters">
-            <util:map>
-                <entry key="cas" value-ref="casFilter"/>
-            </util:map>
-        </property>
-        <property name="filterChainDefinitions">
-            <value>
-                ${client.login} = cas
-                /logout = logout
-                /static/** = anon
-                /cas-failure = anon
-                /** = user
-            </value>
-        </property>
-    </bean>
+    <property name="securityManager" ref="securityManager"/>
+    <!-- 用于调用Controller -->
+    <property name="loginUrl"
+              value="${client.loginUrl}"/>
+    <property name="successUrl" value="/"/>
+    <!-- 自己实现的formAuthcFilter，加入key type -->
+    <property name="filters">
+        <util:map>
+            <entry key="cas" value-ref="casFilter"/>
+        </util:map>
+    </property>
+    <property name="filterChainDefinitions">
+        <value>
+            ${client.login} = cas
+            /logout = logout
+            /static/** = anon
+            /cas-failure = anon
+            /** = user
+        </value>
+    </property>
+</bean>
 
     <!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
     <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
