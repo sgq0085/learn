@@ -30,4 +30,8 @@ $.extend($.validator.messages, {
 	min: $.validator.format("请输入不小于 {0} 的数值")
 });
 
+    jQuery.extend(jQuery.validator.defaults, {
+        errorElement: "span"
+    });
+
 }));

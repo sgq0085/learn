@@ -15,6 +15,12 @@
     <link rel="stylesheet" type="text/css" href="${ctx}/static/bootstrap/3.2.0/css/bootstrap.min.css"/>
     <script type="text/javascript" src="${ctx}/static/jquery/1.11.1/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="${ctx}/static/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="${ctx}/static/html5css3/html5shiv.min.js"></script>
+    <script type="text/javascript" src="${ctx}/static/html5css3/respond.min.js"></script>
+    <![endif]-->
     <sitemesh:write property='head'/>
 </head>
 <body>

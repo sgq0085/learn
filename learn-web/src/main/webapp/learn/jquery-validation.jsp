@@ -7,8 +7,9 @@
     <title>jQuery Validation</title>
     <link type="text/css" rel="stylesheet" href="${ctx}/static/jquery/jquery-validation-1.13.0/validate.css"/>
     <script type="text/javascript" src="${ctx}/static/jquery/1.11.1/jquery-1.11.1.min.js"></script>
-    <script type="text/javascript" src="${ctx}/static/jquery/jquery-validation-1.13.0/jquery.validate.min.js"></script>
-    <script type="text/javascript" src="${ctx}/static/jquery/jquery-validation-1.13.0/localization/messages_zh.min.js"></script>
+    <script type="text/javascript" src="${ctx}/static/jquery/jquery-validation-1.13.0/jquery.validate.js"></script>
+    <script type="text/javascript"
+            src="${ctx}/static/jquery/jquery-validation-1.13.0/localization/messages_zh.min.js"></script>
 
 </head>
 <body>
@@ -26,12 +27,21 @@
         <input type="reset" name="reset" value="reset">
     </div>
 </form>
+<button type="submit" class="btn btn-primary" onclick="ActiveValidate()">检查</button>
 
 <script type="text/javascript">
     // <![CDATA[
+    function ActiveValidate() {
+        var myform = $("body").find("form").get(0);
+        if (!$(myform).validate().form()) {
+            return;
+        }
+    }
     $(function () {
         $("#username").focus();
-
+        $.extend($.validator.defaults, {
+            errorElement: "span"
+        });
         $("#fm1").validate({rules: {
             username: {
                 required: true,
@@ -44,6 +54,8 @@
                 minlength: 6
             }
         }});
+
+
     });
     // ]]>
 </script>

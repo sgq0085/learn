@@ -45,3 +45,15 @@ $(function () {
 如果需要汉化提示，可以引入相应的message.js文件
 <script type="text/javascript" src="${ctx}/static/jquery/jquery-validation-1.13.0/localization/messages_zh.min.js"></script>
 
+
+补充：
+1.修改验证出错误之后显示标签label修改为其他标签，可以将这段代码放到messages_zh.js,也可以放到$("#fm1").validate();之前调用
+$.extend($.validator.defaults, {
+    errorElement: "span"
+});
+
+2.在提交之前的主动检查
+var myform = $("#dialog-confirm").find("form").get(0);
+if (!$(myform).validate().form()) {
+    return;
+}
