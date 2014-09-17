@@ -57,3 +57,49 @@ var myform = $("#dialog-confirm").find("form").get(0);
 if (!$(myform).validate().form()) {
     return;
 }
+
+3.手动触发远程验证
+有下面这个验证，会调用远程api，判断是否存在相同loginName，如果存在则不通过
+$("#user_form").validate({
+    loginName: {
+        required: true,
+        maxlength: 30,
+        minlength: 5,
+        remote: {
+            type: "POST",
+            url: '${ctx}/sys/rbac/user/check-loginname-exists?timestamp=' + new Date().getTime(), /*添加时间戳*/
+            dataType: 'json',
+            data: {
+                loginName: function () {
+                    var l_n = $("#loginName").val();
+                    return l_n;
+                },
+                tenantId: function () {
+                    var tId = $("#tenantId").val();
+                    return tId;
+                }
+            },
+            dataFilter: function (data) {
+                console.info("data", data);
+                data = eval("(" + data + ")");
+                if (data) {
+                    if (!data.result) {
+                        return true;
+                    }
+                    return false;
+                }
+                return false;
+            }
+        }
+    }
+}
+messages: {
+    name: {
+        required: '用户名不能为空',
+        maxlength: '不能超过{0}个字符',
+        minlength: '不能少于{0}个字符'
+    }
+}
+现在想要手动触发远程调用API，需要先清除原来的结果再进行调用
+$("#loginName").removeData("previousValue");
+$("#user_form").data('validator').element('#loginName');
