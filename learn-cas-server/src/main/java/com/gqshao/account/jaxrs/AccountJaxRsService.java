@@ -8,7 +8,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 
 @Path("/user")
-public class AccountService {
+public class AccountJaxRsService {
 
     @GET
     @Path("/{loginName}/{custom}")

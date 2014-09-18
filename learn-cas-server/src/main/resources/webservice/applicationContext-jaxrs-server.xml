@@ -18,5 +18,5 @@
     </jaxrs:server>
 
     <!-- WebService的实现Bean定义 -->
-    <bean id="accountService" class="com.gqshao.account.jaxrs.AccountService"/>
+    <bean id="accountService" class="com.gqshao.account.jaxrs.AccountJaxRsService"/>
 </beans>
