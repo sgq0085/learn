@@ -11,12 +11,16 @@ bind(type,[data],fn)
 $('#foo').bind('mouseenter mouseleave', function() {
   $(this).toggleClass('entered');
 });
+或使用具体事件方法绑定
+$("#btnQuery").click(function(){alert(1);})
+
 (2)同时绑定多个事件类型/处理程序
 $("button").bind({
   click:function(){$("p").slideToggle();},
   mouseover:function(){$("body").css("background-color","red");},
   mouseout:function(){$("body").css("background-color","#FFFFFF");}
 });
+
 (3)在事件处理之前传递一些附加的数据
 function handler(event) {
   alert(event.data.foo);

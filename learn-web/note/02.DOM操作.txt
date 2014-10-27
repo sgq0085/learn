@@ -75,6 +75,9 @@ prop(n|p|k,v|f)                       获取在匹配的元素集中的第一个
 removeProp(name)                      用来删除由.prop()方法设置的属性集          $para.removeProp("luggageCode") 删除jQuery对象para的属性luggageCode
 
 .prop()方法应该被用来处理boolean attributes/properties以及在html(比如：window.location,document)中不存在的properties。其他所有的attributes(在html中你看到的那些)可以而且应该继续使用.attr()方法来进行操作
+比如
+    Object[input#s_tenantName.form-control.input-sm.ac_input 属性(property)值 = "test1" 属性(attribute)值 = "null"]
+    用attr得不到任何属性，这时候需要用prop方法 $('#s_tenantName').prop("value"); 得到结果 test1
 
 属性 name|properties|key,value|fn 说明
 (1)name String 属性名称

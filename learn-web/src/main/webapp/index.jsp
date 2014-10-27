@@ -2,7 +2,8 @@
 <html>
 <head>
 
-    <%--<style type="text/css">
+    <%--
+    <style type="text/css">
         /* <![CDATA[ */
         /*css 内容*/
         /* ]]> */
@@ -12,7 +13,8 @@
         // <![CDATA[
         // JavaScrip 内容
         // ]]>
-    </script>--%>
+    </script>
+    --%>
 
 </head>
 <body>
