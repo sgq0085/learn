@@ -56,6 +56,7 @@
         <module>learn-msm</module>
         <module>learn-cas-server</module>
         <module>learn-cas-client</module>
+        <module>learn-core-java</module>
     </modules>
 
 </project>
