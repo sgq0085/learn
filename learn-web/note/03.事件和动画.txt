@@ -48,7 +48,7 @@ keyup([[data],fn])            当按钮被松开时，发生 keyup 事件。它�
 
 mousedown([[data],fn])        当鼠标指针移动到元素上方，并按下鼠标按键时，会发生 mousedown 事件，与 click 事件不同，mousedown 事件仅需要按键被按下，而不需要松开即可发生
 mouseup([[data],fn])          当在元素上放松鼠标按钮时，会发生 mouseup 事件
-mouseenter([[data],fn])       当鼠标指针穿过元素时，会发生 mouseenter 事件。该事件大多数时候会与mouseleave 事件一起。使用与 mouseover 事件不同，只有在鼠标指针穿过被选元素时，才会触发 mouseenter 事件。
+mouseenter([[data],fn])       当鼠标指针穿过元素时，会发生 mouseenter 事件。该事件大多数时候会与mouseleave 事件一起。使用与 mouseover 事件不同，只有在鼠标指针穿过被选元素时，才会触发 mouseenter 事件，鼠标指针穿过子元素不会触发。
 mouseleave([[data],fn])       当鼠标指针离开元素时，会发生 mouseleave 事件。该事件大多数时候会与mouseenter 事件一起使用。只有在鼠标指针离开被选元素时，才会触发 mouseleave 事件
 mouseover([[data],fn])        当鼠标指针位于元素上方时，会发生 mouseover 事件。 该事件大多数时候会与 mouseout 事件一起使用，如果鼠标指针穿过任何子元素，同样会触发 mouseover 事件。
 mouseout([[data],fn])         当鼠标指针从元素上移开时，发生 mouseout 事件，不论鼠标指针离开被选元素还是任何子元素，都会触发 mouseout 事件
