@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
-    xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jpa="http://www.springframework.org/schema/data/jpa"
-    xsi:schemaLocation="
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xsi:schemaLocation="
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
@@ -14,74 +16,79 @@
 
     <!-- 使用annotation 自动注册bean,并检查@Required,@Autowired的属性已被注入 -->
     <context:component-scan base-package="com.gqshao.test.**.service">
-        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
-        <context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice" />
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+        <context:exclude-filter type="annotation"
+                                expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
     </context:component-scan>
 
-    <!-- flyway配置 -->
-    <!-- <bean id="flyway" class="com.googlecode.flyway.core.Flyway" init-method="migrate">
-        <property name="dataSource" ref="dataSource" />
-        <property name="encoding" value="UTF-8" />
-        <property name="initVersion" value="0" />
-        <property name="table" value="lcm_schema_version" />
-        <property name="locations" value="db/migration" />
-        <property name="initOnMigrate" value="true" />
-    </bean> -->
+<!-- flyway配置 -->
+<bean id="flyway" class="org.flywaydb.core.Flyway" init-method="migrate">
+    <property name="dataSource" ref="dataSource"/>
+    <property name="encoding" value="UTF-8"/>
+    <property name="table" value="LEARN_TEST_SCHEMA_VERSION"/>
+    <property name="locations" value="db/migration"/>
+    <property name="baselineOnMigrate" value="true"/>
+    <property name="baselineVersion" >
+        <bean class="org.flywaydb.core.api.MigrationVersion" factory-method="fromVersion">
+            <constructor-arg value="0"/>
+        </bean>
+    </property>
+</bean>
 
     <!-- MyBatis配置 -->
     <!-- <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean" depends-on="flyway"> -->
-    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean" >
-        <property name="dataSource" ref="dataSource" />
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
         <!-- 自动扫描entity目录, 省掉Configuration.xml里的手工配置 -->
-        <property name="typeAliasesPackage" value="com.gqshao.test" />
+        <property name="typeAliasesPackage" value="com.gqshao.test"/>
         <!-- 显式指定Mapper文件位置 -->
-        <property name="mapperLocations" value="classpath:/mybatis/**/*Mapper.xml" />
+        <property name="mapperLocations" value="classpath:/mybatis/**/*Mapper.xml"/>
         <!-- 添加分页过滤器 -->
         <property name="plugins">
-            <ref bean="pageInterceptor" />
+            <ref bean="pageInterceptor"/>
         </property>
     </bean>
     <!-- 分页插件 -->
-    <bean id="pageInterceptor" class="com.gqshao.test.commons.persistence.interceptor.PageInterceptor" />
+    <bean id="pageInterceptor" class="com.gqshao.test.commons.persistence.interceptor.PageInterceptor"/>
 
     <!-- 扫描basePackage下所有以@MyBatisRepository标识的 接口 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.gqshao.test.**.dao" />
-        <property name="annotationClass" value="org.springframework.stereotype.Repository" />
+        <property name="basePackage" value="com.gqshao.test.**.dao"/>
+        <property name="annotationClass" value="org.springframework.stereotype.Repository"/>
     </bean>
 
     <!-- 读取配置文件 -->
-    <context:property-placeholder ignore-resource-not-found="true" location="classpath*:/application.properties" />
+    <context:property-placeholder ignore-resource-not-found="true" location="classpath*:/application.properties"/>
 
     <!-- 事务管理器, Jdbc单数据源事务 -->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource" />
+        <property name="dataSource" ref="dataSource"/>
     </bean>
 
     <!-- 使用annotation定义事务 -->
-    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
 
     <!-- 定义aspectj -->
-    <aop:aspectj-autoproxy proxy-target-class="true" />
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
 
     <!-- hibernate validator -->
-    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
+    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
 
     <!-- production环境 -->
     <beans profile="production">
         <!-- 数据源配置,使用应用内的Tomcat JDBC连接池 -->
         <bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource" destroy-method="close">
             <!-- Connection Info -->
-            <property name="driverClassName" value="${pro.jdbc.driver}" />
-            <property name="url" value="${pro.jdbc.url}" />
-            <property name="username" value="${pro.jdbc.username}" />
-            <property name="password" value="${pro.jdbc.password}" />
-            <property name="maxActive" value="${jdbc.pool.maxActive}" />
-            <property name="maxIdle" value="${jdbc.pool.maxIdle}" />
-            <property name="defaultAutoCommit" value="false" />
+            <property name="driverClassName" value="${pro.jdbc.driver}"/>
+            <property name="url" value="${pro.jdbc.url}"/>
+            <property name="username" value="${pro.jdbc.username}"/>
+            <property name="password" value="${pro.jdbc.password}"/>
+            <property name="maxActive" value="${jdbc.pool.maxActive}"/>
+            <property name="maxIdle" value="${jdbc.pool.maxIdle}"/>
+            <property name="defaultAutoCommit" value="false"/>
             <!-- 连接Idle10分钟后超时，每1分钟检查一次 -->
-            <property name="timeBetweenEvictionRunsMillis" value="60000" />
-            <property name="minEvictableIdleTimeMillis" value="600000" />
+            <property name="timeBetweenEvictionRunsMillis" value="60000"/>
+            <property name="minEvictableIdleTimeMillis" value="600000"/>
         </bean>
     </beans>
 
@@ -89,13 +96,13 @@
     <beans profile="development">
         <!-- Tomcat JDBC连接池 -->
         <bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource" destroy-method="close">
-            <property name="driverClassName" value="${dev.jdbc.driver}" />
-            <property name="url" value="${dev.jdbc.url}" />
-            <property name="username" value="${dev.jdbc.username}" />
-            <property name="password" value="${dev.jdbc.password}" />
-            <property name="maxActive" value="${jdbc.pool.maxActive}" />
-            <property name="maxIdle" value="${jdbc.pool.maxIdle}" />
-            <property name="defaultAutoCommit" value="false" />
+            <property name="driverClassName" value="${dev.jdbc.driver}"/>
+            <property name="url" value="${dev.jdbc.url}"/>
+            <property name="username" value="${dev.jdbc.username}"/>
+            <property name="password" value="${dev.jdbc.password}"/>
+            <property name="maxActive" value="${jdbc.pool.maxActive}"/>
+            <property name="maxIdle" value="${jdbc.pool.maxIdle}"/>
+            <property name="defaultAutoCommit" value="false"/>
         </bean>
     </beans>
 
@@ -103,13 +110,13 @@
     <beans profile="test">
         <!-- Tomcat JDBC连接池 -->
         <bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource" destroy-method="close">
-            <property name="driverClassName" value="${test.jdbc.driver}" />
-            <property name="url" value="${test.jdbc.url}" />
-            <property name="username" value="${test.jdbc.username}" />
-            <property name="password" value="${test.jdbc.password}" />
-            <property name="maxActive" value="${jdbc.pool.maxActive}" />
-            <property name="maxIdle" value="${jdbc.pool.maxIdle}" />
-            <property name="defaultAutoCommit" value="false" />
+            <property name="driverClassName" value="${test.jdbc.driver}"/>
+            <property name="url" value="${test.jdbc.url}"/>
+            <property name="username" value="${test.jdbc.username}"/>
+            <property name="password" value="${test.jdbc.password}"/>
+            <property name="maxActive" value="${jdbc.pool.maxActive}"/>
+            <property name="maxIdle" value="${jdbc.pool.maxIdle}"/>
+            <property name="defaultAutoCommit" value="false"/>
         </bean>
     </beans>
 </beans>

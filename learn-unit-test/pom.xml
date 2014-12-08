@@ -309,7 +309,7 @@
 
         <!-- flyway -->
         <dependency>
-            <groupId>com.googlecode.flyway</groupId>
+            <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
             <version>${flyway.version}</version>
         </dependency>
@@ -489,10 +489,14 @@
                 <artifactId>tomcat7-maven-plugin</artifactId>
                 <version>2.2</version>
                 <configuration>
-                    <systemProperties>
-                        <spring.profiles.active>development</spring.profiles.active>
-                    </systemProperties>
-                    <useTestClasspath>true</useTestClasspath>
+                    <!--<systemProperties>-->
+                    <!--<spring.profiles.active>development</spring.profiles.active>-->
+                    <!--</systemProperties>-->
+                    <!--<useTestClasspath>true</useTestClasspath>-->
+                    <server>learn-unit-test</server>
+                    <uriEncoding>UTF-8</uriEncoding>
+                    <port>80</port>
+                    <path>/test</path>
                 </configuration>
             </plugin>
 
