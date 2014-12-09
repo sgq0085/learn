@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <artifactId>learn</artifactId>
@@ -12,7 +12,7 @@
     <name>learn :: production :: core-java</name>
 
     <dependencies>
-        
+
 
         <!-- GENERAL UTILS begin -->
         <!-- fileupload begin -->
@@ -102,9 +102,7 @@
         </dependency>
         <!-- LOGGING end -->
 
-        
 
-        
         <!-- junit -->
         <dependency>
             <groupId>junit</groupId>
@@ -144,7 +142,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        
+
     </dependencies>
 
     <build>
@@ -162,11 +160,60 @@
                 </configuration>
             </plugin>
 
-            <!-- resource插件 -->
+            <!-- 创建项目jar包 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+
+            <!-- 用来将工程打包成带源代码的jar包 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.4</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- resource插件 复制主(测试)资源文件至主(测试)输出目录 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
                 <version>2.6</version>
+            </plugin>
+
+            <!-- test插件, 仅测试名称为*Test的类,使用支持分组测试的surefire-junit47 driver -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.16</version>
+                <configuration>
+                    <includes>
+                        <include>**/*Test.java</include>
+                    </includes>
+                    <argLine>-Xmx256M</argLine>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.maven.surefire</groupId>
+                        <artifactId>surefire-junit47</artifactId>
+                        <version>2.16</version>
+                    </dependency>
+                </dependencies>
             </plugin>
 
             <!-- clean插件 -->
@@ -176,25 +223,11 @@
                 <version>2.5</version>
             </plugin>
 
-            <!-- install插件 -->
+            <!-- install插件 将项目输出构件安装到本地仓库 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-install-plugin</artifactId>
                 <version>2.5.1</version>
-            </plugin>
-           
-
-            <!-- tomcat7 插件 -->
-            <plugin>
-                <groupId>org.apache.tomcat.maven</groupId>
-                <artifactId>tomcat7-maven-plugin</artifactId>
-                <version>2.2</version>
-                <configuration>
-                    <systemProperties>
-                        <spring.profiles.active>development</spring.profiles.active>
-                    </systemProperties>
-                    <useTestClasspath>true</useTestClasspath>
-                </configuration>
             </plugin>
 
             <!-- enforcer插件, 避免被依赖的依赖引入过期的jar包 -->
@@ -234,7 +267,7 @@
                 </executions>
             </plugin>
 
-           
+
         </plugins>
     </build>
 </project>
