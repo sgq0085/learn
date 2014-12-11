@@ -1,12 +1,13 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="utf-8" %>
 <%@ page import="java.util.*" %>
+<%@ page session="true" %>
 <html>
 <head><title>Cluster App Test</title></head>
 <body>
-Server Info:
+Server Info:<br>
 <%
-    out.println(request.getLocalAddr() + " : " + request.getLocalPort() + "<br>");%>
-<%
+    out.println("ServerName : " + request.getServerName() + "<br>");
+    out.println("IP&Port : " + request.getLocalAddr() + ":" + request.getLocalPort() + "<br>");
     out.println("<br> ID " + session.getId() + "<br>");
     // 如果有新的 Session 属性设置
     String dataName = request.getParameter("dataName");
