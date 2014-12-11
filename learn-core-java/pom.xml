@@ -13,6 +13,17 @@
 
     <dependencies>
 
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>${jedis.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>net.spy</groupId>
+            <artifactId>spymemcached</artifactId>
+            <version>${spymemcached.version}</version>
+        </dependency>
+
 
         <!-- GENERAL UTILS begin -->
         <!-- fileupload begin -->
