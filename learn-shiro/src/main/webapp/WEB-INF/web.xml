@@ -16,10 +16,6 @@
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
-    
-    <listener>
-        <listener-class></listener-class>
-    </listener>
 
     <servlet>
         <servlet-name>springServlet</servlet-name>
