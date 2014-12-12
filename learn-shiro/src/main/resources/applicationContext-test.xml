@@ -7,5 +7,6 @@
     <!-- required -->
     <!--<import resource="security/applicationContext-shiro.xml" />-->
     <import resource="classpath:security/applicationContext-shiro.xml" />
+    <import resource="classpath:redis/applicationContext-redis.xml" />
 
 </beans>
