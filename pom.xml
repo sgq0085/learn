@@ -16,7 +16,9 @@
         <mybatis-ehcache.version>1.0.2</mybatis-ehcache.version>
         <hibernate.version>4.3.6.Final</hibernate.version>
         <spring-data-jpa.version>1.6.2.RELEASE</spring-data-jpa.version>
+        <spring-data-redis.version>1.4.1.RELEASE</spring-data-redis.version>
         <tomcat-jdbc.version>7.0.55</tomcat-jdbc.version>
+        <commons-pool2.version>2.2</commons-pool2.version>
         <h2.version>1.3.176</h2.version>
         <jedis.version>2.6.1</jedis.version>
         <spymemcached.version>2.11.5</spymemcached.version>
