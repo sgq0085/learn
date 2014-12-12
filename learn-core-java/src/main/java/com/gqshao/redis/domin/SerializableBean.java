@@ -1,21 +1,8 @@
-/**
- * TestBean.java Create on 2014/12/12
- * Copyright(c) Gener-Tech Inc.
- * ALL Rights Reserved.
- */
 package com.gqshao.redis.domin;
 
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- * <pre>
- * 功能说明：
- * </pre>
- *
- * @author <a href="mailto:shao.gq@gener-tech.com">shaogq</a>
- * @version 1.0
- */
 public class SerializableBean implements Serializable {
     public String id;
     public String name;

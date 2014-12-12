@@ -1,8 +1,3 @@
-/**
- * JedisUtils.java Create on 2014/12/12
- * Copyright(c) Gener-Tech Inc.
- * ALL Rights Reserved.
- */
 package com.gqshao.redis.utils;
 
 import org.apache.commons.io.IOUtils;
@@ -16,14 +11,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-/**
- * <pre>
- * 功能说明：
- * </pre>
- *
- * @author <a href="mailto:shao.gq@gener-tech.com">shaogq</a>
- * @version 1.0
- */
 public class JedisUtils {
     public static JedisPoolConfig getMyDefaultJedisPoolConfig() {
         JedisPoolConfig poolConfig = new JedisPoolConfig();
