@@ -40,6 +40,9 @@ public class ShiroDbRealm extends AuthorizingRealm {
         String host = token.getHost();
         ShiroUser su = new ShiroUser.Builder("id", loginName).name("name").isAdmin(true).ip(host).builder();
         SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(su, token.getPassword(), getName());
+        if ("fail".equals(loginName)) {
+            return null;
+        }
         return info;
     }
 

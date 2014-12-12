@@ -9,16 +9,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>单点登录认证系统</title>
-    <link type="text/css" rel="stylesheet" href="${ctx}/static/bootstrap/3.2.0/css/bootstrap.min.css"/>
-    <link type="text/css" rel="stylesheet" href="${ctx}/static/jquery/jquery-validation-1.13.0/validate.css"/>
-    <script type="text/javascript" src="${ctx}/static/jquery/1.11.1/jquery-1.11.1.min.js"></script>
-    <script type="text/javascript" src="${ctx}/static/jquery/jquery-validation-1.13.0/jquery.validate.min.js"></script>
-
-    <!--[if lt IE 9]>
-    <script type="text/javascript" src="${ctx}/static/html5css3/html5shiv.min.js"></script>
-    <script type="text/javascript" src="${ctx}/static/html5css3/respond.min.js"></script>
-    <![endif]-->
+    <title>登陆页</title>
 </head>
 <body id="cas">
 <div class="container">
@@ -32,9 +23,10 @@
             <div style="padding-top:30px" class="panel-body">
                 <form id="fm1" class="form-horizontal" action="${ctx}/login" method="post">
 
+
                     <div style="margin-bottom: 25px" class="input-group">
                         <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-                        <input type="text" id="loginName1" name="loginName" value="" class="form-control"
+                        <input type="text" id="loginName" name="loginName" value="${loginName}" class="form-control"
                                placeholder="用户名:" style="width: 70%;">
                     </div>
 
@@ -50,6 +42,11 @@
                             </label>
                         </div>
                     </div>
+
+                    <c:if test="${not empty shiroLoginFailure && shiroLoginFailure==true}">
+                        <br>
+                        <div class="alert alert-danger col-sm-12 col-md-12">登陆失败,请重新登录</div>
+                    </c:if>
 
                     <div style="margin-top:10px" class="form-group">
                         <div class="col-md-2">

@@ -13,10 +13,11 @@
     <meta http-equiv="Expires" content="0"/>
     <link rel="shortcut icon" type="image/x-icon" href="${ctx}/static/images/favicon.ico"/>
 
-    <!-- common-js-style -->
-    <link type="text/css" rel="stylesheet" href="${ctx}/static/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link type="text/css" rel="stylesheet" href="${ctx}/static/bootstrap/bootstrap-3.2.0/css/bootstrap.min.css"/>
+    <link type="text/css" rel="stylesheet" href="${ctx}/static/jquery/jquery-validation-1.13.0/validate.css"/>
     <script type="text/javascript" src="${ctx}/static/jquery/jquery-1.11.1/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="${ctx}/static/bootstrap/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+
     <!--[if lt IE 9]>
     <script type="text/javascript" src="${ctx}/static/html5css3/html5shiv.min.js"></script>
     <script type="text/javascript" src="${ctx}/static/html5css3/respond.min.js"></script>
