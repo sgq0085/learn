@@ -16,11 +16,11 @@
     <description>Redis配置</description>
 
     <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig"
-          p:maxIdle="10" p:maxTotal="100" p:maxWaitMillis="-1" p:testOnBorrow="true"/>
+          p:maxIdle="10" p:maxTotal="100" p:maxWaitMillis="-1" p:testOnBorrow="true" />
 
     <bean id="jedisConnectionFactory"
           class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
-          p:usePool="true"  p:poolConfig-ref="jedisPoolConfig"
+          p:usePool="true"  p:poolConfig-ref="jedisPoolConfig" p:timeout="1000"
           p:hostName="192.168.3.98" p:port="6379"/>
 
     <bean id="redisTemplate"
