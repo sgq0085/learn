@@ -18,9 +18,10 @@
     <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig"
           p:maxIdle="10" p:maxTotal="100" p:maxWaitMillis="-1" p:testOnBorrow="true" />
 
+    <!-- jedis连接池工厂 timeout设置为0，解决JedisConnectionException -->
     <bean id="jedisConnectionFactory"
           class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
-          p:usePool="true"  p:poolConfig-ref="jedisPoolConfig" p:timeout="1000"
+          p:usePool="true"  p:poolConfig-ref="jedisPoolConfig" p:timeout="0"
           p:hostName="192.168.3.98" p:port="6379"/>
 
     <bean id="redisTemplate"

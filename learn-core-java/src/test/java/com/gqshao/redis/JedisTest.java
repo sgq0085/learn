@@ -1,15 +1,15 @@
 package com.gqshao.redis;
 
 import com.gqshao.redis.utils.JedisUtils;
-import org.junit.*;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
-import redis.clients.jedis.exceptions.JedisConnectionException;
-
-import javax.annotation.PostConstruct;
 
 public class JedisTest {
 
