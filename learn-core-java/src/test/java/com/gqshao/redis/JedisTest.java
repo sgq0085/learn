@@ -20,26 +20,27 @@ public class JedisTest {
     @BeforeClass
     public static void init() {
         JedisPoolConfig poolConfig = JedisUtils.getMyDefaultJedisPoolConfig();
-        pool = new JedisPool(poolConfig, "192.168.3.98", 6379);
-        System.out.println("----------------------create resource----------------------");
+        // timeout设置为0，解决JedisConnectionException
+        pool = new JedisPool(poolConfig, "192.168.3.98", 6379, 0);
+        logger.info("----------------------create resource----------------------");
     }
 
     @AfterClass
     public static void destroy() {
         pool.destroy();
-        System.out.println("----------------------destroy resource---------------------");
+        logger.info("----------------------destroy resource---------------------");
     }
 
     @Before
     public void initJedis() {
         jedis = pool.getResource();
-        System.out.println("----------------------get resource-------------------------");
+        logger.info("----------------------get resource-------------------------");
     }
 
     @After
     public void destroyJedis() {
         pool.returnResource(jedis);
-        System.out.println("----------------------return resource----------------------");
+        logger.info("----------------------return resource----------------------");
     }
 
 }

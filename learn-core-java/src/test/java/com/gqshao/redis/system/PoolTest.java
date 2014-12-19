@@ -1,4 +1,4 @@
-package com.gqshao.redis;
+package com.gqshao.redis.system;
 
 import com.google.common.collect.Lists;
 import com.gqshao.redis.domin.SerializableBean;

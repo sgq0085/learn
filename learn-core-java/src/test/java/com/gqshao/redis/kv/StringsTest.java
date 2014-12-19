@@ -1,5 +1,6 @@
-package com.gqshao.redis;
+package com.gqshao.redis.kv;
 
+import com.gqshao.redis.JedisTest;
 import org.junit.Test;
 
 /**
@@ -8,7 +9,9 @@ import org.junit.Test;
 public class StringsTest extends JedisTest {
 
     /**
-     * set 设置一个key的value值
+     * set [key] [value] 设置一个key的value值
+     * get [key] 根据key返回value
+     * del [key] 删除
      */
     @Test
     public void testSet() {
@@ -18,7 +21,7 @@ public class StringsTest extends JedisTest {
     }
 
     /**
-     * setnx 设置value之前检查是否存在key，只有当该key不存在时才设置value
+     * setnx [key] [value] 当该key不存在时设置value,nx not exist
      */
     @Test
     public void testSetnx() {
@@ -29,7 +32,7 @@ public class StringsTest extends JedisTest {
     }
 
     /**
-     * setex 设置key-value并设置过期时间
+     * setex [key] [seconds] [value] 设置key-value并设置过期时间，时间单位为秒
      */
     @Test
     public void testSetex() throws InterruptedException {
@@ -42,18 +45,18 @@ public class StringsTest extends JedisTest {
     }
 
     /**
-     * setrange 从指定的offset处开始,覆盖key对应的string的value的长度
+     * setrange [key] [offset] [value] 从指定的offset(从0开始计算)处开始,按照给定的value覆盖(index的值会被覆盖)
      */
     @Test
     public void testSetrange() {
         logger.info("set keyr1 \"Hello World\" : " + jedis.set("keyr1", "Hello World"));
         logger.info("setrange keyr1 6 Tom : " + jedis.setrange("keyr1", 6, "Tom"));
-        logger.info("get keyr1" + jedis.get("keyr1"));
+        logger.info("get keyr1 : " + jedis.get("keyr1"));
         logger.info("del keyr1 : " + jedis.del("keyr1"));
     }
 
     /**
-     * mset 一次设置多个key，成功返回Ok
+     * mset [key1] [value1] [key2] [value2] ... 一次设置多个key，成功返回Ok
      */
     @Test
     public void testMset() {
@@ -65,7 +68,8 @@ public class StringsTest extends JedisTest {
     }
 
     /**
-     * msetnx 一次设置多个key,只要有一个key已经存在，MSETNX一个操作都不会执行
+     * msetnx [key1] [value1] [key2] [value2] ...
+     * 一次设置多个key,只要有一个key已经存在，msetnx一个操作都不会执行
      */
     @Test
     public void testMsetnx() {
@@ -78,7 +82,7 @@ public class StringsTest extends JedisTest {
     }
 
     /**
-     * getset 设置key的值，并返回key的旧值
+     * getset [key] [value] 设置key的值，并返回key的旧值
      */
     @Test
     public void testGetset() {
@@ -89,7 +93,8 @@ public class StringsTest extends JedisTest {
     }
 
     /**
-     * getrange 通过指定偏移量返回子字符串,左从0开始，右从-1开始 全闭集合
+     * getrange [key] [startOffset] [endOffset]
+     * 通过指定偏移量返回子字符串,左从0开始，右从-1开始 全闭集合
      */
     @Test
     public void testGetrange() {
@@ -101,39 +106,53 @@ public class StringsTest extends JedisTest {
     }
 
     /**
-     * mget 获取多个key的值，key不存在返回null
+     * mget [key1] [key2] ...获取多个key的值List，key不存在返回null
      */
     @Test
     public void testMget() {
-        logger.info("mset keym1 n1 keym2 n2  : " + jedis.mset("keym1", "n1", "keym2", "n2"));
+        logger.info("mset keym1 n1 keym3 n3  : " + jedis.mset("keym1", "n1", "keym3", "n3"));
         logger.info("mget keym1 keym2 keym3: " + jedis.mget("keym1", "keym2", "keym3"));
-        logger.info("del keym1 keym2" + jedis.del("keym1", "keym2"));
+        logger.info("del keym1 keym3" + jedis.del("keym1", "keym3"));
     }
 
     /**
-     * incr incrby value++,不是数字类型抛出异常，incr一个不存在的key，则value设置为1
-     * decr decrby
+     * incr [key] value++,不是数字类型抛出异常，incr一个不存在的key，则value设置为1
+     * incrby [key] [value] value-=[value],incrby一个不存在的key，则value设置为[value]
+     * decr [key] value-- decr一个不存在的key，则value设置为1
+     * decrby [key] [value] value-=[value],decrby一个不存在的key，则value设置为[value]
      */
     @Test
-    public void testInDe() {
+    public void testIncrDecr() {
+        // incr
+        logger.info("test incr");
         logger.info("incr keyi : " + jedis.incr("keyi"));
-        logger.info("get keyi : " + jedis.get("keyi"));
+        logger.info("get keyi : " + jedis.get("keyi") + "\n");
+
+        // value is not an integer
+        logger.info("test value is not an integer");
         logger.info("set keyi a: " + jedis.set("keyi", "a"));
         try {
             logger.info("incr keyi : " + jedis.incr("keyi"));
         } catch (Exception e) {
             logger.warn("value不是数字类似抛出异常", e);
         }
-        logger.info("del keyi : " + jedis.del("keyi"));
+        logger.info("del keyi : " + jedis.del("keyi") + "\n");
 
-        logger.info("incrby keyint 10 : " + jedis.incrBy("keyint", 10));
-        logger.info("decr keyint : " + jedis.decr("keyint"));
+        logger.info("test incrby");
+        logger.info("incrby keyint 10 : " + jedis.incrBy("keyint", 10) + "\n");
+
+        logger.info("test decr");
+        logger.info("decr keyint : " + jedis.decr("keyint") + "\n");
+
+        logger.info("test decrby");
         logger.info("decrby keyint 10 : " + jedis.decrBy("keyint", 10));
+        logger.info("decrby keyint2 10 : " + jedis.decrBy("keyint2", 10));
         logger.info("del keyint : " + jedis.del("keyint"));
+        logger.info("del keyint2 : " + jedis.del("keyint2"));
     }
 
     /**
-     * append 追加value，返回新Strings长度
+     * append [key] [value] 在原value后追加value，相当于value=value+"[value]"，返回新Strings长度
      */
     @Test
     public void testAppend() {
@@ -144,7 +163,7 @@ public class StringsTest extends JedisTest {
     }
 
     /**
-     * strlen 取指定字符串长度 相当于length
+     * strlen [key] 取指定字符串长度 相当于length
      */
     @Test
     public void testStrlen() {
