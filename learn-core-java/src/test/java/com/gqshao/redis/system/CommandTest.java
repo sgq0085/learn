@@ -10,6 +10,7 @@ public class CommandTest extends JedisTest {
 
     /**
      * keys [patten] 返回满足给定patten的所有key
+     * dbsize 统计key的数量
      * exists [key] 确认一个key是否存在，返回boolean
      * del [key...] 删除一个key或多个key
      * expire [key] [seconds] 设置一个key的过期时间(单位:秒),可多次使用来更新过期时间
@@ -25,6 +26,10 @@ public class CommandTest extends JedisTest {
         logger.info("test keys");
         logger.info("mset keym1 value1 keym2 value2 keym3 value3 : " + jedis.mset("keym1", "value1", "keym2", "value2", "keym3", "value3"));
         logger.info("keys keym* : " + jedis.keys("keym*") + "\n");
+
+        // dbsize
+        logger.info("test dbsize");
+        logger.info("dbsize : "+jedis.dbSize()+"\n");
 
         // exists
         logger.info("test exists");

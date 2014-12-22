@@ -13,7 +13,7 @@ import redis.clients.jedis.JedisPoolConfig;
 
 public class JedisTest {
 
-    private static JedisPool pool;
+    protected static JedisPool pool;
     protected Jedis jedis = null;
     protected static Logger logger = LoggerFactory.getLogger(JedisTest.class);
 
