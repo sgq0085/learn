@@ -64,8 +64,8 @@ public class ListsTest extends JedisTest {
 
     /**
      * lrem [key] [count] [value] 从key所对应的Lists中删除count个指定value
-     * count>0时，从头到尾删除
-     * count<0时，从尾到头删除
+     * count>0时，从头到尾删除count个value
+     * count<0时，从尾到头删除count个value
      * count=0时，全部删除
      */
     @Test
