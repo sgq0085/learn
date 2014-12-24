@@ -16,17 +16,34 @@
     <description>Redis配置</description>
 
     <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig"
-          p:maxIdle="10" p:maxTotal="100" p:maxWaitMillis="-1" p:testOnBorrow="true" />
+          p:maxIdle="10" p:maxTotal="100" p:maxWaitMillis="-1" p:testOnBorrow="false"/>
 
-    <!-- jedis连接池工厂 timeout设置为0，解决JedisConnectionException -->
-    <bean id="jedisConnectionFactory"
-          class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
-          p:usePool="true"  p:poolConfig-ref="jedisPoolConfig" p:timeout="0"
-          p:hostName="192.168.3.98" p:port="6379"/>
+    <bean id="jedisPool1" class="redis.clients.jedis.JedisPool" depends-on="jedisPoolConfig">
+        <constructor-arg index="0" ref="jedisPoolConfig"/>
+        <constructor-arg index="1" value="${redis1.host}"/>
+        <constructor-arg index="2" value="${redis1.port}"/>
+        <constructor-arg index="3" value="0"/>
+    </bean>
 
-    <bean id="redisTemplate"
-          class="org.springframework.data.redis.core.RedisTemplate"
-          p:connectionFactory-ref="jedisConnectionFactory" />
+    <bean id="jedisPool2" class="redis.clients.jedis.JedisPool" depends-on="jedisPoolConfig">
+        <constructor-arg index="0" ref="jedisPoolConfig"/>
+        <constructor-arg index="1" value="${redis2.host}"/>
+        <constructor-arg index="2" value="${redis2.port}"/>
+        <constructor-arg index="3" value="0"/>
+    </bean>
 
+    <!-- 定期执行的消息通道守护任务 -->
+    <bean id="jdkExecutorJob" class="com.gqshao.redis.component.SubDaemonJob">
+        <!-- 首次执行的延迟时间1秒 -->
+        <property name="initialDelay" value="1"/>
+        <!-- 一次执行终止和下一次执行开始之间的延迟180秒 -->
+        <property name="delay" value="10"/>
+        <property name="channels">
+            <array>
+                <value>channelA.test</value>
+                <value>channelB.send_message</value>
+            </array>
+        </property>
+    </bean>
 
 </beans>
