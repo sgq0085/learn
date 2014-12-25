@@ -33,11 +33,11 @@
     </bean>
 
     <!-- 定期执行的消息通道守护任务 -->
-    <bean id="jdkExecutorJob" class="com.gqshao.redis.component.SubDaemonJob">
+    <bean id="jdkExecutorJob" class="com.gqshao.redis.component.SubscribedJob">
         <!-- 首次执行的延迟时间1秒 -->
         <property name="initialDelay" value="1"/>
         <!-- 一次执行终止和下一次执行开始之间的延迟180秒 -->
-        <property name="delay" value="10"/>
+        <property name="delay" value="180"/>
         <property name="channels">
             <array>
                 <value>channelA.test</value>

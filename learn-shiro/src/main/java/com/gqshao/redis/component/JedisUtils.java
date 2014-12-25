@@ -97,7 +97,7 @@ public class JedisUtils {
         return jedis;
     }
 
-    public void destroy(Jedis jedis) {
+    public void returnResource(Jedis jedis) {
         try {
             pool.returnResource(jedis);
         } catch (Exception e) {

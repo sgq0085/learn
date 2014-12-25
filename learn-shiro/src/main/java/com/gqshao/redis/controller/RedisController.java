@@ -1,6 +1,5 @@
 package com.gqshao.redis.controller;
 
-import com.gqshao.redis.component.SubDaemonJob;
 import com.gqshao.redis.service.RedisService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

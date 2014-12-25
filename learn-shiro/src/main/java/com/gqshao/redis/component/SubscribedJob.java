@@ -20,9 +20,9 @@ import java.util.concurrent.TimeUnit;
  * 每隔一段时间测试当前连接是否能PING的通
  * 测试SubscribeRunnable/PSubscribeRunnable其中一种情况
  */
-public class SubDaemonJob implements Runnable {
+public class SubscribedJob implements Runnable {
 
-    private static final Logger logger = LoggerFactory.getLogger(SubDaemonJob.class);
+    private static final Logger logger = LoggerFactory.getLogger(SubscribedJob.class);
 
     @Autowired
     private JedisUtils jedisUtils;
@@ -69,13 +69,11 @@ public class SubDaemonJob implements Runnable {
             logger.info("无法得到Redis连接，订阅消息失败");
         } else if (port == null || !hand.isSubscribed()) {
             this.subscribed();
-            logger.info("订阅Redis消息成功port[{}]", port);
         }
         // 如果客户端发生改变关闭之前的监听开启新的监听
         else if (!port.equals(jedis.configGet("port").get(1))) {
             this.unsubscribed();
             this.subscribed();
-            logger.info("订阅Redis消息成功port[{}]", port);
         }
     }
 
@@ -88,14 +86,24 @@ public class SubDaemonJob implements Runnable {
                     jedis.subscribe(hand, channels);
                 } catch (Exception e) {
                     e.printStackTrace();
+                } finally {
+                    jedisUtils.returnResource(jedis);
                 }
 
             }
         });
         executor = Executors.newSingleThreadExecutor();
         executor.execute(thread);
-        port = jedis.configGet("port").get(1);
-        logger.info("启动对" + port + "的" + Arrays.toString(channels) + "监听");
+        Jedis jedis2 = null;
+        try {
+            jedis2 = jedisUtils.getResource();
+            port = jedis2.configGet("port").get(1);
+        } finally {
+            jedisUtils.returnResource(jedis2);
+        }
+
+
+        logger.info("监听端口为[" + port + "]的消息通道" + Arrays.toString(channels));
     }
 
     private void unsubscribed() {
@@ -109,7 +117,7 @@ public class SubDaemonJob implements Runnable {
         } catch (InterruptedException ie) {
             ie.printStackTrace();
         }
-        logger.info("停止对" + port + "的" + Arrays.toString(channels) + "监听");
+        logger.info("停止监听端口为[" + port + "]的消息通道" + Arrays.toString(channels));
         port = null;
     }
 

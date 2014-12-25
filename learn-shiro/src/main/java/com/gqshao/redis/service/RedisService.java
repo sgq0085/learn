@@ -27,7 +27,7 @@ public class RedisService {
         } catch (Exception e) {
 
         } finally {
-            jedisUtils.destroy(jedis);
+            jedisUtils.returnResource(jedis);
         }
 
     }
