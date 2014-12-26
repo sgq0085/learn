@@ -10,23 +10,10 @@
     <!-- Shiro's main business-tier object for web-enabled applications -->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <property name="realm" ref="shiroDbRealm"/>
+        <!-- 可选项 最好使用,SessionDao,中 doReadSession 读取过于频繁了-->
         <property name="cacheManager" ref="shiroEhcacheManager"/>
-        <!--默认使用servlet容器HttpSession，可以通过配置sessionManager，启用Shiro自己的session-->
-        <!--<property name="sessionManager" ref="sessionManager"/>-->
-    </bean>
-
-
-    <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
-        <property name="globalSessionTimeout" value="1800000"/>
-        <property name="deleteInvalidSessions" value="true"/>
-        <property name="sessionValidationSchedulerEnabled" value="true"/>
-        <property name="sessionValidationInterval" value="1800000"/>
-        <!-- 默认JSESSIONID，同tomcat/jetty在cookie中缓存标识相同，修改用于防止访问404页面时，容器生成的标识把shiro的覆盖掉 -->
-        <property name="sessionIdCookie">
-            <bean class="org.apache.shiro.web.servlet.SimpleCookie">
-                <constructor-arg name="name" value="SHRIOSESSIONID"/>
-            </bean>
-        </property>
+        <!--可选项 默认使用ServletContainerSessionManager，直接使用容器的HttpSession，可以通过配置sessionManager，使用DefaultWebSessionManager来替代-->
+        <property name="sessionManager" ref="sessionManager"/>
     </bean>
 
     <!-- 項目自定义的Realm -->
@@ -57,10 +44,49 @@
         </property>
     </bean>
 
-    <!-- 用户授权信息Cache, 采用EhCache -->
+    <!-- 用户授权信息Cache, 采用EhCache，本地缓存最长时间应比中央缓存时间短一些，以确保Session中doReadSession方法调用时更新中央缓存过期时间 -->
     <bean id="shiroEhcacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
         <property name="cacheManagerConfigFile" value="classpath:security/ehcache-shiro.xml"/>
     </bean>
+
+    <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+        <!-- 设置全局会话超时时间，默认30分钟(1800000) -->
+        <property name="globalSessionTimeout" value="1800000"/>
+        <!-- 是否在会话过期后会调用SessionDAO的delete方法删除会话 默认true-->
+        <property name="deleteInvalidSessions" value="false"/>
+        <!-- 是否开启会话验证器任务 默认true -->
+        <property name="sessionValidationSchedulerEnabled" value="false"/>
+        <!-- 会话验证器调度时间 -->
+        <property name="sessionValidationInterval" value="1800000"/>
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="sessionDAO" ref="sessionDao"/>
+        <!-- 默认JSESSIONID，同tomcat/jetty在cookie中缓存标识相同，修改用于防止访问404页面时，容器生成的标识把shiro的覆盖掉 -->
+        <property name="sessionIdCookie">
+            <bean class="org.apache.shiro.web.servlet.SimpleCookie">
+                <constructor-arg name="name" value="SHRIOSESSIONID"/>
+            </bean>
+        </property>
+        <property name="sessionListeners">
+            <list>
+                <bean class="com.gqshao.authentication.listener.ShiroSessionListener"/>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 自定义Session工厂方法 返回会标识是否修改主要字段的自定义Session-->
+    <bean id="sessionFactory" class="com.gqshao.authentication.session.ShiroSessionFactory"/>
+
+    <!-- 普通持久化接口，不会被缓存 每次doReadSession会被反复调用 -->
+    <!--<bean class="com.gqshao.authentication.dao.RedisSessionDao">-->
+    <!-- 使用可被缓存的Dao ，本地缓存减轻网络压力 -->
+    <!--<bean id="sessionDao" class="com.gqshao.authentication.dao.CachingSessionDao">-->
+    <!-- 可缓存Dao，操作自定义Session,添加标识位，减少doUpdate方法中Redis的连接次数来减轻网络压力 -->
+    <bean id="sessionDao" class="com.gqshao.authentication.dao.CachingShiroSessionDao">
+        <property name="prefix" value="ShiroSession_"/>
+        <!-- 注意中央缓存有效时间要比本地缓存有效时间长-->
+        <property name="seconds" value="1800"/>
+    </bean>
+
 
     <!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
     <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
