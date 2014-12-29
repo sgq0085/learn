@@ -11,6 +11,13 @@
     <name>learn :: production :: shiro</name>
 
     <dependencies>
+        <!-- TIMER -->
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+            <version>${quartz.version}</version>
+        </dependency>
+
         <!-- spring begin -->
         <dependency>
             <groupId>org.springframework</groupId>

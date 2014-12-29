@@ -5,8 +5,11 @@
     <description>导入lcm中的applicationContext文件列表</description>
 
     <!-- required -->
-    <!--<import resource="security/applicationContext-shiro.xml" />-->
     <import resource="classpath:security/applicationContext-shiro.xml" />
+
+    <!-- jedis 配置 -->
     <import resource="classpath:redis/applicationContext-redis.xml" />
+    <!-- quartz 集群使用示例 -->
+    <import resource="schedule/applicationContext-quartz-timer-cluster.xml" />
 
 </beans>

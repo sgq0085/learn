@@ -21,19 +21,19 @@
                                 expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
     </context:component-scan>
 
-<!-- flyway配置 -->
-<bean id="flyway" class="org.flywaydb.core.Flyway" init-method="migrate">
-    <property name="dataSource" ref="dataSource"/>
-    <property name="encoding" value="UTF-8"/>
-    <property name="table" value="LEARN_TEST_SCHEMA_VERSION"/>
-    <property name="locations" value="db/migration"/>
-    <property name="baselineOnMigrate" value="true"/>
-    <property name="baselineVersion" >
-        <bean class="org.flywaydb.core.api.MigrationVersion" factory-method="fromVersion">
-            <constructor-arg value="0"/>
-        </bean>
-    </property>
-</bean>
+    <!-- flyway配置 -->
+    <bean id="flyway" class="org.flywaydb.core.Flyway" init-method="migrate">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="encoding" value="UTF-8"/>
+        <property name="table" value="LEARN_TEST_SCHEMA_VERSION"/>
+        <property name="locations" value="db/migration"/>
+        <property name="baselineOnMigrate" value="true"/>
+        <property name="baselineVersion" >
+            <bean class="org.flywaydb.core.api.MigrationVersion" factory-method="fromVersion">
+                <constructor-arg value="0"/>
+            </bean>
+        </property>
+    </bean>
 
     <!-- MyBatis配置 -->
     <!-- <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean" depends-on="flyway"> -->

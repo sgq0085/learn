@@ -29,4 +29,38 @@
     <context:property-placeholder ignore-resource-not-found="true" location="classpath*:/application.properties"/>
 
 
+
+    <!-- 事务管理器, Jdbc单数据源事务 用于quartz-->
+    <bean id="quartzTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="quartzDataSource"/>
+    </bean>
+
+    <!-- local development环境 -->
+    <beans profile="development">
+        <context:property-placeholder ignore-resource-not-found="true"
+                                      location="classpath*:/application.properties"/>
+        <!-- flyway配置 -->
+        <bean id="flyway" class="org.flywaydb.core.Flyway" init-method="migrate">
+            <property name="dataSource" ref="quartzDataSource"/>
+            <property name="encoding" value="UTF-8"/>
+            <property name="table" value="LEARN_TEST_SCHEMA_VERSION"/>
+            <property name="locations" value="db/migration/h2"/>
+            <property name="baselineOnMigrate" value="true"/>
+            <property name="baselineVersion" >
+                <bean class="org.flywaydb.core.api.MigrationVersion" factory-method="fromVersion">
+                    <constructor-arg value="0"/>
+                </bean>
+            </property>
+        </bean>
+
+        <!-- Tomcat JDBC连接池 -->
+        <bean id="quartzDataSource" class="org.apache.tomcat.jdbc.pool.DataSource" destroy-method="close">
+            <property name="driverClassName" value="${quartz.jdbc.driver}"/>
+            <property name="url" value="${quartz.jdbc.url}"/>
+            <property name="username" value="${quartz.jdbc.username}"/>
+            <property name="password" value="${quartz.jdbc.password}"/>
+            <property name="defaultAutoCommit" value="false"/>
+        </bean>
+
+    </beans>
 </beans>

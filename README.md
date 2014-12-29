@@ -65,3 +65,5 @@ learn-shiro
 shiro的研究<br />
 1.[简单的Spring整合Shiro](http://sgq0085.iteye.com/blog/1983832)<br />
 2.[Shiro一些补充](http://sgq0085.iteye.com/blog/2163641)<br />
+3.[Shiro通过Redis管理会话实现集群](http://sgq0085.iteye.com/blog/2170405)<br />
+3.集群中Quartz的配置<br />
