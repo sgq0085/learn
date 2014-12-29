@@ -1,33 +1,20 @@
 package com.gqshao.authentication.realm;
 
 import com.google.common.collect.Lists;
-import com.gqshao.authentication.dao.CachingShiroSessionDao;
 import com.gqshao.authentication.domain.CustomToken;
 import com.gqshao.authentication.domain.ShiroUser;
-import com.gqshao.authentication.session.ShiroSession;
-import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
-import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
-import org.apache.shiro.authz.Permission;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.shiro.subject.Subject;
-import org.apache.shiro.util.ByteSource;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.annotation.PostConstruct;
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ShiroDbRealm extends AuthorizingRealm {
 
-    @Autowired
-    private CachingShiroSessionDao sessionDao;
 
     public static final String HASH_ALGORITHM = "SHA-1";
     public static final int SALT_SIZE = 8;
@@ -40,6 +27,7 @@ public class ShiroDbRealm extends AuthorizingRealm {
 
     /**
      * 认证回调函数,登录时调用.
+     * AuthenticationInfo 中principal会设置到Session中并通过SessionDao保存起来
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken) {
@@ -56,19 +44,12 @@ public class ShiroDbRealm extends AuthorizingRealm {
             return null;
         }
 
-        // 把账号信息放到Session中，并更新缓存,用于会话管理
-        Subject subject = SecurityUtils.getSubject();
-        Serializable sessionId = subject.getSession().getId();
-        ShiroSession session = (ShiroSession) sessionDao.doReadSessionWithoutExpire(sessionId);
-        session.setAttribute("userId", su.getId());
-        session.setAttribute("loginName", su.getLoginName());
-        sessionDao.update(session);
-
         return info;
     }
 
     /**
      * 授权查询回调函数, 进行鉴权但缓存中无用户的授权信息时调用.
+     * 只会被缓存，不会被设置到Session中
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {

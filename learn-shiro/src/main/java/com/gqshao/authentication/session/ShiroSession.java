@@ -11,6 +11,11 @@ import java.util.Map;
 /**
  * 由于SimpleSession lastAccessTime更改后也会调用SessionDao update方法，
  * 增加标识位，如果只是更新lastAccessTime SessionDao update方法直接返回
+ *
+ * Session Attribute
+ * DefaultSubjectContext.PRINCIPALS_SESSION_KEY 保存 principal
+ * DefaultSubjectContext.AUTHENTICATED_SESSION_KEY 保存 boolean是否登陆
+ * @see org.apache.shiro.subject.support.DefaultSubjectContext
  */
 public class ShiroSession extends SimpleSession implements Serializable {
     // 除lastAccessTime以外其他字段发生改变时为true

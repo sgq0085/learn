@@ -5,8 +5,10 @@ import com.gqshao.authentication.utils.SerializeUtils;
 import com.gqshao.redis.component.JedisUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.session.Session;
+import org.apache.shiro.session.UnknownSessionException;
 import org.apache.shiro.session.mgt.ValidatingSession;
 import org.apache.shiro.session.mgt.eis.CachingSessionDAO;
+import org.apache.shiro.subject.support.DefaultSubjectContext;
 import org.apache.shiro.util.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,6 +39,24 @@ public class CachingShiroSessionDao extends CachingSessionDAO {
     @Autowired
     private JedisUtils jedisUtils;
 
+    /**
+     * 重写CachingSessionDAO中readSession方法，如果Session中没有登陆信息就调用doReadSession方法从Redis中重读
+     */
+    @Override
+    public Session readSession(Serializable sessionId) throws UnknownSessionException {
+        Session session = getCachedSession(sessionId);
+        if (session == null
+                || session.getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY) == null) {
+            session = this.doReadSession(sessionId);
+            if (session == null) {
+                throw new UnknownSessionException("There is no session with id [" + sessionId + "]");
+            } else {
+                // 缓存
+                cache(session, session.getId());
+            }
+        }
+        return session;
+    }
 
     /**
      * 根据会话ID获取会话
@@ -54,11 +74,10 @@ public class CachingShiroSessionDao extends CachingSessionDAO {
             String value = jedis.get(key);
             if (StringUtils.isNotBlank(value)) {
                 session = SerializeUtils.deserializeFromString(value);
-                logger.info("sessionId ttl : " + jedis.ttl(key));
+                logger.debug("sessionId {} ttl {}: ", sessionId, jedis.ttl(key));
+                // 重置Redis中缓存过期时间
                 jedis.expire(key, seconds);
-                // 重新缓存到本地cache
-                this.cache(session, sessionId);
-                logger.info("sessionId {} name {} 被读取", sessionId, session.getClass().getName());
+                logger.debug("sessionId {} name {} 被读取", sessionId, session.getClass().getName());
             }
         } catch (Exception e) {
             logger.warn("读取Session失败", e);
@@ -142,7 +161,7 @@ public class CachingShiroSessionDao extends CachingSessionDAO {
                     tx = jedis.multi();
                     ss.setChanged(false);
                     tx.setex(prefix + session.getId(), seconds, SerializeUtils.serializeToString(ss));
-                    logger.info("sessionId {} name {} 被更新", session.getId(), session.getClass().getName());
+                    logger.debug("sessionId {} name {} 被更新", session.getId(), session.getClass().getName());
                     // 执行事务
                     tx.exec();
                 } catch (Exception e) {
@@ -176,7 +195,7 @@ public class CachingShiroSessionDao extends CachingSessionDAO {
         try {
             jedis = jedisUtils.getResource();
             jedis.del(prefix + session.getId());
-            logger.info("Session {} 被删除", session.getId());
+            logger.debug("Session {} 被删除", session.getId());
         } catch (Exception e) {
             logger.warn("修改Session失败", e);
         } finally {

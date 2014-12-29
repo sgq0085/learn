@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="utf-8" %>
 <%@ page import="java.util.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <html>
 <head>
@@ -62,6 +63,9 @@ Server Info:<br>
         System.out.println(name + " = " + value);
     }
 %>
+<shiro:hasRole name="admin">
+    <br><span>拥有角色admin，才能看到本段文字</span><br>
+</shiro:hasRole>
 <form action="${ctx}/session/add" method="POST">
     <span>名称:</span><input type=text size=20 name="dataName">
     <br>
