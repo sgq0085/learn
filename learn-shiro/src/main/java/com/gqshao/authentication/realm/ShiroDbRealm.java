@@ -1,8 +1,12 @@
 package com.gqshao.authentication.realm;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.gqshao.authentication.dao.CachingShiroSessionDao;
 import com.gqshao.authentication.domain.CustomToken;
 import com.gqshao.authentication.domain.ShiroUser;
+import com.gqshao.authentication.session.ShiroSession;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
@@ -10,8 +14,12 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 public class ShiroDbRealm extends AuthorizingRealm {
 
@@ -19,6 +27,9 @@ public class ShiroDbRealm extends AuthorizingRealm {
     public static final String HASH_ALGORITHM = "SHA-1";
     public static final int SALT_SIZE = 8;
     public static final int HASH_INTERATIONS = 1024;
+
+    @Autowired
+    private CachingShiroSessionDao sessionDao;
 
     public ShiroDbRealm() {
         super();
@@ -43,6 +54,15 @@ public class ShiroDbRealm extends AuthorizingRealm {
         if ("fail".equals(loginName)) {
             return null;
         }
+
+        // TODO: 测试用代码，修改session中属性集群中其他节点也会发生改变
+        Subject subject = SecurityUtils.getSubject();
+        Serializable sessionId = subject.getSession().getId();
+        ShiroSession session = (ShiroSession) sessionDao.doReadSessionWithoutExpire(sessionId);
+        Map<String, String> customMap = Maps.newHashMap();
+        customMap.put("test", "value");
+        session.setAttribute("custom", customMap);
+        sessionDao.update(session);
 
         return info;
     }

@@ -33,7 +33,11 @@ learn-core-java
 一些简单案例的研究学习<br>
 Redis和Memcached简单访问DEMO<br />
 1.[Redis安装](http://sgq0085.iteye.com/blog/2087750)<br />
-2.[Centos6.5安装Memcached](http://sgq0085.iteye.com/blog/2088440)<br />
+2.[Jedis对Redis数据的读取操作](http://sgq0085.iteye.com/blog/2170372)<br />
+3.[通过Jedis访问Redis](http://sgq0085.iteye.com/blog/2170375)<br />
+4.[Redis分布式连接和主从复制](http://sgq0085.iteye.com/blog/2171121)<br />
+5.[Redis消息订阅/发布](http://sgq0085.iteye.com/blog/2171127)<br />
+6.[Centos6.5安装Memcached](http://sgq0085.iteye.com/blog/2088440)<br />
 
 
 learn-msm

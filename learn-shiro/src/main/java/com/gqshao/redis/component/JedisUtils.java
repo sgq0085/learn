@@ -11,6 +11,7 @@ import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
 import javax.annotation.PostConstruct;
+import java.io.Serializable;
 
 @Component
 public class JedisUtils {
@@ -103,6 +104,21 @@ public class JedisUtils {
         } catch (Exception e) {
             logger.warn("销毁连接时出现异常", e);
             e.printStackTrace();
+        }
+    }
+
+    public void publish(String channel, Serializable message) {
+        if (StringUtils.isBlank(channel) || message == null) {
+            return;
+        }
+        Jedis jedis = null;
+        try {
+            jedis = this.getResource();
+            jedis.publish(channel, (String) message);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            this.returnResource(jedis);
         }
     }
 

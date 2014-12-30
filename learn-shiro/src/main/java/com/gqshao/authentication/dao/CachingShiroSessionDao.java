@@ -4,6 +4,7 @@ import com.gqshao.authentication.session.ShiroSession;
 import com.gqshao.authentication.utils.SerializeUtils;
 import com.gqshao.redis.component.JedisUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.cache.Cache;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.UnknownSessionException;
 import org.apache.shiro.session.mgt.ValidatingSession;
@@ -74,10 +75,10 @@ public class CachingShiroSessionDao extends CachingSessionDAO {
             String value = jedis.get(key);
             if (StringUtils.isNotBlank(value)) {
                 session = SerializeUtils.deserializeFromString(value);
-                logger.debug("sessionId {} ttl {}: ", sessionId, jedis.ttl(key));
+                logger.info("sessionId {} ttl {}: ", sessionId, jedis.ttl(key));
                 // 重置Redis中缓存过期时间
                 jedis.expire(key, seconds);
-                logger.debug("sessionId {} name {} 被读取", sessionId, session.getClass().getName());
+                logger.info("sessionId {} name {} 被读取", sessionId, session.getClass().getName());
             }
         } catch (Exception e) {
             logger.warn("读取Session失败", e);
@@ -161,7 +162,7 @@ public class CachingShiroSessionDao extends CachingSessionDAO {
                     tx = jedis.multi();
                     ss.setChanged(false);
                     tx.setex(prefix + session.getId(), seconds, SerializeUtils.serializeToString(ss));
-                    logger.debug("sessionId {} name {} 被更新", session.getId(), session.getClass().getName());
+                    logger.info("sessionId {} name {} 被更新", session.getId(), session.getClass().getName());
                     // 执行事务
                     tx.exec();
                 } catch (Exception e) {
@@ -201,6 +202,15 @@ public class CachingShiroSessionDao extends CachingSessionDAO {
         } finally {
             jedisUtils.returnResource(jedis);
         }
+    }
+
+    /**
+     * 删除cache中缓存的Session
+     */
+    public void uncache(Serializable sessionId) {
+        Session session = this.readSession(sessionId);
+        super.uncache(session);
+        logger.info("取消session {} 的缓存", sessionId);
     }
 
     /**

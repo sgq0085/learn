@@ -54,7 +54,7 @@ Server Info:<br>
         session.setAttribute(dataName, dataValue);
     }
     out.println("<b>Session 列表</b><br>");
-    System.out.println("============================");
+    System.out.println("==============portal.jsp==============");
     Enumeration e = session.getAttributeNames();
     while (e.hasMoreElements()) {
         String name = (String) e.nextElement();
@@ -65,7 +65,10 @@ Server Info:<br>
 %>
 <shiro:hasRole name="admin">
     <br><span>拥有角色admin，才能看到本段文字</span><br>
+
 </shiro:hasRole>
+
+<br><span>个性化的值 : ${custom.test}</span><br>
 <form action="${ctx}/session/add" method="POST">
     <span>名称:</span><input type=text size=20 name="dataName">
     <br>

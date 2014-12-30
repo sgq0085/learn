@@ -57,7 +57,9 @@ public class SlaveofTest {
     @Test
     public void test() {
         // 设置 Redis2为Redis1的slave
+        logger.info("jedis1 slaveof no one");
         jedis1.slaveofNoOne();
+        logger.info("jedis2 slaveof 192.168.3.98 6379");
         jedis2.slaveof("192.168.3.98", 6379);
 
         try {
@@ -92,6 +94,7 @@ public class SlaveofTest {
         // 测试jedis1中读取数据
         logger.info("jedis1.get mykey2 : " + jedis1.get("mykey2"));
 
+        logger.info("jedis1 slaveof no one");
         jedis1.slaveofNoOne();
         jedis1.del("mykey1", "mykey2");
         jedis2.del("mykey1", "mykey2");
