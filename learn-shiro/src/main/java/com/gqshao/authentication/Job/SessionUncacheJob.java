@@ -1,4 +1,4 @@
-package com.gqshao.authentication.Job;
+package com.gqshao.authentication.job;
 
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
