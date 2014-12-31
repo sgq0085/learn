@@ -102,7 +102,7 @@
 
 
     <!-- 定期执行的消息通道守护任务 该通道用于监听是否指定缓存失效 -->
-    <bean id="sessionUncacheJob" class="com.gqshao.authentication.job.SessionUncacheJob">
+    <bean id="sessionUncacheJob" class="com.gqshao.authentication.schedule.SessionUncacheJob">
         <!-- 首次执行的延迟时间30秒 -->
         <property name="initialDelay" value="30"/>
         <!-- 一次执行终止和下一次执行开始之间的延迟180秒 -->
