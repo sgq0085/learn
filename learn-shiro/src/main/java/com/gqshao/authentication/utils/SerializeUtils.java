@@ -20,7 +20,7 @@ public class SerializeUtils extends SerializationUtils {
         }
     }
 
-    public static Session deserializeFromString(String base64) {
+    public static <T> T deserializeFromString(String base64) {
         try {
             byte[] objectData = Base64.decode(base64);
             return deserialize(objectData);
