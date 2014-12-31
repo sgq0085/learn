@@ -16,9 +16,16 @@ public class MyJedisPubSub extends JedisPubSub {
         logger.info("取得订阅的消息后的处理 : " + channel + "=" + message);
     }
 
-    // 初始化订阅时候的处理  
+    /**
+     * 初始化订阅时候的处理 该方法一定要处理异常
+     */
+
     public void onSubscribe(String channel, int subscribedChannels) {
-        logger.info("初始化订阅时候的处理 : " + channel + "=" + subscribedChannels);
+        try {
+            logger.info("初始化订阅时候的处理 : " + channel + "=" + subscribedChannels);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     // 取消订阅时候的处理  

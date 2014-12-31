@@ -21,10 +21,17 @@ public class SessionUncacheListener extends JedisPubSub {
         this.sessionDao = sessionDao;
     }
 
-    // 取得订阅的消息后的处理  
+    /**
+     * 取得订阅的消息后的处理 该方法一定要处理异常
+     */
     public void onMessage(String channel, String message) {
-        logger.info("从缓存失效通道{}得到sessionId:{} : ", channel, message);
-        sessionDao.uncache(message);
+        try {
+            logger.info("从缓存失效通道{}得到sessionId:{} : ", channel, message);
+            sessionDao.uncache(message);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     // 初始化订阅时候的处理  
