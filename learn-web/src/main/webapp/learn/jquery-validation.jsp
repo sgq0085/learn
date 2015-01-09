@@ -6,7 +6,7 @@
 <head>
     <title>jQuery Validation</title>
     <link type="text/css" rel="stylesheet" href="${ctx}/static/jquery/jquery-validation-1.13.0/validate.css"/>
-    <script type="text/javascript" src="${ctx}/static/jquery/1.11.1/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="${ctx}/static/jquery/jquery-1.11.1/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="${ctx}/static/jquery/jquery-validation-1.13.0/jquery.validate.js"></script>
     <script type="text/javascript"
             src="${ctx}/static/jquery/jquery-validation-1.13.0/localization/messages_zh.min.js"></script>
