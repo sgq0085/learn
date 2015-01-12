@@ -103,3 +103,7 @@ messages: {
 现在想要手动触发远程调用API，需要先清除原来的结果再进行调用
 $("#loginName").removeData("previousValue");
 $("#user_form").data('validator').element('#loginName');
+
+element方法中可以传入jQuery对象，或jQuery选择器字符串
+
+4.两种方法拿到validator: $("#fm1").validate() 或 $("#fm1").data("validator") ,必须放在方法里，不能提前放到参数中

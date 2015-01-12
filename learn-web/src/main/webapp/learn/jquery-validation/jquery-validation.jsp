@@ -26,16 +26,21 @@
 </form>
 <button type="submit" class="btn btn-success" onclick="activeValidate()">检查</button>
 <button type="submit" class="btn btn-success" onclick="element()">验证username</button>
-<button type="submit" class="btn btn-success" onclick="removeData()">去掉username验证信息</button>
+<br>
+<button type="submit" class="btn btn-success" onclick="reset()">重置表单验证信息</button>
+
 
 <script type="text/javascript">
     // <![CDATA[
 
     $(function () {
         $("#username").focus();
+
+        // 修改验证出错误之后显示标签label修改为其他标签
         $.extend($.validator.defaults, {
             errorElement: "span"
         });
+
         $("#fm1").validate({
             rules: {
                 username: {
@@ -52,18 +57,31 @@
         });
     });
 
+    //重置,包括错误提示
+    $("input:reset").click(function () {
+        $("#fm1").validate().resetForm();
+    });
+
+    // 手动验证
     function activeValidate() {
-        $("#fm1").validate().form();
+        $("#fm1").data("validator").form();
     }
 
+    // 对单个元素清除缓存重新进行验证　一般用于远程调用
     function element() {
-        $("#fm1").validate().element($("#username"));
+        var $username = $("#username");
+        //　清除原来的认证消息
+        $username.removeData("previousValue");
+        // element方法中可以传入jQuery对象，或jQuery选择器字符串
+        $("#fm1").data("validator").element($username);
+        // $("#fm1").data("validator").element("#username");
+
     }
 
-    function removeData() {
-        $("#username").removeData("previousValue");
+    // 重置表单验证信息
+    function reset() {
+        $("#fm1").validate().resetForm();
     }
-
 
     // ]]>
 </script>
