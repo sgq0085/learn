@@ -15,9 +15,9 @@ var $cr = $(cr);
 #ID                     根据给定ID匹配一个元素    单个元素    $("#test") 选取ID为test的一个元素
 .class                  根据给定类名匹配元素      集合元素    $(".test") 选取所有class为test的元素
 element                 根据给定元素名匹配元素    集合元素    $("p") 选取所有<p>元素
-*                       匹配所有元素              集合元素    $("*") 选取所有元素
+*                       匹配所有元素            集合元素    $("*") 选取所有元素
 "selector1,selector2"   将各个选择器结果合并返回  集合元素    $("div,span,p.myClass")选取所有<div>元素，<span>和class为myClass的<p>标签
-
+.class1.class2          同时拥有class1和class2  集合元素    $(".test1.test2") 选取同时拥有class1 class2的元素
 
 
 2.层次选择器(4个)

@@ -497,6 +497,7 @@
                 <version>2.2</version>
                 <configuration>
                     <uriEncoding>UTF-8</uriEncoding>
+                    <port>8090</port>
                 </configuration>
             </plugin>
 
