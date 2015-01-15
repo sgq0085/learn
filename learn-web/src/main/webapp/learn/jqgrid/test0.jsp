@@ -2,7 +2,7 @@
 <%@ include file="../../commons/taglibs.jsp" %>
 <html>
 <head>
-    <title>jqgrid1</title>
+    <title>jqgrid0</title>
 
     <%@include file="../../commons/jqgrid.jsp" %>
 

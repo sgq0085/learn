@@ -34,6 +34,15 @@
         <url-pattern>/jqgrid1</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>selectServlet</servlet-name>
+        <servlet-class>com.gqshao.servlet.SelectServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>selectServlet</servlet-name>
+        <url-pattern>/select</url-pattern>
+    </servlet-mapping>
+
     <filter>
         <filter-name>sitemesh</filter-name>
         <filter-class>org.sitemesh.config.ConfigurableSiteMeshFilter</filter-class>

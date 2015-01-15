@@ -1,5 +1,6 @@
 package com.gqshao.servlet;
 
+
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Lists;
@@ -19,41 +20,26 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- * 常用jqGrid返回值封装 包括 页码、总页数、总条目数、当前页数据
+ * 为表单Select元素提供随机option参数值
  */
-public class JqGrid1Servlet extends HttpServlet {
+public class SelectServlet extends HttpServlet {
 
     @Override
     public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String page = request.getParameter("page");
         ObjectMapper mapper = new ObjectMapper();
         // 设置输入时忽略在JSON字符串中存在但Java对象实际没有的属性
         mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 
         Map<String, Object> res = Maps.newHashMap();
-        res.put("success", "true");
-        // 当前页码
-        if (StringUtils.isNotBlank(page)) {
-            res.put("page", page);
-        } else {
-            res.put("page", 1);
-        }
-        // 总页数
-        res.put("total", "5");
-        // 数据行总数的数据
-        res.put("records", 75);
-        List<Map<String, Object>> datas = Lists.newArrayList();
+        List<Map<String, String>> options = Lists.newArrayList();
 
         for (int i = 0; i < 15; i++) {
-            Map<String, Object> data = Maps.newHashMap();
-            data.put("id", UUID.randomUUID());
-            data.put("name", data.get("id").toString().substring(0, 8));
-            data.put("age", (int) (Math.random() * 80));
-            data.put("sex", (int) (Math.random() * 2));
-            data.put("date", new Date());
-            datas.add(data);
+            Map<String, String> opt = Maps.newHashMap();
+            opt.put("key", "key-2-" + i);
+            opt.put("value", "value-2-" + i);
+            options.add(opt);
         }
-        res.put("data", datas);
+        res.put("options", options);
         String json = mapper.writeValueAsString(res);
 
         PrintWriter out = response.getWriter();
@@ -62,6 +48,4 @@ public class JqGrid1Servlet extends HttpServlet {
         IOUtils.closeQuietly(out);
 
     }
-
-
 }
