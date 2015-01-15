@@ -30,6 +30,7 @@
         <guava.version>17.0</guava.version>
         <commons-lang3.version>3.3.2</commons-lang3.version>
         <commons-codec.version>1.9</commons-codec.version>
+        <commons-collections.version>3.2.1</commons-collections.version>
         <dozer.version>5.5.1</dozer.version>
         <joda-time.version>2.3</joda-time.version>
         <jackson.version>2.4.2</jackson.version>
