@@ -3,6 +3,8 @@ package com.gqshao.redis.channels;
 
 import com.gqshao.redis.JedisTest;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import redis.clients.jedis.Jedis;
 
 import java.util.concurrent.ExecutorService;
@@ -13,6 +15,8 @@ import java.util.concurrent.TimeUnit;
  * 发布/订阅
  */
 public class MessageTest extends JedisTest {
+
+    protected static Logger logger = LoggerFactory.getLogger(MessageTest.class);
 
     /**
      * SUBSCRIBE [channel...] 订阅一个匹配的通道

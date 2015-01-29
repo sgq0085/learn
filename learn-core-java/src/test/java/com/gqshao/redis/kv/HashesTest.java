@@ -3,6 +3,8 @@ package com.gqshao.redis.kv;
 import com.google.common.collect.Maps;
 import com.gqshao.redis.JedisTest;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 
@@ -11,6 +13,9 @@ import java.util.Map;
  * 对于Hashes key是名称、field是hashmap的key，value是hashmap的value
  */
 public class HashesTest extends JedisTest {
+
+    protected static Logger logger = LoggerFactory.getLogger(HashesTest.class);
+
     /**
      * hset [key] [field] [value] 设置field的value
      * hsetnx [key] [field] [value] 设置field的value，如果key不存在，则先创建，如果field已经存在返回0，nx是not exist

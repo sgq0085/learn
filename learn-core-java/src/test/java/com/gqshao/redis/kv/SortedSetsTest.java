@@ -3,6 +3,8 @@ package com.gqshao.redis.kv;
 import com.google.common.collect.Maps;
 import com.gqshao.redis.JedisTest;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import redis.clients.jedis.Tuple;
 
 import java.util.Map;
@@ -15,6 +17,8 @@ import java.util.Set;
  * 可以有相同的score值
  */
 public class SortedSetsTest extends JedisTest {
+
+    protected static Logger logger = LoggerFactory.getLogger(SortedSetsTest.class);
 
     /**
      * 添加操作

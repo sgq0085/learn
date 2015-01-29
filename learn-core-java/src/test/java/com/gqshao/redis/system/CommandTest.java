@@ -2,11 +2,15 @@ package com.gqshao.redis.system;
 
 import com.gqshao.redis.JedisTest;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 常用命令测试
  */
 public class CommandTest extends JedisTest {
+
+    protected static Logger logger = LoggerFactory.getLogger(CommandTest.class);
 
     /**
      * keys [patten] 返回满足给定patten的所有key

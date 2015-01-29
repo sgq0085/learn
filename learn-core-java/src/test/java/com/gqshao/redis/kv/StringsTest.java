@@ -2,11 +2,15 @@ package com.gqshao.redis.kv;
 
 import com.gqshao.redis.JedisTest;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Strings二进制数据
  */
 public class StringsTest extends JedisTest {
+
+    protected static Logger logger = LoggerFactory.getLogger(StringsTest.class);
 
     /**
      * set [key] [value] 设置一个key的value值

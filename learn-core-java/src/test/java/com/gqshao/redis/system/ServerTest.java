@@ -1,10 +1,15 @@
 package com.gqshao.redis.system;
 
 import com.gqshao.redis.JedisTest;
+import org.junit.Ignore;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import redis.clients.jedis.JedisMonitor;
 
 public class ServerTest extends JedisTest {
+
+    protected static Logger logger = LoggerFactory.getLogger(ServerTest.class);
 
     /**
      * quit 退出连接，只对当前得到的连接有影响，不影响pool中连接
@@ -55,6 +60,7 @@ public class ServerTest extends JedisTest {
     /**
      * monitor 实时监控服务器
      */
+    @Ignore
     @Test
     public void testMonitor() {
         new Thread(new Runnable() {

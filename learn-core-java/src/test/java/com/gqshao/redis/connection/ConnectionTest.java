@@ -1,6 +1,9 @@
 package com.gqshao.redis.connection;
 
+import org.junit.Ignore;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import redis.clients.jedis.*;
 
 import java.util.Arrays;
@@ -9,7 +12,11 @@ import java.util.List;
 /**
  * Redis的Java客户端Jedis的八种调用方式
  */
+// 该类测试时间过长
+@Ignore
 public class ConnectionTest {
+
+    protected static Logger logger = LoggerFactory.getLogger(ConnectionTest.class);
 
     /**
      * 普通连接方式
@@ -23,7 +30,7 @@ public class ConnectionTest {
             String result = jedis.set("n" + i, "n" + i);
         }
         long end = System.currentTimeMillis();
-        System.out.println("Simple SET: " + ((end - start) / 1000.0) + " seconds");
+        logger.info("Simple SET: " + ((end - start) / 1000.0) + " seconds");
         // 销毁
         jedis.disconnect();
     }
@@ -43,7 +50,7 @@ public class ConnectionTest {
         }
         long end = System.currentTimeMillis();
         pool.returnResource(jedis);
-        System.out.println("POOL SET: " + ((end - start) / 1000.0) + " seconds");
+        logger.info("POOL SET: " + ((end - start) / 1000.0) + " seconds");
         // 销毁
         jedis.disconnect();
     }
@@ -63,7 +70,7 @@ public class ConnectionTest {
         }
         List<Object> results = tx.exec();
         long end = System.currentTimeMillis();
-        System.out.println("Transaction SET: " + ((end - start) / 1000.0) + " seconds");
+        logger.info("Transaction SET: " + ((end - start) / 1000.0) + " seconds");
         jedis.disconnect();
     }
 
@@ -82,7 +89,7 @@ public class ConnectionTest {
         }
         List<Object> results = pipeline.syncAndReturnAll();
         long end = System.currentTimeMillis();
-        System.out.println("Pipelined SET: " + ((end - start) / 1000.0) + " seconds");
+        logger.info("Pipelined SET: " + ((end - start) / 1000.0) + " seconds");
         jedis.disconnect();
     }
 
@@ -106,7 +113,7 @@ public class ConnectionTest {
         pipeline.exec();
         List<Object> results = pipeline.syncAndReturnAll();
         long end = System.currentTimeMillis();
-        System.out.println("Pipelined transaction: " + ((end - start) / 1000.0) + " seconds");
+        logger.info("Pipelined transaction: " + ((end - start) / 1000.0) + " seconds");
         jedis.disconnect();
     }
 
@@ -128,7 +135,7 @@ public class ConnectionTest {
             String result = sharding.set("sn" + i, "n" + i);
         }
         long end = System.currentTimeMillis();
-        System.out.println("Simple@Sharing SET: " + ((end - start) / 1000.0) + " seconds");
+        logger.info("Simple@Sharing SET: " + ((end - start) / 1000.0) + " seconds");
 
         sharding.disconnect();
     }
@@ -151,7 +158,7 @@ public class ConnectionTest {
         }
         List<Object> results = pipeline.syncAndReturnAll();
         long end = System.currentTimeMillis();
-        System.out.println("Pipelined@Sharing SET: " + ((end - start) / 1000.0) + " seconds");
+        logger.info("Pipelined@Sharing SET: " + ((end - start) / 1000.0) + " seconds");
 
         sharding.disconnect();
     }
@@ -175,7 +182,7 @@ public class ConnectionTest {
         }
         long end = System.currentTimeMillis();
         pool.returnResource(one);
-        System.out.println("Simple@Pool SET: " + ((end - start) / 1000.0) + " seconds");
+        logger.info("Simple@Pool SET: " + ((end - start) / 1000.0) + " seconds");
 
         pool.destroy();
     }
@@ -203,7 +210,7 @@ public class ConnectionTest {
         List<Object> results = pipeline.syncAndReturnAll();
         long end = System.currentTimeMillis();
         pool.returnResource(one);
-        System.out.println("Pipelined@Pool SET: " + ((end - start) / 1000.0) + " seconds");
+        logger.info("Pipelined@Pool SET: " + ((end - start) / 1000.0) + " seconds");
         pool.destroy();
     }
 

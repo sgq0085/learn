@@ -2,6 +2,8 @@ package com.gqshao.redis.kv;
 
 import com.gqshao.redis.JedisTest;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import redis.clients.jedis.BinaryClient;
 
 /**
@@ -10,6 +12,8 @@ import redis.clients.jedis.BinaryClient;
  * index(下标) 正序(从左到右，从上到下)从0开始,逆序(从右到左，从下至上)从-1开始
  */
 public class ListsTest extends JedisTest {
+
+    protected static Logger logger = LoggerFactory.getLogger(ListsTest.class);
 
     /**
      * lpush [key] [value] 在key对应的list头部(左侧或上侧)添加Strings元素,返回Lists长度,可一次输入多个value，按输入顺序添加依次到头部

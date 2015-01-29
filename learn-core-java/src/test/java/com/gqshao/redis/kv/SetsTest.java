@@ -2,11 +2,15 @@ package com.gqshao.redis.kv;
 
 import com.gqshao.redis.JedisTest;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Sets 是无序集合 Sets中的value被称为member(成员)
  */
 public class SetsTest extends JedisTest {
+
+    protected static Logger logger = LoggerFactory.getLogger(SetsTest.class);
 
     /**
      * sadds [key] [members...] 添加一个或多个value members
