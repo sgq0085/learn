@@ -28,11 +28,16 @@ learn-web
 学习研究JQuery、Bootstrap等
 
 
-learn-no-sql
+learn-core-java
 -----------------------------------
+一些简单案例的研究学习<br>
 Redis和Memcached简单访问DEMO<br />
 1.[Redis安装](http://sgq0085.iteye.com/blog/2087750)<br />
-2.[Centos6.5安装Memcached](http://sgq0085.iteye.com/blog/2088440)<br />
+2.[Jedis对Redis数据的读取操作](http://sgq0085.iteye.com/blog/2170372)<br />
+3.[通过Jedis访问Redis](http://sgq0085.iteye.com/blog/2170375)<br />
+4.[Redis分布式连接和主从复制](http://sgq0085.iteye.com/blog/2171121)<br />
+5.[Redis消息订阅/发布](http://sgq0085.iteye.com/blog/2171127)<br />
+6.[Centos6.5安装Memcached](http://sgq0085.iteye.com/blog/2088440)<br />
 
 
 learn-msm
@@ -57,3 +62,12 @@ CAS服务器端和客户端的研究<br />
 2.[yale-cas服务器端深度定制](http://sgq0085.iteye.com/blog/2003190)<br />
 3.[cas server 4.0深度研究](http://sgq0085.iteye.com/blog/2099196)<br />
 4.[yale-cas 与 shiro进行整合](http://sgq0085.iteye.com/blog/2003783)<br />
+
+
+learn-shiro
+-----------------------------------
+shiro的研究<br />
+1.[简单的Spring整合Shiro](http://sgq0085.iteye.com/blog/1983832)<br />
+2.[Shiro一些补充](http://sgq0085.iteye.com/blog/2163641)<br />
+3.[Shiro通过Redis管理会话实现集群](http://sgq0085.iteye.com/blog/2170405)<br />
+3.集群中Quartz的配置<br />

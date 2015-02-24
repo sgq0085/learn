@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.3.xsd">
+
+    <description>Redis配置</description>
+
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig"
+          p:maxIdle="10" p:maxTotal="100" p:maxWaitMillis="-1" p:testOnBorrow="false"/>
+
+    <bean id="jedisPool1" class="redis.clients.jedis.JedisPool" depends-on="jedisPoolConfig">
+        <constructor-arg index="0" ref="jedisPoolConfig"/>
+        <constructor-arg index="1" value="${redis1.host}"/>
+        <constructor-arg index="2" value="${redis1.port}"/>
+        <constructor-arg index="3" value="0"/>
+    </bean>
+
+    <bean id="jedisPool2" class="redis.clients.jedis.JedisPool" depends-on="jedisPoolConfig">
+        <constructor-arg index="0" ref="jedisPoolConfig"/>
+        <constructor-arg index="1" value="${redis2.host}"/>
+        <constructor-arg index="2" value="${redis2.port}"/>
+        <constructor-arg index="3" value="0"/>
+    </bean>
+
+    <!-- 定期执行的消息通道守护任务 -->
+    <bean id="jdkExecutorJob" class="com.gqshao.redis.component.SubscribedJob">
+        <!-- 首次执行的延迟时间1秒 -->
+        <property name="initialDelay" value="1"/>
+        <!-- 一次执行终止和下一次执行开始之间的延迟180秒 -->
+        <property name="delay" value="180"/>
+        <property name="channels">
+            <array>
+                <value>channelA.test</value>
+                <value>channelB.send_message</value>
+            </array>
+        </property>
+    </bean>
+
+</beans>

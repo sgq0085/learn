@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+
+    <description>导入lcm中的applicationContext文件列表</description>
+
+    <!-- required -->
+    <import resource="classpath:security/applicationContext-shiro.xml" />
+
+    <!-- jedis 配置 -->
+    <import resource="classpath:redis/applicationContext-redis.xml" />
+    <!-- quartz 集群使用示例 -->
+    <import resource="schedule/applicationContext-quartz-timer-cluster.xml" />
+
+</beans>

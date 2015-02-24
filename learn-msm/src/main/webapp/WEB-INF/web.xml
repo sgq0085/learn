@@ -5,8 +5,16 @@
 
     <display-name>负载均衡实验</display-name>
 
+    <listener>
+        <listener-class>com.gqshao.listener.SessionListener</listener-class>
+    </listener>
+    
+    <listener>
+        <listener-class>com.gqshao.listener.TimerListener</listener-class>
+    </listener>
+    
     <session-config>
-        <session-timeout>30</session-timeout>
+        <session-timeout>1</session-timeout>
     </session-config>
 
     <welcome-file-list>

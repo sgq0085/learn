@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="utf-8" %>
+<!DOCTYPE html>
 <html>
 <head>
 
@@ -33,10 +34,10 @@
     );
 </script>
 
+
 <%--
 JS文件引入位置
 <script type=”text/javascript” src=”JS文件”></script>
 --%>
-
 </body>
 </html>

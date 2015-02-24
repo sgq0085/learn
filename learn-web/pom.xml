@@ -247,6 +247,11 @@
             <artifactId>commons-codec</artifactId>
             <version>${commons-codec.version}</version>
         </dependency>
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>${commons-collections.version}</version>
+        </dependency>
         <!-- GENERAL UTILS end -->
 
         <!-- LOGGING begin -->
@@ -315,7 +320,7 @@
 
         <!-- flyway -->
         <dependency>
-            <groupId>com.googlecode.flyway</groupId>
+            <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
             <version>${flyway.version}</version>
         </dependency>
@@ -497,6 +502,7 @@
                 <version>2.2</version>
                 <configuration>
                     <uriEncoding>UTF-8</uriEncoding>
+                    <port>8090</port>
                 </configuration>
             </plugin>
 
