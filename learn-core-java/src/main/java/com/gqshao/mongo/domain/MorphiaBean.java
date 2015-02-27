@@ -1,8 +1,6 @@
 package com.gqshao.mongo.domain;
 
 import org.joda.time.DateTime;
-import org.mongodb.morphia.annotations.NotSaved;
-import org.mongodb.morphia.annotations.Property;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -10,10 +8,11 @@ import java.util.UUID;
 
 @org.mongodb.morphia.annotations.Entity(value = "MorphiaBean", noClassnameStored = true)
 public class MorphiaBean implements Serializable {
+    @org.mongodb.morphia.annotations.Id
     public String id;
 
     // 字段可以被加载，但不被保存
-    @NotSaved
+    @org.mongodb.morphia.annotations.NotSaved
     public String name;
 
     // 字段被忽略(不加载/保存)
@@ -23,7 +22,7 @@ public class MorphiaBean implements Serializable {
     public String val;
 
     // 字段会被修改保存key
-    @Property("started")
+    @org.mongodb.morphia.annotations.Property("started")
     public Date date;
     public Boolean isTrue;
 
