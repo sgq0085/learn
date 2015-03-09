@@ -26,8 +26,14 @@ public class MorphiaTest {
                 MongoCredential credential = MongoCredential.createMongoCRCredential("root", "admin", "123456".toCharArray());
                 mongoClient = new MongoClient(new ServerAddress("192.168.3.106", 27017), Arrays.asList(credential));
                 // 创建Morphia datastore
-                Datastore datastore = new Morphia().createDatastore(mongoClient, "test");
-
+                Morphia morphia = new Morphia();
+                // Map bean
+                morphia.map(MorphiaBean.class);
+                Datastore datastore = morphia.createDatastore(mongoClient, "test");
+                // 确认建立固定长度的集合
+                datastore.ensureCaps();
+                // 缺人建立索引
+                datastore.ensureIndexes();
 
                 MorphiaBean bean1 = MorphiaBean.newInstance();
                 String beanId = UUID.randomUUID().toString();
@@ -49,7 +55,7 @@ public class MorphiaTest {
 
                 // 查询列表 find()
                 List<MorphiaBean> beans = datastore.createQuery(MorphiaBean.class)
-                        .field("id").equal(bean1).asList();
+                        .field("id").equal(bean1.getId()).asList();
 
                 // 取一个条件 findOne()
                 MorphiaBean oneBean = datastore.createQuery(MorphiaBean.class)
@@ -63,6 +69,8 @@ public class MorphiaTest {
 
                 // 按条件删除
                 datastore.delete(datastore.createQuery(MorphiaBean.class).filter("id", beanId2));
+                System.out.println(UUID.randomUUID().toString());
+                System.out.println(UUID.randomUUID().toString().replaceAll("-", ""));
             } finally {
                 mongoClient.close();
             }
