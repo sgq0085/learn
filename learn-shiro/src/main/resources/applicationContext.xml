@@ -18,16 +18,16 @@
     <!-- 使用annotation 自动注册bean,并检查@Required,@Autowired的属性已被注入 -->
     <context:component-scan base-package="com.gqshao">
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-        <context:exclude-filter type="annotation"
-                                expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
+        <context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
     </context:component-scan>
+
+    <bean name="myFilter" class="com.gqshao.spring.filter.MyFilter"/>
 
     <!-- 定义aspectj -->
     <aop:aspectj-autoproxy proxy-target-class="true"/>
 
     <!-- 读取配置文件 -->
     <context:property-placeholder ignore-resource-not-found="true" location="classpath*:/application.properties"/>
-
 
 
     <!-- 事务管理器, Jdbc单数据源事务 用于quartz-->
@@ -46,7 +46,7 @@
             <property name="table" value="LEARN_TEST_SCHEMA_VERSION"/>
             <property name="locations" value="db/migration/h2"/>
             <property name="baselineOnMigrate" value="true"/>
-            <property name="baselineVersion" >
+            <property name="baselineVersion">
                 <bean class="org.flywaydb.core.api.MigrationVersion" factory-method="fromVersion">
                     <constructor-arg value="0"/>
                 </bean>

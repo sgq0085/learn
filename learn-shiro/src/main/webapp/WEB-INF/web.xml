@@ -23,6 +23,10 @@
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
 
+    <listener>
+        <listener-class>com.gqshao.spring.listener.MyListener</listener-class>
+    </listener>
+
     <servlet>
         <servlet-name>springServlet</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -35,6 +39,16 @@
     <servlet-mapping>
         <servlet-name>springServlet</servlet-name>
         <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+    <!-- test servlet use spring bean -->
+    <servlet>
+        <servlet-name>myServlet</servlet-name>
+        <servlet-class>com.gqshao.spring.servlet.DelegatingServletProxy</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>myServlet</servlet-name>
+        <url-pattern>/testservlet</url-pattern>
     </servlet-mapping>
 
     <!-- Character Encoding filter -->
@@ -76,6 +90,22 @@
     <filter-mapping>
         <filter-name>sitemesh</filter-name>
         <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!-- test filter use spring bean -->
+    <filter>
+        <filter-name>MyFilter</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+        <init-param>
+            <param-name>targetBeanName</param-name>
+            <param-value>myFilter</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>MyFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
     </filter-mapping>
 
     <!-- 出错页面定义 -->
