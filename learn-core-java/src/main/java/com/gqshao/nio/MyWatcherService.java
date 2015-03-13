@@ -1,8 +1,14 @@
 package com.gqshao.nio;
 
+import org.apache.commons.io.FileUtils;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
+import java.util.UUID;
 
 import static java.nio.file.StandardWatchEventKinds.*;
 
@@ -10,6 +16,10 @@ import static java.nio.file.StandardWatchEventKinds.*;
  * JDK7 NIO2 文件监控
  */
 public class MyWatcherService {
+
+    // 时间格式化Format
+    private static final DateTimeFormatter dirNameFormat = DateTimeFormat.forPattern("yyyy-MM-dd HH mm ss ");
+
     public static void main(String[] args) throws IOException, InterruptedException {
         String dir = "C:\\Users\\Administrator\\Desktop\\test";
         Path path = Paths.get(dir);
@@ -52,11 +62,20 @@ public class MyWatcherService {
      * 通过修改文件名判断文件拷贝完成
      */
     public static void rename(String dir, String fileName) {
-        File file = new File(dir + File.separator + fileName);
-        File file2 = new File("C:\\Users\\Administrator\\Desktop\\test2" + File.separator + fileName);
-        file.renameTo(file2);
-        if (file2.exists()) {
-            System.out.printf("file %s copy over , you can do next with %s%n", file.getAbsolutePath(), file2.getAbsolutePath());
+        File src = new File(dir + File.separator + fileName);
+        String tmp = "C:\\Users\\Administrator\\Desktop\\test2";
+        File dest = new File(tmp + File.separator
+                + DateTime.now().toString(dirNameFormat)
+                + UUID.randomUUID().toString().replaceAll("-", "")
+                + File.separator + fileName);
+        try {
+            // 未拷贝完成不能移动
+            FileUtils.moveFile(src, dest);
+        } catch (Exception e) {
+            FileUtils.deleteQuietly(dest.getParentFile());
+        }
+        if (dest.exists()) {
+            System.out.printf("file %s copy over , you can do next with %s%n", src.getAbsolutePath(), dest.getAbsolutePath());
         }
     }
 }
