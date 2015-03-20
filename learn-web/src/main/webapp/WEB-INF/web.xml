@@ -28,16 +28,7 @@
         <url-pattern>/request</url-pattern>
     </servlet-mapping>
 
-    <!-- jqgrid 测试Servlet -->
-    <servlet>
-        <servlet-name>jqgrid1</servlet-name>
-        <servlet-class>com.gqshao.servlet.JqGrid1Servlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>jqgrid1</servlet-name>
-        <url-pattern>/jqgrid1</url-pattern>
-    </servlet-mapping>
-
+    <!-- jqgrid test2 测试用选项 -->
     <servlet>
         <servlet-name>selectServlet</servlet-name>
         <servlet-class>com.gqshao.servlet.SelectServlet</servlet-class>

@@ -2,7 +2,7 @@
 <%--在官方的基础上做过修改--%>
 <link type="text/css" rel="stylesheet" href="${ctx}/static/jquery/jquery-ui-1.10.3.custom_for_jqgrid/jquery-ui-1.10.3.custom.css" />
 <%--在官方的基础上做过修改--%>
-<link type="text/css" rel="stylesheet" href="./css/ui.jqgrid.custom.css"/>
+<link type="text/css" rel="stylesheet" href="${ctx}/static/jquery/jqGrid-4.7.1/css/ui.jqgrid.custom.css"/>
 <%--jQuery自动填充组件--%>
 <link type="text/css" rel="stylesheet" href="${ctx}/static/jquery/jquery-autocomplete/jquery.autocomplete.css"/>
 

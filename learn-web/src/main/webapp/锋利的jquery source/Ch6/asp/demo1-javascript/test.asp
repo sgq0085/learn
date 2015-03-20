@@ -1,3 +1,0 @@
-<% 
-response.Write("Hello Ajax!")
- %>
