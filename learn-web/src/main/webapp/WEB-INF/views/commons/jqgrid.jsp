@@ -50,6 +50,7 @@
     /* ]]> */
 </style>
 
+<%--显示消息用JS--%>
 <script type="text/javascript">
     /**
      showMessage({

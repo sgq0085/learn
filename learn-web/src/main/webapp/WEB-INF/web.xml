@@ -4,6 +4,20 @@
          version="2.5">
     <display-name>Archetype Created Web Application</display-name>
 
+    <servlet>
+        <servlet-name>springServlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>/WEB-INF/spring-mvc.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>springServlet</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
     <!-- Request 输出Request中信息 -->
     <servlet>
         <servlet-name>request</servlet-name>
@@ -14,17 +28,7 @@
         <url-pattern>/request</url-pattern>
     </servlet-mapping>
 
-    <!-- JSONP 测试Servlet -->
-    <servlet>
-        <servlet-name>jsonp</servlet-name>
-        <servlet-class>com.gqshao.servlet.JsonpServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>jsonp</servlet-name>
-        <url-pattern>/jsonp</url-pattern>
-    </servlet-mapping>
-
-    <!-- Request 输出Request中信息 -->
+    <!-- jqgrid 测试Servlet -->
     <servlet>
         <servlet-name>jqgrid1</servlet-name>
         <servlet-class>com.gqshao.servlet.JqGrid1Servlet</servlet-class>
@@ -75,7 +79,9 @@
         <dispatcher>FORWARD</dispatcher>
     </filter-mapping>
 
-    <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
-    </welcome-file-list>
+    <!-- 出错页面定义 -->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/WEB-INF/views/error/404.jsp</location>
+    </error-page>
 </web-app>
