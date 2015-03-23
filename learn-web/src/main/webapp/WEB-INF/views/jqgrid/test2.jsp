@@ -8,14 +8,12 @@
     <%@include file="/WEB-INF/views/commons/jqgrid.jsp" %>
 </head>
 <body>
-<div class="container">
     <div id="jqgrid" class="row">
         <%--jqGrid table list4--%>
         <table id="list"></table>
         <%--jqGrid 分页 div gridPager 如果一次展示全部数据 去掉该模块--%>
         <div id="pager"></div>
     </div>
-</div>
 <script type="text/javascript">
     $(function () {
         var option = {

@@ -10,7 +10,7 @@
 <%--语言属性 根元素指定 lang 属性--%>
 <html lang="zh-CN">
 <head>
-    <title>WEB <sitemesh:write property='title'/></title>
+    <title>WEB - <sitemesh:write property='title'/></title>
     <%--字符编码 明确声明字符编码--%>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
     <meta http-equiv="Cache-Control" content="no-store"/>
@@ -38,8 +38,8 @@
     <sitemesh:write property='head'/>
 </head>
 <body>
-
-<sitemesh:write property='body'/>
-
+<div class="container">
+    <sitemesh:write property='body'/>
+</div>
 </body>
 </html>

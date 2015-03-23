@@ -15,26 +15,52 @@ public class ZTreeController {
 
     /**
      * test1
+     * 最简单的DEMO
      */
     @RequestMapping("/test1")
-    public String test0() {
+    public String test1() {
         return "/ztree/test1";
     }
 
-    @RequestMapping("test1data")
-    @ResponseBody
-    public Map<String, Object> test1Data() {
-        Map<String, Object> father = Maps.newHashMap();
-        List<Map<String, Object>> children = Lists.newArrayList();
-        Map<String, Object> son1 = Maps.newHashMap();
-        son1.put("name", "子节点1");
-        Map<String, Object> son2 = Maps.newHashMap();
-        children.add(son1);
-        children.add(son2);
+    /**
+     * test2
+     * 常用简单配置
+     */
+    @RequestMapping("/test2")
+    public String test2() {
+        return "/ztree/test2";
+    }
 
-        son2.put("name", "子节点2");
-        father.put("name", "父节点1");
-        father.put("children", children);
-        return father;
+    /**
+     * test3
+     * 异步加载数据1
+     */
+    @RequestMapping("/test3")
+    public String test3() {
+        return "/ztree/test3";
+    }
+
+    /**
+     * 为异步加载提供数据
+     */
+    @RequestMapping("/test3data")
+    @ResponseBody
+    public List<Map<String, Object>> test3Data(String id,String name, Integer lv) {
+        List<Map<String, Object>> list = Lists.newArrayList();
+        if (id == null) {
+            id = "0";
+            name = "";
+            lv = 0;
+        } else {
+            name = name + ".";
+        }
+        for (int i = 1; i < 5; i++) {
+            Map<String, Object> node = Maps.newHashMap();
+            node.put("id", id + i);
+            node.put("name", name + "n" + i);
+            node.put("isParent", (i % 2 == 1 && lv < 2));
+            list.add(node);
+        }
+        return list;
     }
 }

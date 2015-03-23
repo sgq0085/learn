@@ -25,34 +25,32 @@
     <%@include file="/WEB-INF/views/commons/jqgrid.jsp" %>
 </head>
 <body>
-<div class="container">
-    <form id="searchForm" class="well form-inline" method="post">
-        登录名：
-        &nbsp;&nbsp;&nbsp;
-        <input type="text" id="s_loginName" name="s_loginName" class="form-control input-sm" placeholder="登录名"/>
-        &nbsp;&nbsp;&nbsp;
-        可选项1：
-        &nbsp;&nbsp;&nbsp;
-        <select id="s_param1" class="form-control input-sm" name="s_param1" <%--onchange="setOpt(this)"--%>>
-            <option value="">请选择</option>
-            <c:forEach items="${options1}" var="opt">
-                <option value="${opt.value}">${opt.key}</option>
-            </c:forEach>
-        </select>
-        &nbsp;&nbsp;&nbsp;
-        可选项：
-        &nbsp;&nbsp;&nbsp;
+<form id="searchForm" class="well form-inline" method="post">
+    登录名：
+    &nbsp;&nbsp;&nbsp;
+    <input type="text" id="s_loginName" name="s_loginName" class="form-control input-sm" placeholder="登录名"/>
+    &nbsp;&nbsp;&nbsp;
+    可选项1：
+    &nbsp;&nbsp;&nbsp;
+    <select id="s_param1" class="form-control input-sm" name="s_param1" <%--onchange="setOpt(this)"--%>>
+        <option value="">请选择</option>
+        <c:forEach items="${options1}" var="opt">
+            <option value="${opt.value}">${opt.key}</option>
+        </c:forEach>
+    </select>
+    &nbsp;&nbsp;&nbsp;
+    可选项：
+    &nbsp;&nbsp;&nbsp;
 
-        <select id="s_param2" class="form-control input-sm" name="s_param2">
-            <option value="">请选择</option>
-        </select>
-        &nbsp;&nbsp;&nbsp;
-        <button id="btnQuery" class="btn btn-primary btn-sm" type="button">查&nbsp;询</button>
-    </form>
+    <select id="s_param2" class="form-control input-sm" name="s_param2">
+        <option value="">请选择</option>
+    </select>
+    &nbsp;&nbsp;&nbsp;
+    <button id="btnQuery" class="btn btn-primary btn-sm" type="button">查&nbsp;询</button>
+</form>
 
-    <div id="jqgrid">
-        <table id="list"></table>
-    </div>
+<div id="jqgrid">
+    <table id="list"></table>
 </div>
 
 <script type="text/javascript">

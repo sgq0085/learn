@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/commons/taglibs.jsp" %>
 <html>
 <head>
-    <title>ztree1</title>
+    <title>zTree标准JSON数据</title>
     <%@include file="/WEB-INF/views/commons/ztree.jsp" %>
     <SCRIPT type="text/javascript">
         <!--
@@ -69,6 +69,7 @@
 
         ];
 
+        // 静态加载
         $(document).ready(function () {
             $.fn.zTree.init($("#treeDemo"), setting, zNodes);
         });
@@ -76,13 +77,6 @@
     </SCRIPT>
 </head>
 <body>
-
-<div class="container">
-    <div class="row">
-        <div class="col-lg-3 col-md-3">
-            <ul id="treeDemo" class="ztree well" style="height: 498px; overflow: auto; -moz-user-select: none;"></ul>
-        </div>
-    </div>
-</div>
+<ul id="treeDemo" class="ztree well" style="height: 498px; width: 200px; overflow: auto; -moz-user-select: none;"></ul>
 </body>
 </html>
