@@ -1,10 +1,10 @@
+<%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ include file="/WEB-INF/views/commons/taglibs.jsp" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Map" %>
 <%@ page import="org.apache.commons.collections.CollectionUtils" %>
 <%@ page import="com.google.common.collect.Lists" %>
 <%@ page import="com.google.common.collect.Maps" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="/WEB-INF/views/commons/taglibs.jsp" %>
 <%--装载Options数据--%>
 <%
     List<Map<String, String>> options = (List<Map<String, String>>) request.getAttribute("options");

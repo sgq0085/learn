@@ -1,0 +1,39 @@
+自动补全
+目前自动补全通过 jQuery UI 中Autocomplete实现
+1.引入 jquery-ui-1.10.3.custom.css 和 jquery-ui-1.10.3.custom.min.js
+2.实现代码
+<div class="ui-widget">
+    <label for="tags">Tags: </label>
+    <input type="text" id="tags" value="">
+</div>
+<script type="text/javascript">
+    $(function () {
+        var availableTags = [
+            "ActionScript",
+            "AppleScript",
+            "Asp",
+            "BASIC",
+            "C",
+            "C++",
+            "Clojure",
+            "COBOL",
+            "ColdFusion",
+            "Erlang",
+            "Fortran",
+            "Groovy",
+            "Haskell",
+            "Java",
+            "JavaScript",
+            "Lisp",
+            "Perl",
+            "PHP",
+            "Python",
+            "Ruby",
+            "Scala",
+            "Scheme"
+        ];
+        $("#tags").autocomplete({
+            source: availableTags
+        });
+    });
+</script>

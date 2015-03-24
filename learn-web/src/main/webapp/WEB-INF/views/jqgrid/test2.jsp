@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="/WEB-INF/views/commons/taglibs.jsp" %>
 <%--jqGrid研究二
 主要完成如何设置发起ajax请求，设置按钮、单选框等功能--%>
