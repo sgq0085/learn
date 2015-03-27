@@ -49,7 +49,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Brand</a>
+            <a class="navbar-brand" href="${ctx}">首页</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -64,7 +64,6 @@
                         <li class="divider"></li>
                         <li><a href="${ctx}/jqgrid/test2">异步加载1</a></li>
                         <li><a href="${ctx}/jqgrid/test3">异步加载2</a></li>
-
                     </ul>
                 </li>
 
@@ -76,12 +75,20 @@
                         <li><a href="${ctx}/ztree/test2">简单页面2</a></li>
                         <li class="divider"></li>
                         <li><a href="${ctx}/ztree/test3">异步加载2</a></li>
-
                     </ul>
                 </li>
                 <li><a href="${ctx}/validation/init">validation</a></li>
                 <li><a href="${ctx}/autocomplete/init">autocomplete</a></li>
                 <li><a href="${ctx}/jsonp/init">jsonp</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">form<span
+                            class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="${ctx}/form/test1">简单表单1</a></li>
+                        <li class="divider"></li>
+                        <li><a href="${ctx}/form/test2">复杂表单1</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->

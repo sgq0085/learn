@@ -17,26 +17,26 @@ import java.util.UUID;
 public class JqGridController {
 
     /**
-     * test0
-     */
-    @RequestMapping("/test1")
-    public String test0() {
-        return "/jqgrid/test1";
-    }
-
-    /**
      * test1
      */
-    @RequestMapping("/test2")
+    @RequestMapping("/test1")
     public String test1() {
-        return "/jqgrid/test2";
+        return "/jqgrid/test1";
     }
 
     /**
      * test2
      */
-    @RequestMapping("/test3")
+    @RequestMapping("/test2")
     public String test2() {
+        return "/jqgrid/test2";
+    }
+
+    /**
+     * test3
+     */
+    @RequestMapping("/test3")
+    public String test3() {
         return "/jqgrid/test3";
     }
 
