@@ -1,0 +1,151 @@
+http://plugins.krajee.com/file-input
+
+一.导入参数
+<input id="file_input" name="file" type="file" multiple="multiple">
+
+二.常用配置
+showCaption
+boolean whether to display the file caption. Defaults to true.
+是否显示文件标题
+
+showPreview
+boolean whether to display the file preview. Defaults to true.
+是否显示文件预览
+
+showRemove
+boolean whether to display the file remove/clear button. Defaults to true.
+是否显示清空按钮
+
+showUpload
+boolean whether to display the file upload button. Defaults to true. This will default to a form submit button, unless the uploadUrl is specified.
+是否显示提交按钮
+
+showCancel
+boolean whether to display the file upload cancel button. Defaults to true. This will be only enabled and displayed when an AJAX upload is in process.
+是否显示文件上传取消按钮
+
+captionClass
+追加标题css class
+
+previewClass
+追加文件预览css class
+
+mainClass
+追加css class
+
+initialDelimiter
+多选分隔符，Defaults to '*$$*'.
+
+
+initialPreview
+初始化预览，预览时需要设置的css class
+image files: Include CSS class file-preview-image
+text files: Include CSS class file-preview-text
+other files: Include CSS class file-preview-other
+
+previewSettings
+
+fileTypeSettings
+
+previewFileIcon
+
+browseLabel
+browseIcon
+browseClass
+
+removeLabel
+removeIcon
+removeClass
+removeTitle
+
+uploadLabel
+uploadIcon
+uploadClass
+uploadTitle
+uploadUrl
+uploadAsync
+
+maxFileSize
+
+uploadExtraData
+
+minFileCount
+
+maxFileCount
+
+
+
+
+
+三.事件
+fileclear
+
+filecleared
+
+fileloaded
+
+filereset
+
+fileimageloaded
+
+filebrowse
+
+filebatchselected
+
+fileselectnone
+
+filelock
+
+fileunlock
+
+filepredelete
+
+filedeleted
+
+filepreupload
+
+fileuploaded
+
+filebatchpreupload
+
+filebatchuploadsuccess
+
+filebatchuploadcomplete
+
+filedisabled
+
+fileenabled
+
+
+四.方法
+disable
+    $('#input-id').fileinput('disable');
+
+enable
+    $('#input-id').fileinput('enable');
+
+reset
+    $('#input-id').fileinput('reset');
+
+refresh
+    // example 1 (disable at runtime)
+    $('#input-id').attr('disabled', 'disabled');
+    $('#input-id').fileinput('refresh');
+
+    // example 2 (modify plugin options at runtime)
+    $('#input-id').fileinput('refresh', {browseLabel: 'Select...', removeLabel: 'Delete'});
+
+clear
+    $('#input-id').fileinput('clear');
+
+upload
+    $('#input-id').fileinput('upload');
+
+cancel
+    $('#input-id').fileinput('cancel');
+
+lock
+    $('#input-id').fileinput('lock');
+
+unlock
+    $('#input-id').fileinput('unlock');

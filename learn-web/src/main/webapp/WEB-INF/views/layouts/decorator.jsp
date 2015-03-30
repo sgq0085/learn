@@ -57,8 +57,7 @@
             <ul class="nav navbar-nav">
                 <%--<li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>--%>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">jqgrid<span
-                            class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">JqGrid<span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="${ctx}/jqgrid/test1">简单页面</a></li>
                         <li class="divider"></li>
@@ -68,8 +67,7 @@
                 </li>
 
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">zTree<span
-                            class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">zTree<span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="${ctx}/ztree/test1">简单页面1</a></li>
                         <li><a href="${ctx}/ztree/test2">简单页面2</a></li>
@@ -77,12 +75,20 @@
                         <li><a href="${ctx}/ztree/test3">异步加载2</a></li>
                     </ul>
                 </li>
-                <li><a href="${ctx}/validation/init">validation</a></li>
-                <li><a href="${ctx}/autocomplete/init">autocomplete</a></li>
-                <li><a href="${ctx}/jsonp/init">jsonp</a></li>
+                <li><a href="${ctx}/validation/init">Validation</a></li>
+                <li><a href="${ctx}/autocomplete/init">AutoComplete</a></li>
+                <li><a href="${ctx}/jsonp/init">JsonP</a></li>
+
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">form<span
-                            class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Bootstrap<span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="${ctx}/bootstrap/fileinput/init">fileinput</a></li>
+                        <li class="divider"></li>
+                        <li><a href="${ctx}/bootstrap/datetimepicker/init">datetimepicker</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Form<span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="${ctx}/form/test1">简单表单1</a></li>
                         <li class="divider"></li>
