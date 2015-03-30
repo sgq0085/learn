@@ -3,18 +3,20 @@
 <html>
 <head>
     <title>日期选择框</title>
-    <%@ include file="/WEB-INF/views/commons/datetimepicker.jsp"%>
+    <%@ include file="/WEB-INF/views/commons/jquery-form.jsp" %>
+    <%@ include file="/WEB-INF/views/commons/datetimepicker.jsp" %>
+    <%@ include file="/WEB-INF/views/commons/bootstrap-message.jsp" %>
 </head>
 <body>
-<form id="form" action="${ctx}/excel/upload" class="form-horizontal" method="post"
-      enctype="multipart/form-data">
+
+<form id="form" action="${ctx}/bootstrap/datetimepicker/show" class="form-horizontal" method="post">
     <div class="form-group">
         <label class="col-lg-3 col-md-3 control-label" for="recordDay">
             <span style="color: red">*</span>时间点：
         </label>
 
         <div class="col-lg-5 col-md-5">
-            <div id="record" class="input-group date form_date">
+            <div id="record" class="input-group date" readonly>
                 <input id="recordDay" class="form-control input-sm" name="recordDay" type="text"/>
                 <span class="input-group-addon input-sm btn">
                     <i class="glyphicon glyphicon-calendar"></i>
@@ -46,9 +48,29 @@
             </div>
         </div>
     </div>
+
+    <div class="col-lg-offset-5  col-md-offset-5 col-lg-3 col-md-3">
+        <button id="submit" type="submit" class="btn btn-primary">提交</button>
+        <button type="reset" class="btn btn-info">重置</button>
+    </div>
 </form>
 <script type="text/javascript">
     $(function () {
+        $('#form').on('submit', function (e) {
+            e.preventDefault(); // <-- important
+        });
+
+        $("#record").datetimepicker({
+            language: 'zh-CN',
+            format: 'yyyy-mm-dd hh:ii',
+            // 一周从哪一天开始
+            weekStart: 1,
+            // 当选择一个日期之后是否立即关闭此日期时间选择器
+            autoclose: 1,
+            startView: 2,
+            forceParse: 0
+        });
+
         $('.form_date').datetimepicker({
             language: 'zh-CN',
             format: 'yyyy-mm-dd',
@@ -69,6 +91,22 @@
             $('#minDay').datetimepicker('setEndDate', ev.date);
         });
 
+
+        $("#submit").click(function () {
+            $("#submit").attr("disabled", true);
+            $("#form").ajaxSubmit({
+                url: $("#form").attr("action") + "?timestamp=" + new Date().getTime(),
+                success: function (event, status, xhr) {
+                    bs_info("record : " + event.recordDay
+                    + ", min : " + event.min + ", max : " + event.max);
+                    $("#submit").attr("disabled", false);
+                },
+                error: function (event) {
+                    bs_error("处理失败");
+                    $("#submit").attr("disabled", false);
+                }
+            });
+        });
     });
 </script>
 </body>

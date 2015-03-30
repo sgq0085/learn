@@ -35,13 +35,17 @@
     </div>
 
     <div class="col-lg-offset-5  col-md-offset-5 col-lg-3 col-md-3">
-        <button id="submit" type="button" class="btn btn-primary">提交</button>
+        <button id="submit" type="submit" class="btn btn-primary">提交</button>
         <button type="reset" class="btn btn-info">重置</button>
     </div>
 
 </form>
 <script type="text/javascript">
     $(function () {
+        $('#form').on('submit', function (e) {
+            e.preventDefault(); // <-- important
+        });
+
         $("#file_input").fileinput({
             showCaption: true,
             showPreview: false,
