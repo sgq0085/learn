@@ -1,4 +1,4 @@
-package com.gqshao.jsonp.controller;
+package com.gqshao.jquery.controller;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;

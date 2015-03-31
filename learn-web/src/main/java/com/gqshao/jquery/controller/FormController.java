@@ -1,4 +1,4 @@
-package com.gqshao.form.controller;
+package com.gqshao.jquery.controller;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -11,7 +11,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("form")
-public class Form {
+public class FormController {
 
     /**
      * test1

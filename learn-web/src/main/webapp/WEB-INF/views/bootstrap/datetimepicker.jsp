@@ -40,11 +40,33 @@
         <div class="col-lg-1 col-md-1" style="width:10px;margin-top：:30px;margin-left:30px;">—</div>
 
         <div class="col-lg-2 col-md-2">
-            <div id="maxDay" class="input-group date form_date" style="width:200px;margin-left:20px">
+            <div id="maxDay" class="input-group date form_date" style="width:200px;margin-left:10px">
                 <input id="max" class="form-control input-sm" name="max" type="text"/>
                 <span class="input-group-addon input-sm btn">
                     <i class="glyphicon glyphicon-calendar"></i>
                 </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-lg-3 col-md-3 control-label">时间范围：</label>
+
+        <div class="col-lg-2 col-md-2">
+            <div id="start" class="input-group date form_date" style="width:200px;">
+                <input id="start_time" class="form-control input-sm" name="start_time" type="text"/>
+                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+            </div>
+        </div>
+
+        <div class="col-lg-1 col-md-1" style="width:10px;margin-top：:30px;margin-left:30px;">—</div>
+
+        <div class="col-lg-2 col-md-2">
+            <div id="end" class="input-group date form_date" style="width:200px;margin-left:10px">
+                <input id="end_time" class="form-control input-sm" name="max" type="text"/>
+                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
             </div>
         </div>
     </div>
@@ -91,19 +113,60 @@
             $('#minDay').datetimepicker('setEndDate', ev.date);
         });
 
+        function checkTime() {
+            var start = $('#start_time').val();
+            var end = $('#end_time').val()
+            if (start && end) {
+                return new Date(start) < new Date(end);
+            } else {
+                return true;
+            }
+        }
+
+        $("#start").datetimepicker().on('changeDate', function (ev) {
+            if (!checkTime()) {
+                bs_error("开始时间不能大于结束时间");
+            }
+        });
+
+        $("#end").datetimepicker().on('changeDate', function (ev) {
+            if (!checkTime()) {
+                bs_error("结束时间不能小于开始时间");
+            }
+        });
+
 
         $("#submit").click(function () {
             $("#submit").attr("disabled", true);
-            $("#form").ajaxSubmit({
+            /*$("#form").ajaxSubmit({
+             url: $("#form").attr("action") + "?timestamp=" + new Date().getTime(),
+             success: function (event, status, xhr) {
+             bs_info("record : " + event.recordDay
+             + ", min : " + event.min + ", max : " + event.max);
+             $("#submit").attr("disabled", false);
+             },
+             error: function (event) {
+             bs_error("处理失败");
+             $("#submit").attr("disabled", false);
+             }
+             });*/
+            $.ajax({
+                type: "POST",
                 url: $("#form").attr("action") + "?timestamp=" + new Date().getTime(),
+                data: {
+                    "recordDay": $("#recordDay").val(),
+                    "max": $("#max").val(),
+                    "min": $("#min").val()
+                },
                 success: function (event, status, xhr) {
-                    bs_info("record : " + event.recordDay
-                    + ", min : " + event.min + ", max : " + event.max);
                     $("#submit").attr("disabled", false);
+                    bs_info("record : " + event.recordDay + ", min : " + event.min + ", max : " + event.max);
+
                 },
                 error: function (event) {
-                    bs_error("处理失败");
                     $("#submit").attr("disabled", false);
+                    bs_error("处理失败");
+
                 }
             });
         });

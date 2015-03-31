@@ -1,4 +1,4 @@
-package com.gqshao.jqgrid.controller;
+package com.gqshao.jquery.controller;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;

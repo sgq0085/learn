@@ -1,4 +1,4 @@
-package com.gqshao.mapper;
+package com.gqshao.commons.mapper;
 
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonProcessingException;

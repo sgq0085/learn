@@ -39,7 +39,7 @@
 </head>
 <body>
 <div class="container">
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default" id="top">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
@@ -91,6 +91,14 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Form<span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="${ctx}/form/test1">简单表单1</a></li>
+                        <li class="divider"></li>
+                        <li><a href="${ctx}/form/test2">复杂表单1</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Highcharts<span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="${ctx}/highcharts/test1">简单实现1</a></li>
                         <li class="divider"></li>
                         <li><a href="${ctx}/form/test2">复杂表单1</a></li>
                     </ul>
