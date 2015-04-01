@@ -98,9 +98,14 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Highcharts<span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="${ctx}/highcharts/test1">简单实现1</a></li>
-                        <li class="divider"></li>
-                        <li><a href="${ctx}/form/test2">复杂表单1</a></li>
+                        <li><a href="${ctx}/highcharts/test1">普通Demo</a></li>
+                        <li><a href="${ctx}/highcharts/test2">Json数据</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Highstock<span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="${ctx}/highstock/test1">普通Demo</a></li>
                     </ul>
                 </li>
             </ul>
