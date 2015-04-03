@@ -1,0 +1,84 @@
+一. 加载位置
+用css控制长度和宽度，可以通过bootstrap来控制宽度
+<ul id="treeDemo" class="ztree well" style="height: 498px; width: 200px; overflow: auto; -moz-user-select: none;"></ul>
+注：CSS中 -moz-user-select: none 作用是文字不可以选中
+
+二.$.fn.zTree
+1.静态加载
+setting 配置信息JSON ， zNodes 数据JSON
+$(document).ready(function () {
+    $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+});
+
+2.ZTreeObj 根据treeId获取zTree对象的方法
+$.fn.zTree.getZTreeObj("treeDemo")，注意不是ID选择器没有#号
+
+三.简单的常用配置Setting （详细见官方API）
+1.简单 JSON 数据 :  data.simpleData.enable
+
+2.不显示连接线 : view.showLine
+
+3.不显示父节点图标 : view.showIcon
+
+4.默认打开 : 属性open
+
+5.自定义定义图标 父节点自定义展开/折叠时图标的 URL 路径 : 属性iconOpen/iconClose
+
+6.定义图标 节点自定义图标的 URL 路径 : 属性icon
+
+7.定义图标 节点自定义图标的 className : 属性iconSkin
+当iconSkin值为 MyIconSkinName 时
+父节点对应的css为 .ztree li span.button.MyIconSkinName_ico_open, .ztree li span.button.MyIconSkinName_ico_close
+叶子节点对应的css为 .ztree li span.button.MyIconSkinName_ico_docu
+
+8.定义字体 fontCss
+实际使用时可以通过方法放回预定义的字体，防止出现异常
+
+9.name属性中使用HTML : nameIsHTML
+
+10.打开URL : 属性url:"", target: "_blank"
+
+11.点击事件 : 属性click
+
+四.异步加载
+1.开启异步加载 : async.enable
+
+2.异步加载URL : async.url
+
+3.异步加载时需要自动提交父节点属性的参数 : async.autoParam
+可选id,name,level，还可以修改提交的参数名
+
+4.Ajax 请求提交的静态参数键值对 : async.otherParam
+
+5.Ajax 获取的数据类型 : async.dataType
+默认值"text"
+
+6.Ajax 的 http 请求模式 : async.type
+默认值"post"
+
+7.Ajax 提交参数的数据类型 : async.contentType
+默认值："application/x-www-form-urlencoded"
+
+8.用于对 Ajax 返回数据进行预处理的函数 : async.dataFilter
+
+
+五.事件
+1.捕获单击节点之前的事件回调函数 : callback.beforeClick
+传入参数function beforeClick(treeId, treeNode) { }
+
+2.异步加载之前的事件回调函数 : callback.beforeAsync
+
+3.捕获异步加载出现异常错误的事件回调函数 : callback.onAsyncError
+function onAsyncError(event, treeId, treeNode, XMLHttpRequest, textStatus, errorThrown) { }
+
+4.捕获异步加载正常结束的事件回调函数 : callback.onAsyncSuccess
+function onAsyncSuccess(event, treeId, treeNode, msg) { }
+
+
+六.zTreeObj方法
+1.获取 zTree 当前被选中的节点数据集合 : zTreeObj.getSelectedNodes
+
+2.刷新 : zTreeObj.refresh()
+
+3.刷新节点 : zTreeObj.reAsyncChildNodes
+zTree.reAsyncChildNodes(parentNode, reloadType, isSilent)

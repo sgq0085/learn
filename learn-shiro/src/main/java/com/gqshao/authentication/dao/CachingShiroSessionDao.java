@@ -225,7 +225,7 @@ public class CachingShiroSessionDao extends CachingSessionDAO {
             if (CollectionUtils.isEmpty(keys)) {
                 return null;
             }
-            List<String> valueList = jedis.mget(keys.toArray(new String[0]));
+            List<String> valueList = jedis.mget(keys.toArray(new String[keys.size()]));
             return SerializeUtils.deserializeFromStringController(valueList);
         } catch (Exception e) {
             logger.warn("统计Session信息失败", e);

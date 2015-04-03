@@ -3,6 +3,7 @@ package com.gqshao.redis.domin;
 import java.io.Serializable;
 import java.util.Date;
 
+
 public class SerializableBean implements Serializable {
     public String id;
     public String name;

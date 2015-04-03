@@ -47,7 +47,7 @@
         <selenium.version>2.42.2</selenium.version>
         <jetty.version>7.6.15.v20140411</jetty.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <jdk.version>1.6</jdk.version>
+        <jdk.version>1.7</jdk.version>
     </properties>
 
     <modules>

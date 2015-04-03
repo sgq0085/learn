@@ -42,10 +42,15 @@ public class SelectServlet extends HttpServlet {
         res.put("options", options);
         String json = mapper.writeValueAsString(res);
 
-        PrintWriter out = response.getWriter();
-        out.print(json);
-        out.flush();
-        IOUtils.closeQuietly(out);
+        PrintWriter out = null;
+        try {
+            out = response.getWriter();
+            out.print(json);
+            out.flush();
+        } catch (Exception e) {
+            IOUtils.closeQuietly(out);
+        }
+
 
     }
 }
