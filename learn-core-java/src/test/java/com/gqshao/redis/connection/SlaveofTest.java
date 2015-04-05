@@ -2,6 +2,7 @@ package com.gqshao.redis.connection;
 
 
 import com.gqshao.redis.utils.JedisUtils;
+import com.gqshao.redis.utils.JedisUtilsTest;
 import org.junit.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -83,7 +84,7 @@ public class SlaveofTest {
         // 测试值仍然存在
         logger.info("jedis2.get again : " + jedis2.get("mykey1"));
         // Redis2中存入数据
-        logger.info("jedis2.set mykey2 myvalue2 : "+jedis2.set("mykey2", "myvalue2"));
+        logger.info("jedis2.set mykey2 myvalue2 : " + jedis2.set("mykey2", "myvalue2"));
         // Redis1设置为Redis2的slave
         jedis1.slaveof("192.168.3.98", 6380);
         try {

@@ -4,10 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 
-public class SerializableBean implements Serializable {
-    public String id;
-    public String name;
-    public String value;
+public class SerializableBean extends BaseBean implements Serializable {
+    private String value;
     public Date date;
     public Boolean isTrue;
 
@@ -16,8 +14,8 @@ public class SerializableBean implements Serializable {
     }
 
     public SerializableBean(String id, String name, String value, Date date, Boolean isTrue) {
-        this.id = id;
-        this.name = name;
+        super.setId(id);
+        super.setName(name);
         this.value = value;
         this.date = date;
         this.isTrue = isTrue;
@@ -37,22 +35,6 @@ public class SerializableBean implements Serializable {
 
     public void setIsTrue(Boolean isTrue) {
         this.isTrue = isTrue;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getValue() {

@@ -1,6 +1,6 @@
 package com.gqshao.redis.kv;
 
-import com.gqshao.redis.JedisTest;
+import com.gqshao.redis.JedisTestBase;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Sets 是无序集合 Sets中的value被称为member(成员)
  */
-public class SetsTest extends JedisTest {
+public class SetsTest extends JedisTestBase {
 
     protected static Logger logger = LoggerFactory.getLogger(SetsTest.class);
 

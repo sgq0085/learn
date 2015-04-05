@@ -1,6 +1,6 @@
 package com.gqshao.redis.kv;
 
-import com.gqshao.redis.JedisTest;
+import com.gqshao.redis.JedisTestBase;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Strings二进制数据
  */
-public class StringsTest extends JedisTest {
+public class StringsTest extends JedisTestBase {
 
     protected static Logger logger = LoggerFactory.getLogger(StringsTest.class);
 
@@ -40,10 +40,10 @@ public class StringsTest extends JedisTest {
      */
     @Test
     public void testSetex() throws InterruptedException {
-        logger.info("setex keysex 10 10sec : " + jedis.setex("keysex", 10, "10sec"));
+        logger.info("setex keysex 10 10sec : " + jedis.setex("keysex", 2, "10sec"));
         logger.info("get keysex : " + jedis.get("keysex"));
         logger.info("sleep 10 sec");
-        Thread.sleep(10000);
+        Thread.sleep(30000);
         logger.info("get keysex : " + jedis.get("keysex"));
         logger.info("del keysex : " + jedis.del("keysex"));
     }

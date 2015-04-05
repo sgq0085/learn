@@ -20,7 +20,7 @@
         <tomcat-jdbc.version>7.0.55</tomcat-jdbc.version>
         <commons-pool2.version>2.2</commons-pool2.version>
         <h2.version>1.3.176</h2.version>
-        <jedis.version>2.6.1</jedis.version>
+        <jedis.version>2.7.0</jedis.version>
         <spymemcached.version>2.11.5</spymemcached.version>
         <ehcache.version>2.6.8</ehcache.version>
         <quartz.version>2.2.1</quartz.version>

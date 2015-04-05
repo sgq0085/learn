@@ -1,7 +1,7 @@
 package com.gqshao.redis.kv;
 
 import com.google.common.collect.Maps;
-import com.gqshao.redis.JedisTest;
+import com.gqshao.redis.JedisTestBase;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +12,7 @@ import java.util.Map;
  * Hashes Strings类型的field和value的映射表.它的添加、删除操作都是O(1)(平均)。hash特别适合用于存储对象
  * 对于Hashes key是名称、field是hashmap的key，value是hashmap的value
  */
-public class HashesTest extends JedisTest {
+public class HashesTest extends JedisTestBase {
 
     protected static Logger logger = LoggerFactory.getLogger(HashesTest.class);
 

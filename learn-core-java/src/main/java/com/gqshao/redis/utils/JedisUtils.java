@@ -1,5 +1,6 @@
 package com.gqshao.redis.utils;
 
+import com.gqshao.redis.domin.SerializableBean;
 import org.apache.commons.io.IOUtils;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
@@ -10,6 +11,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Date;
 
 public class JedisUtils {
     public static JedisPoolConfig getMyDefaultJedisPoolConfig() {
@@ -33,6 +35,8 @@ public class JedisUtils {
         return poolConfig;
     }
 
+
+
     public static byte[] serialize(Object source) {
         if (source == null) {
             return null;
@@ -52,16 +56,16 @@ public class JedisUtils {
         return bos.toByteArray();
     }
 
-    public static Object deserialize(byte[] source) {
+    public static <T> T deserialize(byte[] source) {
         if (source == null) {
             return null;
         }
         ObjectInputStream oin = null;
-        Object result = null;
+        T result = null;
         try {
             ByteArrayInputStream bin = new ByteArrayInputStream(source);
             oin = new ObjectInputStream(bin);
-            result = oin.readObject();
+            result = (T) oin.readObject();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -70,64 +74,8 @@ public class JedisUtils {
         return result;
     }
 
-    public static Object unserialize(byte[] source) {
-        if (source == null) {
-            return null;
-        }
+    public static <T> T unserialize(byte[] source) {
         return deserialize(source);
-    }
-
-    public static <T> String set(String key, Object value) {
-        JedisPool pool = null;
-        String result = null;
-        try {
-            pool = new JedisPool(JedisUtils.getMyDefaultJedisPoolConfig(), "192.168.3.98", 6379);
-            Jedis jedis = pool.getResource();
-            result = JedisUtils.set(jedis, key, value);
-            pool.returnResource(jedis);
-
-        } catch (JedisConnectionException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-
-            pool.destroy();
-        }
-        return result;
-    }
-
-    public static <T> String set(Jedis jedis, String key, Object value) {
-        return jedis.set(key.getBytes(), JedisUtils.serialize(value));
-    }
-
-    public static <T> T get(String key, Class<T> type) {
-        JedisPool pool = null;
-        T result = null;
-        try {
-            pool = new JedisPool(JedisUtils.getMyDefaultJedisPoolConfig(), "192.168.3.98", 6379);
-            Jedis jedis = pool.getResource();
-            result = JedisUtils.get(jedis, key, type);
-            pool.returnResource(jedis);
-
-        } catch (JedisConnectionException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            pool.destroy();
-        }
-        return result;
-    }
-
-    public static <T> T get(Jedis jedis, String key, Class<T> type) {
-        Object result = JedisUtils.unserialize(jedis.get(key.getBytes()));
-        try {
-            return (T) result;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
     }
 
 

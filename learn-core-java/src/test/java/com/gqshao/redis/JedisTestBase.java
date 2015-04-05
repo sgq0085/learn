@@ -1,27 +1,26 @@
 package com.gqshao.redis;
 
 import com.gqshao.redis.utils.JedisUtils;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
+import org.junit.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
-public class JedisTest {
+import static org.assertj.core.api.Assertions.assertThat;
+
+public class JedisTestBase {
 
     protected static JedisPool pool;
     protected Jedis jedis = null;
-    protected static Logger logger = LoggerFactory.getLogger(JedisTest.class);
+    protected static Logger logger = LoggerFactory.getLogger(JedisTestBase.class);
 
     @BeforeClass
     public static void init() {
         JedisPoolConfig poolConfig = JedisUtils.getMyDefaultJedisPoolConfig();
         // timeout设置为0，解决JedisConnectionException
-        pool = new JedisPool(poolConfig, "192.168.3.98", 6379, 0);
+        pool = new JedisPool(poolConfig, "192.168.158.128", 8380, 0);
         logger.info("----------------------create resource----------------------");
     }
 
@@ -39,7 +38,7 @@ public class JedisTest {
 
     @After
     public void destroyJedis() {
-        pool.returnResource(jedis);
+        jedis.close();
         logger.info("----------------------return resource----------------------");
     }
 

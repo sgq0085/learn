@@ -1,13 +1,15 @@
 package com.gqshao.redis.system;
 
-import com.gqshao.redis.JedisTest;
+import com.gqshao.redis.JedisTestBase;
+import org.joda.time.DateTime;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisMonitor;
 
-public class ServerTest extends JedisTest {
+public class ServerTest extends JedisTestBase {
 
     protected static Logger logger = LoggerFactory.getLogger(ServerTest.class);
 
@@ -55,6 +57,7 @@ public class ServerTest extends JedisTest {
         // config get
         logger.info("config get test");
         logger.info("config get dir" + jedis.configGet("dir"));
+        logger.info("config get" + jedis.configGet("*"));
     }
 
     /**
@@ -63,24 +66,57 @@ public class ServerTest extends JedisTest {
     @Ignore
     @Test
     public void testMonitor() {
+        // 开启监控线程
         new Thread(new Runnable() {
+            @Override
             public void run() {
-                for (int i = 0; i < 100; i++) {
-                    jedis.ping();
-                    try {
-                        Thread.sleep(200);
-                    } catch (InterruptedException e) {
-                    }
+                Jedis monitorJedis = null;
+                final long start = DateTime.now().getMillis();
+                try {
+                    monitorJedis = pool.getResource();
+                    jedis.monitor(new JedisMonitor() {
+                        public void onCommand(String command) {
+                            // 开始10秒之后结束
+                            if (DateTime.now().minus(start).getMillis() > 10000) {
+                                System.exit(0);
+                            }
+                            System.out.println(command);
+                        }
+                    });
+                } finally {
+                    monitorJedis.close();
                 }
-                jedis.disconnect();
             }
         }).start();
 
-        jedis.monitor(new JedisMonitor() {
-            public void onCommand(String command) {
-                System.out.println(command);
+        // 开启监控线程
+        new Thread(new Runnable() {
+            public void run() {
+                Jedis pingJedis = null;
+                try {
+                    pingJedis = pool.getResource();
+                    for (int i = 0; i < 100; i++) {
+                        try {
+                            pingJedis.ping();
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                        }
+                    }
+                } finally {
+                    pingJedis.close();
+                }
+
             }
-        });
+        }).start();
+
+
+        while (true) {
+            try {
+                Thread.sleep(10000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 

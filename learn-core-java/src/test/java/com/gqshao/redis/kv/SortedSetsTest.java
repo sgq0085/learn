@@ -1,7 +1,7 @@
 package com.gqshao.redis.kv;
 
 import com.google.common.collect.Maps;
-import com.gqshao.redis.JedisTest;
+import com.gqshao.redis.JedisTestBase;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +16,7 @@ import java.util.Set;
  * Rank与Lists中index(下标)，功能一致，正序(从左到右，从上到下)从0开始,逆序(从右到左，从下至上)从-1开始
  * 可以有相同的score值
  */
-public class SortedSetsTest extends JedisTest {
+public class SortedSetsTest extends JedisTestBase {
 
     protected static Logger logger = LoggerFactory.getLogger(SortedSetsTest.class);
 
@@ -156,7 +156,8 @@ public class SortedSetsTest extends JedisTest {
         logger.info("zadd myzset -10 -10 10 10 : "
                 + jedis.zadd("myzset", memberScore) + "\n");
         logger.info("zrangebylex myzset （-10 （z : ");
-        Set<String> bylexRex = jedis.zrangeByLex("myzset", "(-10", "(z");
+        /*zrangeByLex 在 Redis 3.0.0中被移除*/
+        /*Set<String> bylexRex = jedis.zrangeByLex("myzset", "(-10", "(z");
         for (String res : bylexRex) {
             logger.info(res);
         }
@@ -165,7 +166,7 @@ public class SortedSetsTest extends JedisTest {
         bylexRex = jedis.zrangeByLex("myzset", "[-10", "(zh");
         for (String res : bylexRex) {
             logger.info(res);
-        }
+        }*/
 
         logger.info("del myzset : " + jedis.del("myzset"));
     }

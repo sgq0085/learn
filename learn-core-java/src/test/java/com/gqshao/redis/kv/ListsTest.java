@@ -1,6 +1,6 @@
 package com.gqshao.redis.kv;
 
-import com.gqshao.redis.JedisTest;
+import com.gqshao.redis.JedisTestBase;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +11,7 @@ import redis.clients.jedis.BinaryClient;
  * Redis的List是双向链表，最大长度是2的32次方（4G）
  * index(下标) 正序(从左到右，从上到下)从0开始,逆序(从右到左，从下至上)从-1开始
  */
-public class ListsTest extends JedisTest {
+public class ListsTest extends JedisTestBase {
 
     protected static Logger logger = LoggerFactory.getLogger(ListsTest.class);
 

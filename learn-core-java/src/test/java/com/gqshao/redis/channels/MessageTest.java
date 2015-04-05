@@ -1,7 +1,7 @@
 package com.gqshao.redis.channels;
 
 
-import com.gqshao.redis.JedisTest;
+import com.gqshao.redis.JedisTestBase;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * 发布/订阅
  */
-public class MessageTest extends JedisTest {
+public class MessageTest extends JedisTestBase {
 
     protected static Logger logger = LoggerFactory.getLogger(MessageTest.class);
 
