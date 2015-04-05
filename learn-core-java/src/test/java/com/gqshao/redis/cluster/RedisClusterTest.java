@@ -1,6 +1,7 @@
 package com.gqshao.redis.cluster;
 
 import com.google.common.collect.Sets;
+import com.gqshao.redis.channels.MyJedisPubSub;
 import com.gqshao.redis.utils.JedisUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
@@ -61,12 +62,17 @@ public class RedisClusterTest {
     public void eachNode() {
         // 测试各节点是否异常
         for (String key : nodes.keySet()) {
+            Jedis jedis = null;
             try {
-                Jedis jedis = nodes.get(key).getResource();
+                jedis = nodes.get(key).getResource();
                 jedis.ping();
                 jedis.close();
             } catch (Exception e) {
                 System.out.println("节点[" + key + "]异常");
+            } finally {
+                if (jedis != null) {
+                    jedis.close();
+                }
             }
         }
     }
@@ -75,13 +81,40 @@ public class RedisClusterTest {
     public void useMasterTest() {
         // 只从Master节点读取信息
         for (String key : nodes.keySet()) {
+            Jedis jedis = null;
             try {
-                Jedis jedis = nodes.get(key).getResource();
+                jedis = nodes.get(key).getResource();
                 if (StringUtils.isBlank(jedis.configGet("slaveof").get(1))) {
                     System.out.println(jedis.keys("foo*"));
                 }
             } catch (Exception e) {
                 System.out.println(key + "无法PING");
+            } finally {
+                if (jedis != null) {
+                    jedis.close();
+                }
+            }
+        }
+    }
+
+    @Test
+    public void testSubscribe() {
+        for (final String key : nodes.keySet()) {
+            try {
+                final MyJedisPubSub listener = new MyJedisPubSub();
+                final Jedis subscribeJedis = nodes.get(key).getResource();
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        System.out.println(key + " :subscribe channelA.test channelB.send_message");
+                        subscribeJedis.subscribe(listener, "channelA.test", "channelB.send_message");
+                    }
+                }).start();
+                Jedis publishJedis = nodes.get(key).getResource();
+                publishJedis.publish("channelA.test", "OK");
+                publishJedis.publish("channelB.send_message", "Hello World!");
+                listener.unsubscribe("channelA.test", "channelB.send_message");
+            } catch (Exception e) {
             }
         }
     }
