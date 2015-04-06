@@ -1,7 +1,8 @@
-package com.gqshao.authentication.singleton.dao;
+package com.gqshao.authentication.cluster.dao;
 
+import com.google.common.collect.Lists;
 import com.gqshao.authentication.component.ShiroSession;
-import com.gqshao.redis.singleton.utils.JedisUtil;
+import com.gqshao.redis.cluster.utils.JedisUtil;
 import com.gqshao.redis.utils.SerializeUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.session.Session;
@@ -15,18 +16,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import redis.clients.jedis.Jedis;
-import redis.clients.jedis.Transaction;
+import redis.clients.jedis.JedisCluster;
+import redis.clients.jedis.JedisPool;
 
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
-/**
- * 针对自定义的ShiroSession的Redis CRUD操作，通过isChanged标识符，确定是否需要调用Update方法
- * 通过配置securityManager在属性cacheManager查找从缓存中查找Session是否存在，如果找不到才调用下面方法
- * Shiro内部相应的组件（DefaultSecurityManager）会自动检测相应的对象（如Realm）是否实现了CacheManagerAware并自动注入相应的CacheManager。
- */
 public class CachingShiroSessionDao extends CachingSessionDAO {
 
     private static final Logger logger = LoggerFactory.getLogger(CachingShiroSessionDao.class);
@@ -38,7 +36,10 @@ public class CachingShiroSessionDao extends CachingSessionDAO {
     private int seconds = 0;
 
     @Autowired
-    private JedisUtil jedisUtil;
+    private JedisCluster jedisCluster;
+
+    @Autowired
+    JedisUtil jedisUtil;
 
     /**
      * 重写CachingSessionDAO中readSession方法，如果Session中没有登陆信息就调用doReadSession方法从Redis中重读
@@ -69,45 +70,33 @@ public class CachingShiroSessionDao extends CachingSessionDAO {
     protected Session doReadSession(Serializable sessionId) {
         logger.debug("begin doReadSession {} ", sessionId);
         Session session = null;
-        Jedis jedis = null;
         try {
-            jedis = jedisUtil.getResource();
             String key = prefix + sessionId;
-            String value = jedis.get(key);
+            String value = jedisCluster.get(key);
             if (StringUtils.isNotBlank(value)) {
                 session = SerializeUtil.deserializeFromString(value);
-                logger.info("sessionId {} ttl {}: ", sessionId, jedis.ttl(key));
+                logger.info("sessionId {} ttl {}: ", sessionId, jedisCluster.ttl(key));
                 // 重置Redis中缓存过期时间
-                jedis.expire(key, seconds);
+                jedisCluster.expire(key, seconds);
                 logger.info("sessionId {} name {} 被读取", sessionId, session.getClass().getName());
             }
         } catch (Exception e) {
             logger.warn("读取Session失败", e);
-        } finally {
-            jedisUtil.close(jedis);
         }
         return session;
     }
 
-    /**
-     * 从Redis中读取，但不重置Redis中缓存过期时间
-     */
     public Session doReadSessionWithoutExpire(Serializable sessionId) {
         Session session = null;
-        Jedis jedis = null;
         try {
-            jedis = jedisUtil.getResource();
             String key = prefix + sessionId;
-            String value = jedis.get(key);
+            String value = jedisCluster.get(key);
             if (StringUtils.isNotBlank(value)) {
                 session = SerializeUtil.deserializeFromString(value);
             }
         } catch (Exception e) {
             logger.warn("读取Session失败", e);
-        } finally {
-            jedisUtil.close(jedis);
         }
-
         return session;
     }
 
@@ -121,17 +110,13 @@ public class CachingShiroSessionDao extends CachingSessionDAO {
         // 创建一个Id并设置给Session
         Serializable sessionId = this.generateSessionId(session);
         assignSessionId(session, sessionId);
-        Jedis jedis = null;
         try {
-            jedis = jedisUtil.getResource();
             // session由Redis缓存失效决定，这里只是简单标识
             session.setTimeout(seconds);
-            jedis.setex(prefix + sessionId, seconds, SerializeUtil.serializeToString((ShiroSession) session));
+            jedisCluster.setex(prefix + sessionId, seconds, SerializeUtil.serializeToString((ShiroSession) session));
             logger.info("sessionId {} name {} 被创建", sessionId, session.getClass().getName());
         } catch (Exception e) {
             logger.warn("创建Session失败", e);
-        } finally {
-            jedisUtil.close(jedis);
         }
         return sessionId;
     }
@@ -156,27 +141,11 @@ public class CachingShiroSessionDao extends CachingSessionDAO {
                 if (!ss.isChanged()) {
                     return;
                 }
-                Jedis jedis = null;
-                Transaction tx = null;
-                try {
-                    jedis = jedisUtil.getResource();
-                    // 开启事务
-                    tx = jedis.multi();
-                    ss.setChanged(false);
-                    ss.setLastAccessTime(DateTime.now().toDate());
-                    tx.setex(prefix + session.getId(), seconds, SerializeUtil.serializeToString(ss));
-                    logger.debug("sessionId {} name {} 被更新", session.getId(), session.getClass().getName());
-                    // 执行事务
-                    tx.exec();
-                } catch (Exception e) {
-                    if (tx != null) {
-                        // 取消执行事务
-                        tx.discard();
-                    }
-                    throw e;
-                } finally {
-                    jedisUtil.close(jedis);
-                }
+                ss.setChanged(false);
+                ss.setLastAccessTime(DateTime.now().toDate());
+                jedisCluster.setex(prefix + session.getId(), seconds, SerializeUtil.serializeToString(ss));
+                jedisUtil.publish("shiro.session.uncache", session.getId());
+                logger.debug("sessionId {} name {} 被更新", session.getId(), session.getClass().getName());
             } else {
                 logger.debug("sessionId {} name {} 更新失败", session.getId(), session.getClass().getName());
             }
@@ -191,16 +160,12 @@ public class CachingShiroSessionDao extends CachingSessionDAO {
     @Override
     public void doDelete(Session session) {
         logger.debug("begin doDelete {} ", session);
-        Jedis jedis = null;
         try {
-            jedis = jedisUtil.getResource();
-            jedis.del(prefix + session.getId());
+            jedisCluster.del(prefix + session.getId());
             this.uncache(session.getId());
             logger.debug("shiro session id {} 被删除", session.getId());
         } catch (Exception e) {
             logger.warn("删除Session失败", e);
-        } finally {
-            jedisUtil.close(jedis);
         }
     }
 
@@ -222,19 +187,31 @@ public class CachingShiroSessionDao extends CachingSessionDAO {
      */
     @Override
     public Collection<Session> getActiveSessions() {
-        Jedis jedis = null;
         try {
-            jedis = jedisUtil.getResource();
-            Set<String> keys = jedis.keys(prefix + "*");
-            if (CollectionUtils.isEmpty(keys)) {
-                return null;
+            Map<String, JedisPool> nodes = jedisCluster.getClusterNodes();
+            List<String> res = Lists.newArrayList();
+            for (String node : nodes.keySet()) {
+                Jedis jedis = null;
+                try {
+                    jedis = nodes.get(node).getResource();
+                    if (StringUtils.isBlank(jedis.configGet("slaveof").get(1))) {
+                        Set<String> keys = jedis.keys(prefix + "*");
+                        if (CollectionUtils.isEmpty(keys)) {
+                            return null;
+                        }
+                        List<String> list = jedis.mget(keys.toArray(new String[keys.size()]));
+                        res.addAll(list);
+                    }
+                } catch (Exception e) {
+                    System.out.println(node + "无法PING");
+                } finally {
+                    JedisUtil.close(jedis);
+                }
             }
-            List<String> valueList = jedis.mget(keys.toArray(new String[keys.size()]));
-            return SerializeUtil.deserializeFromStringCollection(valueList);
+
+            return SerializeUtil.deserializeFromStringCollection(res);
         } catch (Exception e) {
             logger.warn("统计Session信息失败", e);
-        } finally {
-            jedisUtil.close(jedis);
         }
         return null;
     }

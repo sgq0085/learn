@@ -69,4 +69,10 @@
             <property name="shiroSessionService" ref="sessionService"/>
         </bean>
     </beans>
+
+    <beans profile="development_redis_cluster">
+        <bean class="com.gqshao.authentication.cluster.controller.SessionController">
+            <property name="sessionService" ref="sessionService"/>
+        </bean>
+    </beans>
 </beans>

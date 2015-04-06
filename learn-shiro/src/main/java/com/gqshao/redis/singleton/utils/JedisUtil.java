@@ -1,4 +1,4 @@
-package com.gqshao.redis.singleton.component;
+package com.gqshao.redis.singleton.utils;
 
 
 import org.apache.commons.lang3.StringUtils;
@@ -10,9 +10,9 @@ import redis.clients.jedis.JedisPool;
 
 import java.io.Serializable;
 
-public class JedisUtils {
+public class JedisUtil {
 
-    private static final Logger logger = LoggerFactory.getLogger(JedisUtils.class);
+    private static final Logger logger = LoggerFactory.getLogger(JedisUtil.class);
 
     @Autowired
     private JedisPool jedisPool;
@@ -29,7 +29,9 @@ public class JedisUtils {
 
     public void close(Jedis jedis) {
         try {
-            jedis.close();
+            if (jedis != null) {
+                jedis.close();
+            }
         } catch (Exception e) {
             logger.warn("销毁连接时出现异常", e);
             e.printStackTrace();

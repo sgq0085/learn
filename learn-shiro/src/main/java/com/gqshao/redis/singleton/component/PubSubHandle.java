@@ -1,6 +1,7 @@
 package com.gqshao.redis.singleton.component;
 
 import com.gqshao.redis.service.PubSubService;
+import com.gqshao.redis.singleton.utils.JedisUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class PubSubHandle extends JedisPubSub {
     private static Map<String, PubSubService> channelHandles;
 
     @Autowired
-    private JedisUtils jedisUtils;
+    private JedisUtil jedisUtils;
 
     @PostConstruct
     public void subscribe() {
@@ -28,8 +29,12 @@ public class PubSubHandle extends JedisPubSub {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    Jedis jedis = jedisUtils.getResource();
-                    jedis.subscribe(new PubSubHandle(), channel);
+                    try {
+                        Jedis jedis = jedisUtils.getResource();
+                        jedis.subscribe(new PubSubHandle(), channel);
+                    } catch (Exception e) {
+                        logger.warn("Redis消息订阅失败", e);
+                    }
                 }
             }).start();
         }

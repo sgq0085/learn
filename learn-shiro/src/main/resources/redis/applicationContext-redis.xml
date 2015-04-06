@@ -15,23 +15,68 @@
 
     <description>Redis配置</description>
 
-    <beans profile="development_redis_singleton">
-        <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig"
-              p:maxIdle="10" p:maxTotal="100" p:maxWaitMillis="-1" p:testOnBorrow="false"/>
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig"
+          p:maxIdle="10" p:maxTotal="100" p:maxWaitMillis="-1" p:testOnBorrow="true" p:testOnReturn="true"/>
 
-        <bean id="jedisPool" class="redis.clients.jedis.JedisPool" depends-on="jedisPoolConfig">
+    <beans profile="development_redis_singleton">
+        <bean id="jedisPool" class="redis.clients.jedis.JedisPool">
             <constructor-arg index="0" ref="jedisPoolConfig"/>
             <constructor-arg index="1" value="${redis.host}"/>
             <constructor-arg index="2" value="${redis.port}"/>
             <constructor-arg index="3" value="0"/>
         </bean>
 
-        <bean id="jedisUtils" class="com.gqshao.redis.singleton.component.JedisUtils"/>
+        <bean id="jedisUtils" class="com.gqshao.redis.singleton.utils.JedisUtil"/>
 
         <bean id="pubSubHandle" class="com.gqshao.redis.singleton.component.PubSubHandle">
             <property name="channelHandles">
                 <map>
                     <entry key="shiro.session.uncache" value-ref="sessionUncacheService"/>
+                </map>
+            </property>
+        </bean>
+    </beans>
+
+    <beans profile="development_redis_cluster">
+        <bean id="jedisCluster" class="redis.clients.jedis.JedisCluster" destroy-method="close">
+            <constructor-arg index="0">
+                <set>
+                    <bean class="redis.clients.jedis.HostAndPort">
+                        <constructor-arg index="0" value="${redis.node1.host}"/>
+                        <constructor-arg index="1" value="${redis.node1.port}"/>
+                    </bean>
+                    <bean class="redis.clients.jedis.HostAndPort">
+                        <constructor-arg index="0" value="${redis.node2.host}"/>
+                        <constructor-arg index="1" value="${redis.node2.port}"/>
+                    </bean>
+                    <bean class="redis.clients.jedis.HostAndPort">
+                        <constructor-arg index="0" value="${redis.node3.host}"/>
+                        <constructor-arg index="1" value="${redis.node3.port}"/>
+                    </bean>
+                    <bean class="redis.clients.jedis.HostAndPort">
+                        <constructor-arg index="0" value="${redis.node4.host}"/>
+                        <constructor-arg index="1" value="${redis.node4.port}"/>
+                    </bean>
+                    <bean class="redis.clients.jedis.HostAndPort">
+                        <constructor-arg index="0" value="${redis.node5.host}"/>
+                        <constructor-arg index="1" value="${redis.node5.port}"/>
+                    </bean>
+                    <bean class="redis.clients.jedis.HostAndPort">
+                        <constructor-arg index="0" value="${redis.node6.host}"/>
+                        <constructor-arg index="1" value="${redis.node6.port}"/>
+                    </bean>
+                </set>
+            </constructor-arg>
+            <constructor-arg index="1" value="0"/>
+            <constructor-arg index="2" ref="jedisPoolConfig"/>
+        </bean>
+
+        <bean id="jedisUtil" class="com.gqshao.redis.cluster.utils.JedisUtil"/>
+
+        <bean id="pubSubHandle" class="com.gqshao.redis.cluster.component.PubSubHandle">
+            <property name="channelHandles">
+                <map>
+                    <entry key="shiro.session.uncache" value-ref="sessionService"/>
                 </map>
             </property>
         </bean>

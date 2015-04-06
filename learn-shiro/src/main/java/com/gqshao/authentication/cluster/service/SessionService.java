@@ -1,11 +1,13 @@
-package com.gqshao.authentication.singleton.service;
+package com.gqshao.authentication.cluster.service;
+
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import com.gqshao.authentication.cluster.dao.CachingShiroSessionDao;
 import com.gqshao.authentication.component.ShiroSession;
-import com.gqshao.authentication.singleton.dao.CachingShiroSessionDao;
-import com.gqshao.redis.singleton.utils.JedisUtil;
+import com.gqshao.redis.cluster.utils.JedisUtil;
+import com.gqshao.redis.service.PubSubService;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
@@ -22,15 +24,21 @@ import java.util.*;
  * 直接操作Session属性，不会被保存
  * 封装Session属性相关操作 Session属性发生改变时保存到Redis中并通知其它节点清空本地EhCache缓存
  */
-public class ShiroSessionService {
+public class SessionService implements PubSubService {
 
-    private Logger logger = LoggerFactory.getLogger(ShiroSessionService.class);
+    private Logger logger = LoggerFactory.getLogger(SessionService.class);
 
     @Autowired
     private CachingShiroSessionDao sessionDao;
 
     @Autowired
     private JedisUtil jedisUtil;
+
+    @Override
+    public void handle(String channel, String message) {
+        logger.debug("channel {} , message {} ", channel, message);
+        sessionDao.uncache(message);
+    }
 
     public ShiroSession getSession() {
         return (ShiroSession) this.sessionDao.doReadSessionWithoutExpire(SecurityUtils.getSubject().getSession().getId());
@@ -43,7 +51,6 @@ public class ShiroSessionService {
         this.sessionDao.update(session);
         // 通过发布消息通知其他节点取消本地对session的缓存
         jedisUtil.publish("shiro.session.uncache", session.getId());
-
     }
 
     public void setStopTimestamp(Date stopTimestamp) {

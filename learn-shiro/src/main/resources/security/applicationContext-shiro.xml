@@ -106,4 +106,14 @@
 
         <bean id="sessionService" class="com.gqshao.authentication.singleton.service.ShiroSessionService"/>
     </beans>
+
+    <beans profile="development_redis_cluster">
+        <bean id="sessionDao" class="com.gqshao.authentication.cluster.dao.CachingShiroSessionDao">
+            <property name="prefix" value="shiro.session_"/>
+            <!-- 注意中央缓存有效时间要比本地缓存有效时间长-->
+            <property name="seconds" value="1800"/>
+        </bean>
+        <bean id="sessionListener" class="com.gqshao.authentication.cluster.listener.ShiroSessionListener"/>
+        <bean id="sessionService" class="com.gqshao.authentication.cluster.service.SessionService"/>
+    </beans>
 </beans>

@@ -1,7 +1,7 @@
-package com.gqshao.authentication.singleton.listener;
+package com.gqshao.authentication.cluster.listener;
 
-import com.gqshao.authentication.singleton.dao.CachingShiroSessionDao;
-import com.gqshao.redis.singleton.utils.JedisUtil;
+import com.gqshao.authentication.cluster.dao.CachingShiroSessionDao;
+import com.gqshao.redis.cluster.utils.JedisUtil;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.SessionListener;
 import org.slf4j.Logger;
@@ -37,5 +37,4 @@ public class ShiroSessionListener implements SessionListener {
         jedisUtil.publish("shiro.session.uncache", session.getId());
         logger.debug("session {} onExpiration", session.getId());
     }
-
 }

@@ -28,7 +28,7 @@ public class SerializeUtil extends SerializationUtils {
         }
     }
 
-    public static <T> Collection<T> deserializeFromStringController(Collection<String> base64s) {
+    public static <T> Collection<T> deserializeFromStringCollection(Collection<String> base64s) {
         try {
             List<T> list = Lists.newLinkedList();
             for (String base64 : base64s) {

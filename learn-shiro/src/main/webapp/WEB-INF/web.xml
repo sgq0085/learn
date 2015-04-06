@@ -17,7 +17,9 @@
     <context-param>
         <param-name>spring.profiles.default</param-name>
         <!-- Redis只有一个节点 -->
-        <param-value>development_redis_singleton</param-value>
+        <!--<param-value>development_redis_singleton</param-value>-->
+        <!-- Redis集群 -->
+        <param-value>development_redis_cluster</param-value>
     </context-param>
 
     <listener>

@@ -1,8 +1,8 @@
 package com.gqshao.authentication.singleton.dao;
 
 import com.google.common.collect.Lists;
+import com.gqshao.redis.singleton.utils.JedisUtil;
 import com.gqshao.redis.utils.SerializeUtil;
-import com.gqshao.redis.singleton.component.JedisUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.mgt.SimpleSession;
@@ -34,7 +34,7 @@ public class CachingSessionDao extends CachingSessionDAO {
     private int seconds = 0;
 
     @Autowired
-    private JedisUtils jedisUtils;
+    private JedisUtil jedisUtil;
 
 
     /**
@@ -48,7 +48,7 @@ public class CachingSessionDao extends CachingSessionDAO {
         Session session = null;
         Jedis jedis = null;
         try {
-            jedis = jedisUtils.getResource();
+            jedis = jedisUtil.getResource();
             String key = prefix + sessionId;
             String value = jedis.get(key);
             if (StringUtils.isNotBlank(value)) {
@@ -62,7 +62,7 @@ public class CachingSessionDao extends CachingSessionDAO {
         } catch (Exception e) {
             logger.warn("读取Session失败", e);
         } finally {
-            jedisUtils.close(jedis);
+            jedisUtil.close(jedis);
         }
 
         return session;
@@ -72,7 +72,7 @@ public class CachingSessionDao extends CachingSessionDAO {
         Session session = null;
         Jedis jedis = null;
         try {
-            jedis = jedisUtils.getResource();
+            jedis = jedisUtil.getResource();
             String key = prefix + sessionId;
             String value = jedis.get(key);
             if (StringUtils.isNotBlank(value)) {
@@ -81,7 +81,7 @@ public class CachingSessionDao extends CachingSessionDAO {
         } catch (Exception e) {
             logger.warn("读取Session失败", e);
         } finally {
-            jedisUtils.close(jedis);
+            jedisUtil.close(jedis);
         }
 
         return session;
@@ -99,13 +99,13 @@ public class CachingSessionDao extends CachingSessionDAO {
         assignSessionId(session, sessionId);
         Jedis jedis = null;
         try {
-            jedis = jedisUtils.getResource();
+            jedis = jedisUtil.getResource();
             jedis.setex(prefix + sessionId, seconds, SerializeUtil.serializeToString((SimpleSession) session));
             logger.info("sessionId {} name {} 被创建", sessionId, session.getClass().getName());
         } catch (Exception e) {
             logger.warn("创建Session失败", e);
         } finally {
-            jedisUtils.close(jedis);
+            jedisUtil.close(jedis);
         }
         return sessionId;
     }
@@ -127,11 +127,11 @@ public class CachingSessionDao extends CachingSessionDAO {
         Jedis jedis = null;
         try {
             if (session instanceof SimpleSession) {
-                jedis = jedisUtils.getResource();
+                jedis = jedisUtil.getResource();
                 jedis.setex(prefix + session.getId(), seconds, SerializeUtil.serializeToString((SimpleSession) session));
                 logger.info("sessionId {} name {} 被更新", session.getId(), session.getClass().getName());
             } else if (session instanceof Serializable) {
-                jedis = jedisUtils.getResource();
+                jedis = jedisUtil.getResource();
                 jedis.setex(prefix + session.getId(), seconds, SerializeUtil.serializeToString((Serializable) session));
                 logger.info("sessionId {} name {} 作为非SimpleSession对象被更新, ", session.getId(), session.getClass().getName());
             } else {
@@ -140,7 +140,7 @@ public class CachingSessionDao extends CachingSessionDAO {
         } catch (Exception e) {
             logger.warn("更新Session失败", e);
         } finally {
-            jedisUtils.close(jedis);
+            jedisUtil.close(jedis);
         }
     }
 
@@ -151,13 +151,13 @@ public class CachingSessionDao extends CachingSessionDAO {
     protected void doDelete(Session session) {
         Jedis jedis = null;
         try {
-            jedis = jedisUtils.getResource();
+            jedis = jedisUtil.getResource();
             jedis.del(prefix + session.getId());
             logger.info("Session {} 被删除", session.getId());
         } catch (Exception e) {
             logger.warn("修改Session失败", e);
         } finally {
-            jedisUtils.close(jedis);
+            jedisUtil.close(jedis);
         }
     }
 
@@ -168,19 +168,17 @@ public class CachingSessionDao extends CachingSessionDAO {
     public Collection<Session> getActiveSessions() {
         Jedis jedis = null;
         try {
-            jedis = jedisUtils.getResource();
-            Set<String> keys = jedis.keys(prefix+"*");
+            jedis = jedisUtil.getResource();
+            Set<String> keys = jedis.keys(prefix + "*");
             if (CollectionUtils.isEmpty(keys)) {
                 return null;
             }
-            List<String> valueList = jedis.mget(keys.toArray(new String[0]));
-            SerializeUtil.deserializeFromStringController(valueList);
-            List<Session> sessionList = Lists.newArrayList();
-            return sessionList;
+            List<String> valueList = jedis.mget(keys.toArray(new String[keys.size()]));
+            return SerializeUtil.deserializeFromStringCollection(valueList);
         } catch (Exception e) {
             logger.warn("统计Session信息失败", e);
         } finally {
-            jedisUtils.close(jedis);
+            jedisUtil.close(jedis);
         }
         return null;
     }

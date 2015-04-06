@@ -1,7 +1,7 @@
 package com.gqshao.authentication.singleton.dao;
 
 
-import com.gqshao.redis.singleton.component.JedisUtils;
+import com.gqshao.redis.singleton.utils.JedisUtil;
 import org.apache.commons.lang3.SerializationUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.UnknownSessionException;
@@ -30,7 +30,7 @@ public class RedisSessionDao extends AbstractSessionDAO {
     private int seconds = 0;
 
     @Autowired
-    private JedisUtils jedisUtils;
+    private JedisUtil jedisUtil;
 
     /**
      * 根据会话ID获取会话
@@ -46,7 +46,7 @@ public class RedisSessionDao extends AbstractSessionDAO {
         Session session = null;
         Jedis jedis = null;
         try {
-            jedis = jedisUtils.getResource();
+            jedis = jedisUtil.getResource();
             byte[] key = SerializationUtils.serialize(prefix + sessionId);
             byte[] value = jedis.get(key);
             if (value != null) {
@@ -58,7 +58,7 @@ public class RedisSessionDao extends AbstractSessionDAO {
         } catch (Exception e) {
             logger.warn("读取Session失败", e);
         } finally {
-            jedisUtils.close(jedis);
+            jedisUtil.close(jedis);
         }
 
         return session;
@@ -76,7 +76,7 @@ public class RedisSessionDao extends AbstractSessionDAO {
         assignSessionId(session, sessionId);
         Jedis jedis = null;
         try {
-            jedis = jedisUtils.getResource();
+            jedis = jedisUtil.getResource();
             if (session instanceof SimpleSession) {
                 byte[] key = SerializationUtils.serialize(prefix + sessionId);
                 byte[] value = SerializationUtils.serialize(((SimpleSession) session));
@@ -91,7 +91,7 @@ public class RedisSessionDao extends AbstractSessionDAO {
         } catch (Exception e) {
             logger.warn("创建Session失败", e);
         } finally {
-            jedisUtils.close(jedis);
+            jedisUtil.close(jedis);
         }
         return sessionId;
     }
@@ -105,7 +105,7 @@ public class RedisSessionDao extends AbstractSessionDAO {
     public void update(Session session) throws UnknownSessionException {
         Jedis jedis = null;
         try {
-            jedis = jedisUtils.getResource();
+            jedis = jedisUtil.getResource();
             if (session instanceof SimpleSession) {
                 byte[] key = SerializationUtils.serialize(prefix + session.getId());
                 byte[] value = SerializationUtils.serialize(((SimpleSession) session));
@@ -122,7 +122,7 @@ public class RedisSessionDao extends AbstractSessionDAO {
         } catch (Exception e) {
             logger.warn("修改Session失败", e);
         } finally {
-            jedisUtils.close(jedis);
+            jedisUtil.close(jedis);
         }
     }
 
@@ -133,12 +133,12 @@ public class RedisSessionDao extends AbstractSessionDAO {
     public void delete(Session session) {
         Jedis jedis = null;
         try {
-            jedis = jedisUtils.getResource();
+            jedis = jedisUtil.getResource();
             jedis.del(SerializationUtils.serialize(prefix + session.getId()));
         } catch (Exception e) {
             logger.warn("删除Session失败", e);
         } finally {
-            jedisUtils.close(jedis);
+            jedisUtil.close(jedis);
         }
     }
 
@@ -149,13 +149,13 @@ public class RedisSessionDao extends AbstractSessionDAO {
     public Collection<Session> getActiveSessions() {
         Jedis jedis = null;
         try {
-            jedis = jedisUtils.getResource();
+            jedis = jedisUtil.getResource();
             jedis.scan("ShiroSession_*");
 
         } catch (Exception e) {
             logger.warn("修改Session失败", e);
         } finally {
-            jedisUtils.close(jedis);
+            jedisUtil.close(jedis);
         }
         return null;
     }
