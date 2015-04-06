@@ -1,17 +1,12 @@
 package com.gqshao.redis.utils;
 
-import com.gqshao.redis.domin.SerializableBean;
 import org.apache.commons.io.IOUtils;
-import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
-import redis.clients.jedis.exceptions.JedisConnectionException;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.Date;
 
 public class JedisUtils {
     public static JedisPoolConfig getMyDefaultJedisPoolConfig() {
@@ -34,7 +29,6 @@ public class JedisUtils {
         poolConfig.setTimeBetweenEvictionRunsMillis(1800000);
         return poolConfig;
     }
-
 
 
     public static byte[] serialize(Object source) {

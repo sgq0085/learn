@@ -2,7 +2,6 @@ package com.gqshao.redis.connection;
 
 
 import com.gqshao.redis.utils.JedisUtils;
-import com.gqshao.redis.utils.JedisUtilsTest;
 import org.junit.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,8 +47,8 @@ public class SlaveofTest {
 
     @After
     public void destroyJedis() {
-        pool1.returnResource(jedis1);
-        pool2.returnResource(jedis2);
+        jedis1.close();
+        jedis2.close();
     }
 
     /**

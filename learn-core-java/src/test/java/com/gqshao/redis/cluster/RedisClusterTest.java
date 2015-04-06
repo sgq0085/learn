@@ -4,20 +4,14 @@ import com.google.common.collect.Sets;
 import com.gqshao.redis.channels.MyJedisPubSub;
 import com.gqshao.redis.utils.JedisUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.joda.time.DateTime;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import redis.clients.jedis.*;
-import redis.clients.jedis.exceptions.JedisConnectionException;
 
-import java.util.Arrays;
 import java.util.Map;
 import java.util.Set;
-import java.util.UUID;
 
 public class RedisClusterTest {
 
@@ -53,7 +47,9 @@ public class RedisClusterTest {
     @Test
     public void easyTest() {
         // 简单测试
-        cluster.set("foo", "bar");
+        cluster.set("foo1", "bar");
+        cluster.set("foo10", "bar");
+        cluster.set("foo100", "bar");
         System.out.println(cluster.get("foo"));
         cluster.close();
     }
@@ -66,7 +62,6 @@ public class RedisClusterTest {
             try {
                 jedis = nodes.get(key).getResource();
                 jedis.ping();
-                jedis.close();
             } catch (Exception e) {
                 System.out.println("节点[" + key + "]异常");
             } finally {
@@ -85,7 +80,7 @@ public class RedisClusterTest {
             try {
                 jedis = nodes.get(key).getResource();
                 if (StringUtils.isBlank(jedis.configGet("slaveof").get(1))) {
-                    System.out.println(jedis.keys("foo*"));
+                    System.out.println(key + " : " + jedis.keys("foo*"));
                 }
             } catch (Exception e) {
                 System.out.println(key + "无法PING");
