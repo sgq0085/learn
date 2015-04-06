@@ -29,7 +29,7 @@ public class MessageTest extends JedisTestBase {
      */
     @Test
     public void testSubscribe() {
-        final MyJedisPubSub listener = new MyJedisPubSub();
+        final SingletonJedisPubSub listener = new SingletonJedisPubSub();
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -66,7 +66,7 @@ public class MessageTest extends JedisTestBase {
      */
     @Test
     public void testPsubscribe() {
-        final MyJedisPubSub listener = new MyJedisPubSub();
+        final SingletonJedisPubSub listener = new SingletonJedisPubSub();
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {

@@ -4,9 +4,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import redis.clients.jedis.JedisPubSub;
 
-public class MyJedisPubSub extends JedisPubSub {
+public class SingletonJedisPubSub extends JedisPubSub {
 
-    protected static Logger logger = LoggerFactory.getLogger(MyJedisPubSub.class);
+    protected static Logger logger = LoggerFactory.getLogger(SingletonJedisPubSub.class);
 
     // 取得订阅的消息后的处理  
     public void onMessage(String channel, String message) {

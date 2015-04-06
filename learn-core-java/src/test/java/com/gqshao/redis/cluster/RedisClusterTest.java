@@ -1,14 +1,17 @@
 package com.gqshao.redis.cluster;
 
 import com.google.common.collect.Sets;
-import com.gqshao.redis.channels.MyJedisPubSub;
+import com.gqshao.redis.channels.ClusterJedisPubSub;
 import com.gqshao.redis.utils.JedisUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import redis.clients.jedis.*;
+import redis.clients.jedis.HostAndPort;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisCluster;
+import redis.clients.jedis.JedisPool;
 
 import java.util.Map;
 import java.util.Set;
@@ -96,7 +99,7 @@ public class RedisClusterTest {
     public void testSubscribe() {
         for (final String key : nodes.keySet()) {
             try {
-                final MyJedisPubSub listener = new MyJedisPubSub();
+                final ClusterJedisPubSub listener = new ClusterJedisPubSub(key);
                 final Jedis subscribeJedis = nodes.get(key).getResource();
                 new Thread(new Runnable() {
                     @Override
