@@ -1,4 +1,4 @@
-package com.gqshao.authentication.session;
+package com.gqshao.authentication.component;
 
 
 import org.apache.shiro.session.mgt.SimpleSession;
@@ -68,8 +68,15 @@ public class ShiroSession extends SimpleSession implements Serializable {
         this.setChanged(true);
     }
 
+    /**
+     * 防止过于频繁的保存
+     */
     @Override
     public void setAttribute(Object key, Object value) {
+        Object obj = this.getAttribute(key);
+        if (obj != null && obj.equals(value)) {
+            return;
+        }
         super.setAttribute(key, value);
         this.setChanged(true);
     }

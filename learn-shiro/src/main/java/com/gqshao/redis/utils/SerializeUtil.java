@@ -1,15 +1,14 @@
-package com.gqshao.authentication.utils;
+package com.gqshao.redis.utils;
 
 import com.google.common.collect.Lists;
 import org.apache.commons.lang3.SerializationUtils;
 import org.apache.shiro.codec.Base64;
-import org.apache.shiro.session.Session;
 
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 
-public class SerializeUtils extends SerializationUtils {
+public class SerializeUtil extends SerializationUtils {
 
     public static String serializeToString(Serializable obj) {
         try {

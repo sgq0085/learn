@@ -2,10 +2,10 @@ package com.gqshao.authentication.realm;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.gqshao.authentication.dao.CachingShiroSessionDao;
+import com.gqshao.authentication.singleton.dao.CachingShiroSessionDao;
 import com.gqshao.authentication.domain.CustomToken;
 import com.gqshao.authentication.domain.ShiroUser;
-import com.gqshao.authentication.session.ShiroSession;
+import com.gqshao.authentication.component.ShiroSession;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;

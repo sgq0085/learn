@@ -1,10 +1,9 @@
 package com.gqshao.authentication.controller;
 
-import com.gqshao.authentication.dao.CachingShiroSessionDao;
+import com.gqshao.authentication.singleton.dao.CachingShiroSessionDao;
 import com.gqshao.authentication.filter.MyAuthenticationFilter;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
-import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -1,8 +1,9 @@
 package com.gqshao.schedule.job;
 
 
-import com.gqshao.authentication.dao.CachingShiroSessionDao;
+import com.gqshao.authentication.singleton.dao.CachingShiroSessionDao;
 import org.apache.shiro.session.Session;
+import org.apache.shiro.session.mgt.eis.CachingSessionDAO;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.slf4j.Logger;
@@ -29,7 +30,7 @@ public class QuartzClusterableJob extends QuartzJobBean {
 
     @Override
     protected void executeInternal(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-        CachingShiroSessionDao sessionDao = applicationContext.getBean(CachingShiroSessionDao.class);
+        CachingSessionDAO sessionDao = (CachingSessionDAO) applicationContext.getBean("sessionDao");
         Collection<Session> sessions = sessionDao.getActiveSessions();
         int size = 0;
         if (sessions != null) {

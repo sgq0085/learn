@@ -9,14 +9,15 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>
             classpath:applicationContext.xml
-            classpath:applicationContext-test.xml
+            classpath:applicationContext-web.xml
         </param-value>
     </context-param>
 
     <!-- 設定Spring Context的默认Profile -->
     <context-param>
         <param-name>spring.profiles.default</param-name>
-        <param-value>development</param-value>
+        <!-- Redis只有一个节点 -->
+        <param-value>development_redis_singleton</param-value>
     </context-param>
 
     <listener>

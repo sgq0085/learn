@@ -1,4 +1,4 @@
-package com.gqshao.authentication.session;
+package com.gqshao.authentication.component;
 
 
 import org.apache.shiro.session.Session;

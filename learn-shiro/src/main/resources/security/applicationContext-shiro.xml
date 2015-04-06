@@ -68,25 +68,13 @@
         </property>
         <property name="sessionListeners">
             <list>
-                <bean class="com.gqshao.authentication.listener.ShiroSessionListener"/>
+                <ref bean="sessionListener"/>
             </list>
         </property>
     </bean>
 
     <!-- 自定义Session工厂方法 返回会标识是否修改主要字段的自定义Session-->
-    <bean id="sessionFactory" class="com.gqshao.authentication.session.ShiroSessionFactory"/>
-
-    <!-- 普通持久化接口，不会被缓存 每次doReadSession会被反复调用 -->
-    <!--<bean class="com.gqshao.authentication.dao.RedisSessionDao">-->
-    <!-- 使用可被缓存的Dao ，本地缓存减轻网络压力 -->
-    <!--<bean id="sessionDao" class="com.gqshao.authentication.dao.CachingSessionDao">-->
-    <!-- 可缓存Dao，操作自定义Session,添加标识位，减少doUpdate方法中Redis的连接次数来减轻网络压力 -->
-    <bean id="sessionDao" class="com.gqshao.authentication.dao.CachingShiroSessionDao">
-        <property name="prefix" value="shiro.session_"/>
-        <!-- 注意中央缓存有效时间要比本地缓存有效时间长-->
-        <property name="seconds" value="1800"/>
-    </bean>
-
+    <bean id="sessionFactory" class="com.gqshao.authentication.component.ShiroSessionFactory"/>
 
     <!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
     <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
@@ -100,17 +88,22 @@
         <property name="securityManager" ref="securityManager"/>
     </bean>
 
+    <beans profile="development_redis_singleton">
+        <!-- 普通持久化接口，不会被缓存 每次doReadSession会被反复调用 -->
+        <!--<bean class="com.gqshao.authentication.dao.RedisSessionDao">-->
+        <!-- 可被缓存的Dao ，本地缓存减轻网络压力 -->
+        <!--<bean id="sessionDao" class="com.gqshao.authentication.dao.CachingSessionDao">-->
+        <!-- 可缓存Dao，操作自定义Session,添加标识位，减少doUpdate方法中Redis的连接次数来减轻网络压力 -->
+        <bean id="sessionDao" class="com.gqshao.authentication.singleton.dao.CachingShiroSessionDao">
+            <property name="prefix" value="shiro.session_"/>
+            <!-- 注意中央缓存有效时间要比本地缓存有效时间长-->
+            <property name="seconds" value="1800"/>
+        </bean>
 
-    <!-- 定期执行的消息通道守护任务 该通道用于监听是否指定缓存失效 -->
-    <bean id="sessionUncacheJob" class="com.gqshao.authentication.schedule.SessionUncacheJob">
-        <!-- 首次执行的延迟时间30秒 -->
-        <property name="initialDelay" value="30"/>
-        <!-- 一次执行终止和下一次执行开始之间的延迟180秒 -->
-        <property name="delay" value="180"/>
-        <property name="channels">
-            <array>
-                <value>shiro.session.uncache</value>
-            </array>
-        </property>
-    </bean>
+        <bean id="sessionListener" class="com.gqshao.authentication.singleton.listener.ShiroSessionListener"/>
+
+        <bean id="sessionUncacheService" class="com.gqshao.authentication.singleton.service.ShiroSessionUncacheService"/>
+
+        <bean id="sessionService" class="com.gqshao.authentication.singleton.service.ShiroSessionService"/>
+    </beans>
 </beans>

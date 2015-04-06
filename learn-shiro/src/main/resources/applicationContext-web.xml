@@ -9,6 +9,7 @@
 
     <!-- jedis 配置 -->
     <import resource="classpath:redis/applicationContext-redis.xml" />
+
     <!-- quartz 集群使用示例 -->
     <import resource="schedule/applicationContext-quartz-timer-cluster.xml" />
 

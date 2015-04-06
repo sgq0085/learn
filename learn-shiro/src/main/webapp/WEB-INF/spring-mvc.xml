@@ -41,7 +41,7 @@
     <mvc:default-servlet-handler/>
 
     <!-- 定义无需Controller的url<->view直接映射 -->
-    <mvc:view-controller path="/" view-name="portal" />
+    <mvc:view-controller path="/" view-name="portal"/>
 
     <!-- 将Controller抛出的异常转到特定View, 保持SiteMesh的装饰效果 -->
     <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
@@ -63,4 +63,10 @@
         <property name="securityManager" ref="securityManager"/>
     </bean>
     <!-- end -->
+
+    <beans profile="development_redis_singleton">
+        <bean class="com.gqshao.authentication.singleton.controller.SessionController">
+            <property name="shiroSessionService" ref="sessionService"/>
+        </bean>
+    </beans>
 </beans>

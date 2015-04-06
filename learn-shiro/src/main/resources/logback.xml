@@ -21,7 +21,7 @@
     <!-- log4jdbc -->
     <logger name="jdbc.sqltiming" level="INFO" />
 
-    <logger name="com.gqshao" level="INFO" />
+    <logger name="com.gqshao" level="DEBUG" />
 
     <root level="WARN">
         <appender-ref ref="console" />

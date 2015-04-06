@@ -1,7 +1,7 @@
-package com.gqshao.authentication.dao;
+package com.gqshao.authentication.singleton.dao;
 
 
-import com.gqshao.redis.component.JedisUtils;
+import com.gqshao.redis.singleton.component.JedisUtils;
 import org.apache.commons.lang3.SerializationUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.UnknownSessionException;
@@ -58,7 +58,7 @@ public class RedisSessionDao extends AbstractSessionDAO {
         } catch (Exception e) {
             logger.warn("读取Session失败", e);
         } finally {
-            jedisUtils.returnResource(jedis);
+            jedisUtils.close(jedis);
         }
 
         return session;
@@ -91,7 +91,7 @@ public class RedisSessionDao extends AbstractSessionDAO {
         } catch (Exception e) {
             logger.warn("创建Session失败", e);
         } finally {
-            jedisUtils.returnResource(jedis);
+            jedisUtils.close(jedis);
         }
         return sessionId;
     }
@@ -122,7 +122,7 @@ public class RedisSessionDao extends AbstractSessionDAO {
         } catch (Exception e) {
             logger.warn("修改Session失败", e);
         } finally {
-            jedisUtils.returnResource(jedis);
+            jedisUtils.close(jedis);
         }
     }
 
@@ -138,7 +138,7 @@ public class RedisSessionDao extends AbstractSessionDAO {
         } catch (Exception e) {
             logger.warn("删除Session失败", e);
         } finally {
-            jedisUtils.returnResource(jedis);
+            jedisUtils.close(jedis);
         }
     }
 
@@ -155,7 +155,7 @@ public class RedisSessionDao extends AbstractSessionDAO {
         } catch (Exception e) {
             logger.warn("修改Session失败", e);
         } finally {
-            jedisUtils.returnResource(jedis);
+            jedisUtils.close(jedis);
         }
         return null;
     }

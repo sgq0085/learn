@@ -15,35 +15,26 @@
 
     <description>Redis配置</description>
 
-    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig"
-          p:maxIdle="10" p:maxTotal="100" p:maxWaitMillis="-1" p:testOnBorrow="false"/>
+    <beans profile="development_redis_singleton">
+        <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig"
+              p:maxIdle="10" p:maxTotal="100" p:maxWaitMillis="-1" p:testOnBorrow="false"/>
 
-    <bean id="jedisPool1" class="redis.clients.jedis.JedisPool" depends-on="jedisPoolConfig">
-        <constructor-arg index="0" ref="jedisPoolConfig"/>
-        <constructor-arg index="1" value="${redis1.host}"/>
-        <constructor-arg index="2" value="${redis1.port}"/>
-        <constructor-arg index="3" value="0"/>
-    </bean>
+        <bean id="jedisPool" class="redis.clients.jedis.JedisPool" depends-on="jedisPoolConfig">
+            <constructor-arg index="0" ref="jedisPoolConfig"/>
+            <constructor-arg index="1" value="${redis.host}"/>
+            <constructor-arg index="2" value="${redis.port}"/>
+            <constructor-arg index="3" value="0"/>
+        </bean>
 
-    <bean id="jedisPool2" class="redis.clients.jedis.JedisPool" depends-on="jedisPoolConfig">
-        <constructor-arg index="0" ref="jedisPoolConfig"/>
-        <constructor-arg index="1" value="${redis2.host}"/>
-        <constructor-arg index="2" value="${redis2.port}"/>
-        <constructor-arg index="3" value="0"/>
-    </bean>
+        <bean id="jedisUtils" class="com.gqshao.redis.singleton.component.JedisUtils"/>
 
-    <!-- 定期执行的消息通道守护任务 -->
-    <bean id="jdkExecutorJob" class="com.gqshao.redis.component.SubscribedJob">
-        <!-- 首次执行的延迟时间1秒 -->
-        <property name="initialDelay" value="1"/>
-        <!-- 一次执行终止和下一次执行开始之间的延迟180秒 -->
-        <property name="delay" value="180"/>
-        <property name="channels">
-            <array>
-                <value>channelA.test</value>
-                <value>channelB.send_message</value>
-            </array>
-        </property>
-    </bean>
+        <bean id="pubSubHandle" class="com.gqshao.redis.singleton.component.PubSubHandle">
+            <property name="channelHandles">
+                <map>
+                    <entry key="shiro.session.uncache" value-ref="sessionUncacheService"/>
+                </map>
+            </property>
+        </bean>
+    </beans>
 
 </beans>
