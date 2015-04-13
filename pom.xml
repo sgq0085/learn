@@ -8,6 +8,18 @@
     <packaging>pom</packaging>
     <name>learn :: project</name>
 
+    <modules>
+        <module>learn-jta-jpa</module>
+        <module>learn-unit-test</module>
+        <module>learn-shiro</module>
+        <module>learn-sitemesh</module>
+        <module>learn-web</module>
+        <module>learn-msm</module>
+        <module>learn-cas-server</module>
+        <module>learn-cas-client</module>
+        <module>learn-core-java</module>
+    </modules>
+
     <properties>
         <spring.version>4.0.6.RELEASE</spring.version>
         <aspectj.version>1.7.4</aspectj.version>
@@ -50,16 +62,41 @@
         <jdk.version>1.7</jdk.version>
     </properties>
 
-    <modules>
-        <module>learn-jta-jpa</module>
-        <module>learn-unit-test</module>
-        <module>learn-shiro</module>
-        <module>learn-sitemesh</module>
-        <module>learn-web</module>
-        <module>learn-msm</module>
-        <module>learn-cas-server</module>
-        <module>learn-cas-client</module>
-        <module>learn-core-java</module>
-    </modules>
 
+    <!-- 设定仓库 -->
+    <!--<repositories>
+        <repository>
+            <id>nexus</id>
+            <name>Team Nexus Repository</name>
+            <url>http://192.168.3.116:8081/nexus/content/groups/public/</url>
+        </repository>
+    </repositories>-->
+
+    <!-- 设定自己构件插件的仓库的本地仓库（hosted） -->
+    <!--<pluginRepositories>
+        <pluginRepository>
+            <id>nexus</id>
+            <name>Team Nexus Repository</name>
+            <url>http://192.168.3.116:8081/nexus/content/groups/public/</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <distributionManagement>
+        <repository>
+            <id>nexus-releases</id>
+            <name>Local Nexus Repository</name>
+            <url>http://192.168.3.116:8081/nexus/content/repositories/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>nexus-snapshots</id>
+            <name>Local Nexus Repository</name>
+            <url>http://192.168.3.116:8081/nexus/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>-->
 </project>
