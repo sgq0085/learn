@@ -81,17 +81,11 @@
             <version>${spring.version}</version>
         </dependency>
 
-        <!-- jetty for functional test and executable war -->
+        <!-- j2ee web -->
         <dependency>
-            <groupId>org.eclipse.jetty.aggregate</groupId>
-            <artifactId>jetty-webapp</artifactId>
-            <version>${jetty.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-jsp</artifactId>
-            <version>${jetty.version}</version>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.0.1</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -99,12 +93,7 @@
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-            <version>2.5</version>
-            <scope>provided</scope>
-        </dependency>
+        <!-- WEB end -->
 
         <!-- SECURITY begin -->
         <dependency>
