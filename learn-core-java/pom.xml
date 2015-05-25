@@ -12,7 +12,12 @@
     <name>learn :: production :: core-java</name>
 
     <dependencies>
-
+        <!-- thrift -->
+        <dependency>
+            <groupId>org.apache.thrift</groupId>
+            <artifactId>libthrift</artifactId>
+            <version>${thrift.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>org.mongodb</groupId>

@@ -38,6 +38,7 @@ Redis和Memcached简单访问DEMO<br />
 4.[Redis分布式连接和主从复制](http://sgq0085.iteye.com/blog/2171121)<br />
 5.[Redis消息订阅/发布](http://sgq0085.iteye.com/blog/2171127)<br />
 6.[Centos6.5安装Memcached](http://sgq0085.iteye.com/blog/2088440)<br />
+6.[Thrift 简单使用](http://sgq0085.iteye.com/blog/2213959)<br />
 
 
 learn-msm
