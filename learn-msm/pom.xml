@@ -12,7 +12,6 @@
 
     <properties>
         <memcached-session-manager.version>1.8.2</memcached-session-manager.version>
-        <spymemcached.version>2.11.4</spymemcached.version>
         <kryo-serializers.version>0.11</kryo-serializers.version>
         <kryo.version>1.04</kryo.version>
         <minlog.version>1.2</minlog.version>
