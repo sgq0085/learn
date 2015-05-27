@@ -39,7 +39,10 @@ Redis和Memcached简单访问DEMO<br />
 5.[Redis消息订阅/发布](http://sgq0085.iteye.com/blog/2171127)<br />
 6.[Centos6.5安装Memcached](http://sgq0085.iteye.com/blog/2088440)<br />
 7.[Thrift 简单使用](http://sgq0085.iteye.com/blog/2213959)<br />
-8.本地IP查询<br />
+8.[JDK7 NIO2 监控文件夹文件拷贝完成](http://sgq0085.iteye.com/blog/2190975)<br />
+9.concurrency包下演示如何通过构造ThreadFactory为线程池中运行的线程命名，及如何处理线程池中异常<br />
+10.ip包下演示如何查询本地IP<br />
+11.udp包下演示基于UDP发送和接收数据<br />
 
 
 learn-msm
