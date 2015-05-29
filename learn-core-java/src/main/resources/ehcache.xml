@@ -42,16 +42,15 @@
                   timeToLiveSeconds="120"
                   overflowToDisk="false"
                   diskPersistent="false"
-                  diskExpiryThreadIntervalSeconds="120"/>
+                  diskExpiryThreadIntervalSeconds="1800"/>
 
-    <cache name="pinCache" maxElementsInMemory="100000"
-           maxElementsOnDisk="0"
+    <cache name="pinCache"
+           maxElementsInMemory="1"
+           maxElementsOnDisk="20000000"
            eternal="true"
            overflowToDisk="true"
            diskPersistent="false"
-           diskExpiryThreadIntervalSeconds="120"
-           diskSpoolBufferSizeMB="30"
-           clearOnFlush="false"/>
+           diskSpoolBufferSizeMB="128"/>
 
 
 </ehcache>

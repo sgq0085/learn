@@ -1,4 +1,4 @@
-package com.gqshao.ehcache;
+package com.gqshao.file;
 
 import com.gqshao.file.util.FileUtil;
 import org.apache.commons.collections.CollectionUtils;
@@ -9,19 +9,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-public class RandomAccessFileTest {
+public class FileTest {
 
-    private static final Logger logger = LoggerFactory.getLogger(RandomAccessFileTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(FileTest.class);
 
-    private static final String ENCODING = "UTF-8";
-    private static final int NUM = 50000;
+    public static final String ENCODING = "UTF-8";
+    public static final int NUM = 50000;
 
-    private static File file = new File(ClassLoader.getSystemResource("").getPath() + File.separator + "test.txt");
-    private static File randomFile = new File(ClassLoader.getSystemResource("").getPath() + File.separator + "RandomFile.txt");
+    public static File file = new File(ClassLoader.getSystemResource("").getPath() + File.separator + "test.txt");
+    public static File randomFile = new File(ClassLoader.getSystemResource("").getPath() + File.separator + "RandomFile.txt");
 
     /**
      * 生成1000w随机文本文件
@@ -33,8 +32,8 @@ public class RandomAccessFileTest {
         try {
             out = new OutputStreamWriter(new FileOutputStream(file, true), ENCODING);
             // 在1500w里随机1000w数据
-            for (int j = 0; j < 100000000; j++) {
-                out.write(prefix + (int) (130000000 * Math.random()) + "\n");
+            for (int j = 0; j < 10000000; j++) {
+                out.write(prefix + (int) (13000000 * Math.random()) + "\n");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -75,7 +74,7 @@ public class RandomAccessFileTest {
     }
 
     /**
-     * 测试RandomAccessFile读取文件
+     * 测试BufferedRandomAccessFileReadLine读取文件
      */
     @Test
     public void testBufferedRandomAccessRead() {
@@ -125,6 +124,4 @@ public class RandomAccessFileTest {
         }
         logger.info(((System.currentTimeMillis() - start) / 1000) + "");
     }
-
-
 }
