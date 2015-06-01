@@ -2,6 +2,7 @@ package com.gqshao.file.util;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import com.gqshao.file.io.BufferedRandomAccessFile;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -9,6 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.io.*;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class FileUtil {
 
@@ -23,7 +25,7 @@ public class FileUtil {
      */
     public static Map<String, Object> BufferedRandomAccessFileReadLine(File file, String encoding, long pos, int num) {
         Map<String, Object> res = Maps.newHashMap();
-        List<String> pins = Lists.newArrayList();
+        Set<String> pins = Sets.newHashSet();
         res.put("pins", pins);
         BufferedRandomAccessFile reader = null;
         try {

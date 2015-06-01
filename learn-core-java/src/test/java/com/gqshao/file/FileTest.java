@@ -9,8 +9,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class FileTest {
 
@@ -84,16 +86,9 @@ public class FileTest {
         long pos = 0L;
         while (true) {
             Map<String, Object> res = FileUtil.BufferedRandomAccessFileReadLine(file, ENCODING, pos, NUM);
-            // 如果返回结果为空结束循环
-            if (MapUtils.isEmpty(res)) {
-                break;
-            }
-            List<String> pins = (List<String>) res.get("pins");
+            Set<String> pins = (Set<String>) res.get("pins");
             if (CollectionUtils.isNotEmpty(pins)) {
-//                logger.info(Arrays.toString(pins.toArray()));
-                if (pins.size() < NUM) {
-                    break;
-                }
+                logger.info(Arrays.toString(pins.toArray()));
             } else {
                 break;
             }

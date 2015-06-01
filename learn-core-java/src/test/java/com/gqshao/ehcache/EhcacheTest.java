@@ -31,7 +31,7 @@ public class EhcacheTest {
         int i = 0, j = 0, total = 0;
         while (true) {
             Map<String, Object> res = FileUtil.BufferedRandomAccessFileReadLine(FileTest.file, FileTest.ENCODING, pos, FileTest.NUM);
-            List<String> pins = (List<String>) res.get("pins");
+            Set<String> pins = (Set<String>) res.get("pins");
             if (CollectionUtils.isNotEmpty(pins)) {
                 for (String pin : pins) {
                     if (!set.contains(pin)) {
@@ -46,9 +46,6 @@ public class EhcacheTest {
                 end = System.currentTimeMillis();
                 logger.info("过滤总数" + total + "万, 不重复" + i + "个,重复" + j + "个, set size" + set.size() + "用时 " + (end - start) + "毫秒");
                 start = end;
-                if (pins.size() < FileTest.NUM) {
-                    break;
-                }
             } else {
                 break;
             }
