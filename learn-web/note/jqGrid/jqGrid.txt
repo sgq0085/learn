@@ -44,6 +44,7 @@ getGridParam、setGridParam：
      形式2：jQuery('#tableID').jqGrid('getGridParam','url'))
 　　         jQuery("#tableID").jqGrid('setGridParam',{page:2}).trigger("reloadGrid")
 
+    var postData = $("#grid").jqGrid("getGridParam", "postData"); // 向服务器发起请求时会把数据进行序列化，用户自定义数据也可以被提交到服务器端
 4.手动执行查询
 ${"jqgrid"}.jqGrid("setGridParam", {
     search: true
