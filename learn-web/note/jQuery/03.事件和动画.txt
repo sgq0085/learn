@@ -2,7 +2,7 @@
 1.加载DOM
 $(window).load(function(){}) 等价于 window.onload=function(){}
 多次使用
-$(document).ready(function(){}) 简写$(function(){}) 另简写 $().ready(function(){})
+$(document).ready(function(){}) 简写$(function(){}); 另简写 $().ready(function(){})
 
 2.事件绑定
 bind(type,[data],fn)
