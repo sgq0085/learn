@@ -31,7 +31,10 @@
                 data: result.data2
             }],
             rangeSelector: {
-                buttons: [{type: 'day', count: 1, text: '1天'},
+                buttons: [
+                    {type: 'hour', count: 1, text: '1小时'},
+                    {type: 'hour', count: 12, text: '12小时'},
+                    {type: 'day', count: 1, text: '1天'},
                     {type: 'day', count: 3, text: '3天'},
                     {type: 'week', count: 1, text: '1周'},
                     {type: 'all', text: '所有'}
