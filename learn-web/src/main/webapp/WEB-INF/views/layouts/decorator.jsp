@@ -89,6 +89,8 @@
                         <li><a href="${ctx}/bootstrap/fileinput/init">fileinput</a></li>
                         <li class="divider"></li>
                         <li><a href="${ctx}/bootstrap/datetimepicker/init">datetimepicker</a></li>
+                        <li class="divider"></li>
+                        <li><a href="${ctx}/bootstrap-table/test1">Table-普通Demo1</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">

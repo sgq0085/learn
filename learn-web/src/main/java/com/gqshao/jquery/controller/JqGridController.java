@@ -59,7 +59,7 @@ public class JqGridController {
 
         for (int i = 0; i < 15; i++) {
             Map<String, Object> data = Maps.newHashMap();
-            data.put("id", UUID.randomUUID());
+            data.put("id", UUID.randomUUID().toString().replaceAll("-", ""));
             data.put("name", data.get("id").toString().substring(0, 8));
             data.put("age", (int) (Math.random() * 80));
             data.put("sex", (int) (Math.random() * 2));
@@ -69,7 +69,6 @@ public class JqGridController {
         res.put("data", datas);
         return res;
     }
-
 
 
 }
