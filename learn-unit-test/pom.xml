@@ -93,6 +93,18 @@
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jsp-api</artifactId>
+            <version>2.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.servlet</groupId>
+                    <artifactId>javax.servlet-api</artifactId>
+                </exclusion>
+            </exclusions>
+
+        </dependency>
         <!-- WEB end -->
 
         <!-- SECURITY begin -->
@@ -187,7 +199,12 @@
             <artifactId>ojdbc6</artifactId>
             <version>1.0</version>
         </dependency>
-
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.35</version>
+            <scope>runtime</scope>
+        </dependency>
         <!-- GENERAL UTILS begin -->
         <!-- fileupload begin -->
         <dependency>

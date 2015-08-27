@@ -81,8 +81,8 @@
   </update>
   
   <update id="deleteByIds">
-    update sys_role set IS_DELETE=1 
-    where ID in 
+    update sys_role set is_delete=1
+    where id in
     <foreach collection="array" item="id" index="index" open="(" close=")" separator=",">
     #{id}
     </foreach>
