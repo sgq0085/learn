@@ -15,10 +15,9 @@
     <description>Spring公共配置</description>
 
     <!-- 使用annotation 自动注册bean,并检查@Required,@Autowired的属性已被注入 -->
-    <context:component-scan base-package="com.gqshao.test.**.service">
+    <context:component-scan base-package="com.gqshao.test">
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-        <context:exclude-filter type="annotation"
-                                expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
+        <context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
     </context:component-scan>
 
     <!-- flyway配置 -->
@@ -26,9 +25,9 @@
         <property name="dataSource" ref="dataSource"/>
         <property name="encoding" value="UTF-8"/>
         <property name="table" value="LEARN_TEST_SCHEMA_VERSION"/>
-        <property name="locations" value="db/migration"/>
+        <property name="locations" value="db/mysql_migration"/>
         <property name="baselineOnMigrate" value="true"/>
-        <property name="baselineVersion" >
+        <property name="baselineVersion">
             <bean class="org.flywaydb.core.api.MigrationVersion" factory-method="fromVersion">
                 <constructor-arg value="0"/>
             </bean>
@@ -68,8 +67,8 @@
     <!-- 使用annotation定义事务 -->
     <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
 
-    <!-- 定义aspectj -->
-    <aop:aspectj-autoproxy proxy-target-class="true"/>
+    <!-- 定义aspectj 开启AOP监听 只对当前配置文件有效  影响事务暂时关闭-->
+    <!--<aop:aspectj-autoproxy proxy-target-class="true" expose-proxy="true"/>-->
 
     <!-- hibernate validator -->
     <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>

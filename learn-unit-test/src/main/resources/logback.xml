@@ -21,7 +21,10 @@
     <!-- log4jdbc -->
     <logger name="jdbc.sqltiming" level="INFO" />
 
+    <logger name="jdbc.audit" level="DEBUG"/>
+
     <logger name="com.gqshao.test" level="INFO" />
+    <logger name="org.springframework.jdbc.datasource.DataSourceTransactionManager" level="DEBUG" />
 
     <root level="WARN">
         <appender-ref ref="console" />

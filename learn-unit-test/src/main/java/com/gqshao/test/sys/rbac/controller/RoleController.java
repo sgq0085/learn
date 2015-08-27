@@ -149,7 +149,7 @@ public class RoleController {
      * @return
      */
     //@RequiresPermissions("rolemgt:delete")
-    @RequestMapping(value="delete",method=RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value="delete")
     public @ResponseBody Boolean delete(@RequestParam(value="ids",required=true)String ids){
         
         String[] sp = ids.split(",");
