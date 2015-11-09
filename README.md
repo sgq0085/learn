@@ -43,6 +43,7 @@ Redis和Memcached简单访问DEMO<br />
 9.concurrency包下演示如何通过构造ThreadFactory为线程池中运行的线程命名，及如何处理线程池中异常<br />
 10.ip包下演示如何查询本地IP<br />
 11.udp包下演示基于UDP发送和接收数据<br />
+12.[通过sigar获取系统信息](http://sgq0085.iteye.com/blog/2254437)<br />
 
 
 learn-msm

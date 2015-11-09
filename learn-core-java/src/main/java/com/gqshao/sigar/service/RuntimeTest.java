@@ -9,6 +9,17 @@ import java.util.Properties;
 import org.hyperic.sigar.*;
 
 public class RuntimeTest {
+
+    static {
+        String var0 = System.getProperty("os.name").toLowerCase();
+        if(var0.contains("windows")) {
+            System.loadLibrary("sigar-x86-winnt");
+        } else {
+            System.load("/usr/lib/libsigar-amd64-linux.so");
+        }
+
+    }
+
     public static void main(String[] args) {
         try {
             // System信息，从jvm获取
@@ -193,7 +204,6 @@ public class RuntimeTest {
             try {
                 usage = sigar.getFileSystemUsage(fs.getDirName());
                 switch (fs.getType()) {
-
                     case 0: // TYPE_UNKNOWN ：未知
                         break;
                     case 1: // TYPE_NONE
