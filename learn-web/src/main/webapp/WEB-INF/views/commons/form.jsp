@@ -84,7 +84,7 @@
     }
 
     .icon-edit {
-        background-image: url("../images/edit-btn.png");
+        background-image: url("../../../static/images/edit-btn.png");
         background-repeat: no-repeat;
         cursor: pointer;
         display: inline-block;

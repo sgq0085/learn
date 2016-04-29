@@ -61,11 +61,11 @@
                    onkeydown="return false;"/>
         </dd>
     </dl>
-
+    <%-- 留白 --%>
     <dl class="col-16-4 advanced" hidden="hidden">
-        <dt><span for="param3">多选框：</span></dt>
+        <dt><%--<span for="param3">多选框：</span>--%></dt>
         <dd>
-            <input type="checkbox" id="param3" name="param3" value="1"/>
+            <%-- <input type="checkbox" id="param3" name="param3" value="1"/>--%>
         </dd>
     </dl>
 
@@ -84,17 +84,17 @@
         </dd>
     </dl>
     <dl class="col-16-3 advanced" hidden="hidden">
-        <dt><span for="param6">选填：</span></dt>
+        <dt><%--<span for="param6">选填：</span>--%></dt>
         <dd>
-            <input type="text" id="param6" name="param6" maxlength="15" class="form-control input-sm"
-                   onkeydown="return false;"/>
+            <%-- <input type="text" id="param6" name="param6" maxlength="15" class="form-control input-sm"
+                    onkeydown="return false;"/>--%>
         </dd>
     </dl>
     <dl class="col-16-3 advanced" hidden="hidden">
-        <dt><span for="param7">选填：</span></dt>
+        <dt><%--<span for="param7">选填：</span>--%></dt>
         <dd>
-            <input type="text" id="param7" name="param7" maxlength="15" class="form-control input-sm"
-                   onkeydown="return false;"/>
+            <%--<input type="text" id="param7" name="param7" maxlength="15" class="form-control input-sm"
+                   onkeydown="return false;"/>--%>
         </dd>
     </dl>
 
