@@ -13,6 +13,7 @@ import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisCluster;
 import redis.clients.jedis.JedisPool;
 
+import java.io.IOException;
 import java.util.Map;
 import java.util.Set;
 
@@ -43,12 +44,12 @@ public class RedisClusterTest {
      * pool.destroy()
      */
     @AfterClass
-    public static void destroy() {
+    public static void destroy() throws IOException {
         cluster.close();
     }
 
     @Test
-    public void easyTest() {
+    public void easyTest() throws IOException {
         // 简单测试
         cluster.set("foo1", "bar");
         cluster.set("foo10", "bar");

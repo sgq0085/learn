@@ -32,7 +32,7 @@ public class ConnectionTest {
         long end = System.currentTimeMillis();
         logger.info("Simple SET: " + ((end - start) / 1000.0) + " seconds");
         // 销毁
-        jedis.disconnect();
+        jedis.close();
     }
 
     /**
@@ -49,10 +49,9 @@ public class ConnectionTest {
             String result = jedis.set("np" + i, "vp" + i);
         }
         long end = System.currentTimeMillis();
-        pool.returnResource(jedis);
         logger.info("POOL SET: " + ((end - start) / 1000.0) + " seconds");
         // 销毁
-        jedis.disconnect();
+        jedis.close();
     }
 
     /**
@@ -71,7 +70,7 @@ public class ConnectionTest {
         List<Object> results = tx.exec();
         long end = System.currentTimeMillis();
         logger.info("Transaction SET: " + ((end - start) / 1000.0) + " seconds");
-        jedis.disconnect();
+        jedis.close();
     }
 
     /**
@@ -90,7 +89,7 @@ public class ConnectionTest {
         List<Object> results = pipeline.syncAndReturnAll();
         long end = System.currentTimeMillis();
         logger.info("Pipelined SET: " + ((end - start) / 1000.0) + " seconds");
-        jedis.disconnect();
+        jedis.close();
     }
 
     /**
@@ -114,7 +113,7 @@ public class ConnectionTest {
         List<Object> results = pipeline.syncAndReturnAll();
         long end = System.currentTimeMillis();
         logger.info("Pipelined transaction: " + ((end - start) / 1000.0) + " seconds");
-        jedis.disconnect();
+        jedis.close();
     }
 
     /**
@@ -137,7 +136,7 @@ public class ConnectionTest {
         long end = System.currentTimeMillis();
         logger.info("Simple@Sharing SET: " + ((end - start) / 1000.0) + " seconds");
 
-        sharding.disconnect();
+        sharding.close();
     }
 
     /**
@@ -160,7 +159,7 @@ public class ConnectionTest {
         long end = System.currentTimeMillis();
         logger.info("Pipelined@Sharing SET: " + ((end - start) / 1000.0) + " seconds");
 
-        sharding.disconnect();
+        sharding.close();
     }
 
     /**
@@ -209,7 +208,7 @@ public class ConnectionTest {
         }
         List<Object> results = pipeline.syncAndReturnAll();
         long end = System.currentTimeMillis();
-        pool.returnResource(one);
+        one.close();
         logger.info("Pipelined@Pool SET: " + ((end - start) / 1000.0) + " seconds");
         pool.destroy();
     }
