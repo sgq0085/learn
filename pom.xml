@@ -18,6 +18,7 @@
         <module>learn-cas-server</module>
         <module>learn-cas-client</module>
         <module>learn-core-java</module>
+        <module>learn-spring-boot</module>
     </modules>
 
     <properties>
