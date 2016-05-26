@@ -1,7 +1,7 @@
 package com.gqshao.bootstrap.controller;
 
 import com.google.common.collect.Maps;
-import com.gqshao.utils.Files;
+import com.gqshao.commons.utils.Files;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

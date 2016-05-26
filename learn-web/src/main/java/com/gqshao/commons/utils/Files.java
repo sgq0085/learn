@@ -1,4 +1,4 @@
-package com.gqshao.utils;
+package com.gqshao.commons.utils;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
