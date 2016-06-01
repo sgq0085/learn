@@ -257,6 +257,11 @@
             <artifactId>freemarker</artifactId>
             <version>2.3.23</version>
         </dependency>
+        <dependency>
+            <groupId>org.jfree</groupId>
+            <artifactId>jfreechart</artifactId>
+            <version>1.0.19</version>
+        </dependency>
         <!-- GENERAL UTILS end -->
 
         <!-- LOGGING begin -->
@@ -485,13 +490,18 @@
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>${jetty.version}</version>
                 <configuration>
+                    <connectors>
+                        <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
+                            <port>80</port>
+                        </connector>
+                    </connectors>
                     <systemProperties>
                         <systemProperty>
                             <name>spring.profiles.active</name>
                             <value>development</value>
                         </systemProperty>
                     </systemProperties>
-                    <useTestClasspath>true</useTestClasspath>
+                    <useTestClasspath>false</useTestClasspath>
                     <webAppConfig>
                         <contextPath>/${project.artifactId}</contextPath>
                     </webAppConfig>
@@ -507,7 +517,7 @@
                 <version>2.2</version>
                 <configuration>
                     <uriEncoding>UTF-8</uriEncoding>
-                    <port>8090</port>
+                    <port>80</port>
                 </configuration>
             </plugin>
 
