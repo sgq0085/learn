@@ -28,7 +28,7 @@ public class FileinputController {
         Map<String, Object> res = Maps.newHashMap();
         res.put("success", false);
 
-        Map<String, Object> multipartFormData = Files.enctypeEqualsMultipartFormData(request, null);
+        Map<String, Object> multipartFormData = Files.enctypeEqualsMultipartFormDataParam(request, null);
         List<File> files = (List<File>) multipartFormData.get("files");
         if (CollectionUtils.isEmpty(files)) {
             res.put("msg", "请选择文件");
